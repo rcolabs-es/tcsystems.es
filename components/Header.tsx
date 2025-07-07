@@ -71,8 +71,8 @@ export default function Header() {
             <Image
               src="/logo.webp"
               alt="TCSystems"
-              width={60}
-              height={60}
+              width={1000}
+              height={1000}
               className="w-20 h-20 dark:brightness-0 dark:invert"
             />
           </Link>

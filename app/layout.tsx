@@ -4,11 +4,14 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
+import CookieBanner from "@/components/CookieBanner";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://tcsystems.es'),
   title: "TCSystems - Kioscos de Autoservicio | Líderes en España",
   description: "Empresa española líder en sistemas de cobro automático, máquinas de pago automáticas y kioscos de autoservicio. Más de 14 años desarrollando soluciones de TPV automático y kioscos de autoservicio para empresas. Automatización de cobros con soporte 24/7 en toda España.",
   keywords: [
@@ -113,9 +116,7 @@ export default function RootLayout({
                 "availableLanguage": "Spanish"
               },
               "sameAs": [
-                "https://www.linkedin.com/company/tc-systems",
-                "https://twitter.com/tcsystems"
-              ],
+                "https://www.linkedin.com/company/tcsystems-grupotcobro/"              ],
               "hasOfferCatalog": {
                 "@type": "OfferCatalog",
                 "name": "Sistemas de Cobro Automático",
@@ -153,9 +154,11 @@ export default function RootLayout({
       <body className={`${inter.className} bg-white dark:bg-zinc-950 text-gray-900 dark:text-white transition-colors duration-300`}>
         <ThemeProvider>
           <Header />
+          <GoogleAnalytics gaId="G-FTNY37SJ4W" />
           <main>{children}</main>
           <Footer />
           <ScrollToTop />
+          <CookieBanner />
         </ThemeProvider>
       </body>
     </html>

@@ -59,39 +59,39 @@ export default function TestimonialsSection() {
     }
   ];
 
-  const testimonials = [
-    {
-      name: "María González",
-      position: "Directora de Operaciones",
-      company: "Ayuntamiento de Madrid",
-      content: "TCSystems revolucionó nuestro sistema de cobro de tasas municipales. La eficiencia aumentó un 300% y los ciudadanos están mucho más satisfechos.",
-      rating: 5,
-      sector: "Administración Pública"
-    },
-    {
-      name: "Carlos Ruiz",
-      position: "Gerente",
-      company: "Cadena Hotelera Premium",
-      content: "La integración fue perfecta y el soporte técnico excepcional. Nuestros huéspedes valoran la comodidad del sistema de pago automático.",
-      rating: 5,
-      sector: "Hostelería"
-    },
-    {
-      name: "Ana Martín",
-      position: "Propietaria",
-      company: "Lavandería SpeedyWash",
-      content: "Desde que instalamos el sistema de TCSystems, nuestros ingresos aumentaron un 40%. La máquina funciona perfectamente las 24 horas.",
-      rating: 5,
-      sector: "Lavanderías"
-    }
-  ];
+  // const testimonials = [
+  //   {
+  //     name: "María González",
+  //     position: "Directora de Operaciones",
+  //     company: "Ayuntamiento de Madrid",
+  //     content: "TCSystems revolucionó nuestro sistema de cobro de tasas municipales. La eficiencia aumentó un 300% y los ciudadanos están mucho más satisfechos.",
+  //     rating: 5,
+  //     sector: "Administración Pública"
+  //   },
+  //   {
+  //     name: "Carlos Ruiz",
+  //     position: "Gerente",
+  //     company: "Cadena Hotelera Premium",
+  //     content: "La integración fue perfecta y el soporte técnico excepcional. Nuestros huéspedes valoran la comodidad del sistema de pago automático.",
+  //     rating: 5,
+  //     sector: "Hostelería"
+  //   },
+  //   {
+  //     name: "Ana Martín",
+  //     position: "Propietaria",
+  //     company: "Lavandería SpeedyWash",
+  //     content: "Desde que instalamos el sistema de TCSystems, nuestros ingresos aumentaron un 40%. La máquina funciona perfectamente las 24 horas.",
+  //     rating: 5,
+  //     sector: "Lavanderías"
+  //   }
+  // ];
 
-  const stats = [
-    { value: "98%", label: "Satisfacción del cliente" },
-    { value: "99.9%", label: "Tiempo de actividad" },
-    { value: "24h", label: "Tiempo de respuesta" },
-    { value: "500+", label: "Clientes satisfechos" }
-  ];
+  // const stats = [
+  //   { value: "98%", label: "Satisfacción del cliente" },
+  //   { value: "99.9%", label: "Tiempo de actividad" },
+  //   { value: "24h", label: "Tiempo de respuesta" },
+  //   { value: "500+", label: "Clientes satisfechos" }
+  // ];
 
   return (
     <section className="relative py-24 bg-white dark:bg-zinc-950 overflow-hidden" id="clientes">
@@ -104,17 +104,16 @@ export default function TestimonialsSection() {
         {/* Header */}
         <div className="text-center mb-16 space-y-6">
           <div className="inline-flex items-center bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-full px-4 py-2 text-sm text-gray-600 dark:text-zinc-400 shadow-sm">
-            Casos de Éxito
+            Nuestros Clientes
           </div>
           
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
-            Lo que dicen nuestros 
-            <span className="text-[#0e9acd]"> clientes</span>
+            Más de <span className="text-[#0e9acd]">500 clientes</span> en toda España
           </h2>
         </div>
 
-        {/* Testimonials Grid */}
-        <div className="grid lg:grid-cols-3 gap-8 mb-16">
+        {/* Testimonials Grid - COMENTADO TEMPORALMENTE */}
+        {/* <div className="grid lg:grid-cols-3 gap-8 mb-16">
           {testimonials.map((testimonial, index) => (
             <div 
               key={index}
@@ -145,19 +144,13 @@ export default function TestimonialsSection() {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
 
         {/* Client Logos Section - Subtle */}
-        <div className="border-t border-gray-200 dark:border-zinc-800 pt-16">
+        <div className="pt-8">
           <div className="text-center mb-12">
-            <p className="text-sm font-medium text-gray-500 dark:text-zinc-500 uppercase tracking-wider mb-4">
-              Empresas que confían en nosotros
-            </p>
-            <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">
-              Más de <span className="text-[#0e9acd]">500 clientes</span> en toda España
-            </h3>
-            <p className="text-gray-600 dark:text-zinc-400 max-w-2xl mx-auto">
-              Desde administraciones públicas hasta grandes corporaciones, nuestras soluciones están transformando negocios.
+            <p className="text-gray-600 dark:text-zinc-400 max-w-3xl mx-auto text-lg">
+              Desde administraciones públicas hasta grandes corporaciones, nuestras soluciones están transformando negocios en toda España.
             </p>
           </div>
 

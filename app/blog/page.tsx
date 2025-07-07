@@ -8,87 +8,51 @@ import { Search, Calendar, Clock, Tag, ArrowRight, Filter } from 'lucide-react'
 const blogPosts = [
   {
     id: 1,
-    title: 'Revolución en los Sistemas de Pago: Tendencias 2024',
-    excerpt: 'Descubre las últimas innovaciones en sistemas de pago automático y cómo están transformando el sector retail y de servicios.',
-    content: 'Los sistemas de pago están evolucionando a un ritmo acelerado. Las nuevas tecnologías como pagos sin contacto, biométricos y blockchain están redefiniendo la experiencia del usuario...',
-    image: '/Elysium sin fondo.webp',
+    title: 'Beneficios de los kioscos de autoservicio para negocios: Ahorro de costes y mejora de la experiencia cliente',
+    excerpt: 'Descubre cómo los kioscos de autoservicio automatizan los pagos, reducen costes operativos y mejoran la experiencia del cliente en sectores como hostelería, lavanderías, parkings y estaciones de servicio.',
+    content: 'En un mundo donde la automatización y la eficiencia marcan la diferencia, los kioscos de autoservicio se han convertido en una solución tecnológica indispensable para todo tipo de negocios.',
+    image: '/blogImages/blogpost1.jpg',
     category: 'Tecnología',
-    date: '2024-01-15',
-    readTime: '5 min',
-    slug: 'revolucion-sistemas-pago-2024',
+    date: '2024-12-27',
+    readTime: '8 min',
+    slug: 'beneficios-kioscos-autoservicio',
     featured: true,
-    tags: ['Pagos', 'Tecnología', 'Innovación', '2024']
+    tags: ['Kioscos', 'Autoservicio', 'Ahorro de costes', 'Experiencia cliente']
   },
   {
     id: 2,
-    title: 'Caso de Éxito: Ayuntamiento de Madrid Moderniza sus Servicios',
-    excerpt: 'Conoce cómo implementamos un sistema integral de kioscos de autoservicio que mejoró la atención ciudadana en un 300%.',
-    content: 'La implementación de nuestros kioscos EVO en el Ayuntamiento de Madrid ha revolucionado la atención ciudadana, reduciendo tiempos de espera y mejorando la eficiencia...',
-    image: '/T-Cobro Prometheus.webp',
-    category: 'Casos de Éxito',
-    date: '2024-01-10',
-    readTime: '7 min',
-    slug: 'caso-exito-ayuntamiento-madrid',
+    title: 'Guía para elegir el kiosco de autoservicio ideal según el sector de tu negocio',
+    excerpt: 'Descubre cómo elegir el kiosco de autoservicio perfecto para tu negocio. Compara kioscos completos, terminales avanzadas y sistemas premium para hostelería, lavanderías, parkings y administraciones públicas.',
+    content: 'La automatización de los procesos de cobro es clave para optimizar cualquier negocio moderno. Sin embargo, no todos los kioscos de autoservicio son iguales ni se adaptan a las mismas necesidades.',
+    image: '/blogImages/blogpost2.jpg',
+    category: 'Guías',
+    date: '2024-12-25',
+    readTime: '10 min',
+    slug: 'guia-elegir-kiosco-autoservicio',
     featured: false,
-    tags: ['Caso de Éxito', 'Administración Pública', 'Kioscos', 'EVO']
+    tags: ['Guías', 'Kioscos', 'Selección', 'Negocios', 'Sectores']
   },
   {
     id: 3,
-    title: 'Guía Completa: Cómo Elegir el TPV Perfecto para tu Negocio',
-    excerpt: 'Todo lo que necesitas saber para seleccionar el terminal de punto de venta que mejor se adapte a las necesidades de tu empresa.',
-    content: 'Elegir el TPV adecuado es fundamental para el éxito de cualquier negocio. En esta guía completa analizamos todos los factores que debes considerar...',
-    image: '/EVO LATERAL SIN FONDO.webp',
-    category: 'Guías',
-    date: '2024-01-05',
-    readTime: '10 min',
-    slug: 'guia-elegir-tpv-perfecto',
+    title: 'Cómo mejorar la experiencia del cliente con kioscos de autoservicio: ventajas y mejores prácticas',
+    excerpt: 'Descubre cómo los kioscos de autoservicio pueden transformar la experiencia del cliente en tu negocio. Ventajas, consejos para su implementación y mejores prácticas para aumentar la satisfacción y eficiencia.',
+    content: 'En la era digital, la experiencia del cliente es un factor decisivo para el éxito de cualquier negocio. Los kioscos de autoservicio han revolucionado la forma en que los usuarios interactúan con productos y servicios.',
+    image: '/blogImages/blogpost3.jpg',
+    category: 'Experiencia Cliente',
+    date: '2024-12-23',
+    readTime: '7 min',
+    slug: 'mejorar-experiencia-cliente-kioscos',
     featured: false,
-    tags: ['Guía', 'TPV', 'Negocios', 'Selección']
-  },
-  {
-    id: 4,
-    title: 'Sostenibilidad y Tecnología: El Futuro de los Pagos Verdes',
-    excerpt: 'Exploramos cómo nuestros sistemas contribuyen a un futuro más sostenible reduciendo el uso de papel y optimizando procesos.',
-    content: 'La sostenibilidad es una prioridad en el desarrollo de nuestros sistemas. Descubre cómo nuestras soluciones contribuyen a un futuro más verde...',
-    image: '/logo.webp',
-    category: 'Sostenibilidad',
-    date: '2023-12-28',
-    readTime: '6 min',
-    slug: 'sostenibilidad-pagos-verdes',
-    featured: false,
-    tags: ['Sostenibilidad', 'Medio Ambiente', 'Tecnología Verde', 'Eficiencia']
-  },
-  {
-    id: 5,
-    title: 'Seguridad en Sistemas de Pago: Protocolos y Certificaciones',
-    excerpt: 'Analizamos los estándares de seguridad más importantes en sistemas de pago automático y cómo garantizamos la protección total.',
-    content: 'La seguridad es fundamental en cualquier sistema de pago. Te explicamos los protocolos y certificaciones que garantizan la máxima protección...',
-    image: '/T-COBRO ELYSIUM SIN FONDO (1).webp',
-    category: 'Seguridad',
-    date: '2023-12-20',
-    readTime: '8 min',
-    slug: 'seguridad-sistemas-pago',
-    featured: false,
-    tags: ['Seguridad', 'Certificaciones', 'Protocolos', 'PCI DSS']
-  },
-  {
-    id: 6,
-    title: 'Integración de Sistemas: API y Conectividad Avanzada',
-    excerpt: 'Descubre cómo nuestros sistemas se integran perfectamente con tu infraestructura existente mediante APIs robustas.',
-    content: 'La integración perfecta es clave para el éxito. Nuestras APIs permiten conectar nuestros sistemas con cualquier infraestructura existente...',
-    image: '/Speedywash.webp',
-    category: 'Tecnología',
-    date: '2023-12-15',
-    readTime: '12 min',
-    slug: 'integracion-sistemas-api',
-    featured: false,
-    tags: ['API', 'Integración', 'Conectividad', 'Sistemas']
+    tags: ['Experiencia Cliente', 'Kioscos', 'Mejores Prácticas', 'Satisfacción', 'Autoservicio']
   }
 ]
 
-const categories = ['Todos', 'Tecnología', 'Casos de Éxito', 'Guías', 'Sostenibilidad', 'Seguridad']
-
 export default function BlogPage() {
+  // Extraer categorías dinámicamente de los posts existentes
+  const categories = useMemo(() => {
+    const uniqueCategories = [...new Set(blogPosts.map(post => post.category))]
+    return ['Todos', ...uniqueCategories.sort()]
+  }, [])
   const [selectedCategory, setSelectedCategory] = useState('Todos')
   const [searchTerm, setSearchTerm] = useState('')
 
@@ -126,6 +90,7 @@ export default function BlogPage() {
       'Tecnología': 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300',
       'Casos de Éxito': 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300',
       'Guías': 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300',
+      'Experiencia Cliente': 'bg-pink-100 text-pink-800 dark:bg-pink-900/30 dark:text-pink-300',
       'Sostenibilidad': 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300',
       'Seguridad': 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300'
     }

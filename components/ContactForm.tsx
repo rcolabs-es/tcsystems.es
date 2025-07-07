@@ -51,26 +51,53 @@ export default function ContactForm({ productName }: ContactFormProps) {
     
     setIsSubmitting(true);
     
-    // Simular envío del formulario
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    setIsSubmitting(false);
-    setSubmitted(true);
-    
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({
-        firstName: '',
-        lastName: '',
-        phone: '',
-        company: '',
-        corporateEmail: '',
-        project: '',
-        privacyPolicy: false,
-        dataProcessing: false
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          phone: formData.phone,
+          company: formData.company,
+          corporateEmail: formData.corporateEmail,
+          project: formData.project,
+          productName: productName,
+        }),
       });
-    }, 3000);
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Error al enviar el formulario');
+      }
+
+      // Éxito - mostrar mensaje de confirmación
+      setSubmitted(true);
+      
+      // Reset form after 5 seconds
+      setTimeout(() => {
+        setSubmitted(false);
+        setFormData({
+          firstName: '',
+          lastName: '',
+          phone: '',
+          company: '',
+          corporateEmail: '',
+          project: '',
+          privacyPolicy: false,
+          dataProcessing: false
+        });
+      }, 5000);
+
+    } catch (error) {
+      console.error('Error enviando formulario:', error);
+      alert('Error al enviar el formulario. Por favor, inténtalo de nuevo o contacta directamente a consultoria@tcsystems.es');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -80,11 +107,14 @@ export default function ContactForm({ productName }: ContactFormProps) {
           <Send className="w-8 h-8 text-white" />
         </div>
         <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-          ¡Mensaje enviado!
+          ¡Solicitud enviada con éxito!
         </h3>
-        <p className="text-gray-600 dark:text-zinc-400">
+        <p className="text-gray-600 dark:text-zinc-400 mb-4">
           Gracias por tu interés{productName ? ` en ${productName}` : ''}. 
-          Nos pondremos en contacto contigo muy pronto.
+          Hemos recibido tu solicitud y te hemos enviado un email de confirmación.
+        </p>
+        <p className="text-sm text-gray-500 dark:text-zinc-500">
+          <strong>Próximos pasos:</strong> Nos pondremos en contacto contigo dentro de las próximas 24 horas para ayudarte con tu proyecto.
         </p>
       </div>
     );
