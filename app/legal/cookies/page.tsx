@@ -217,7 +217,7 @@ export default function CookiesPage() {
 
         <div className="mt-12 pt-8 border-t border-gray-200 dark:border-zinc-700">
           <p className="text-sm text-gray-500 dark:text-zinc-400">
-            <strong>Última actualización:</strong> Diciembre 2024
+            <strong>Última actualización:</strong> Julio 2025
           </p>
         </div>
       </div>
