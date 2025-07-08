@@ -173,7 +173,7 @@ export const UserConfirmation = ({
               <Text style={ctaText}>
                 Mientras tanto, puedes explorar más sobre nuestros productos:
               </Text>
-              <Link href="https://tcsystems.es/productos" style={ctaButton}>
+              <Link href="https://tcsystems.es/#productos" style={ctaButton}>
                 🔍 Ver todos nuestros productos
               </Link>
             </Section>
