@@ -43,7 +43,7 @@ const quickActions = [
     icon: Calendar,
     title: 'Solicitar Presupuesto',
     description: 'Solicita un presupuesto personalizado',
-    action: '/contacto',
+    action: '/contacto#presupuesto',
     color: 'from-[#0e9acd] to-blue-600'
   },
   {
@@ -137,7 +137,7 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             {/* Contact Form */}
-            <div>
+            <div id="presupuesto">
               <ContactForm />
             </div>
 

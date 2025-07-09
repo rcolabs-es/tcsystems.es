@@ -128,7 +128,7 @@ export default function Header() {
                         </div>
                           <div className="mt-4 pt-4 border-t border-gray-200 dark:border-zinc-800">
                             <Link
-                              href="/productos"
+                              href="/#productos"
                               className="text-[#0e9acd] hover:text-blue-600 font-medium text-sm transition-colors"
                             >
                               Ver todos los productos →
@@ -154,7 +154,7 @@ export default function Header() {
           <div className="hidden lg:flex items-center space-x-4">
             <ThemeToggle />
                           <Link
-                href="/contacto"
+                href="/contacto#presupuesto"
                 className="bg-[#0e9acd] text-white px-6 py-2.5 rounded-lg font-medium hover:bg-[#0c7ba3] transition-colors duration-200"
               >
                 Solicitar presupuesto
@@ -223,7 +223,7 @@ export default function Header() {
               ))}
               <div className="pt-4">
                                   <Link
-                    href="/contacto"
+                    href="/contacto#presupuesto"
                     className="bg-[#0e9acd] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#0c7ba3] transition-colors duration-200 text-center block"
                     onClick={() => setIsMenuOpen(false)}
                   >

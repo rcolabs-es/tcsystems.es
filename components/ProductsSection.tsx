@@ -119,7 +119,7 @@ export default function ProductsSection() {
                     <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                   </Link>
                   <Link
-                    href="/contacto"
+                    href="/contacto#presupuesto"
                     className="w-full border-2 border-[#0e9acd] text-[#0e9acd] py-3 px-6 rounded-xl font-semibold hover:bg-[#0e9acd] hover:text-white transition-all duration-200 flex items-center justify-center"
                   >
                     Solicitar presupuesto

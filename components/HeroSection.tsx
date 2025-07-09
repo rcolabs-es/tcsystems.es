@@ -39,7 +39,7 @@ export default function HeroSection() {
             
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
-                href="/contacto"
+                href="/contacto#presupuesto"
                 className="inline-flex items-center justify-center bg-[#0e9acd] text-white px-8 py-4 rounded-xl font-semibold hover:bg-[#0c7ba3] transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 group"
               >
                 Solicitar presupuesto

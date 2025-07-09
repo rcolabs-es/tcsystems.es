@@ -28,7 +28,7 @@ export default function CTASection() {
       icon: Calendar,
       title: "Solicitar presupuesto",
       description: "Solicita información detallada",
-      action: "/contacto",
+      action: "/contacto#presupuesto",
       label: "Solicitar ahora"
     }
   ];
@@ -50,7 +50,7 @@ export default function CTASection() {
           
           <div className="flex flex-col sm:flex-row gap-4 lg:gap-6 justify-center mb-8 lg:mb-10">
             <Link
-              href="/contacto"
+              href="/contacto#presupuesto"
               className="inline-flex items-center justify-center bg-white text-[#0e9acd] px-8 lg:px-10 py-4 lg:py-5 rounded-2xl font-bold text-base lg:text-lg hover:bg-gray-50 transition-all duration-200 shadow-xl hover:shadow-2xl hover:scale-105 group"
             >
               Solicitar presupuesto gratuito

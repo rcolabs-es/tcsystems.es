@@ -207,7 +207,7 @@ export default function Footer() {
                   Solicita tu presupuesto personalizado.
                 </p>
                 <Link
-                  href="/contacto"
+                  href="/contacto#presupuesto"
                   className="inline-flex items-center bg-white text-[#0e9acd] px-6 py-3 rounded-xl font-semibold hover:bg-gray-100 transition-all duration-200 group"
                 >
                   Solicitar presupuesto
