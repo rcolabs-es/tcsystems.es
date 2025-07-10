@@ -21,7 +21,7 @@ export default function CTASection() {
       icon: MessageCircle,
       title: "WhatsApp",
       description: "Chat directo",
-      action: "https://wa.me/34916216237",
+      action: "https://wa.me/34677614129",
       label: "Abrir chat"
     },
     {

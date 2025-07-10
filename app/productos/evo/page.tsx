@@ -88,7 +88,7 @@ const contactOptions = [
     icon: MessageCircle,
     title: 'WhatsApp',
     subtitle: 'Consulta inmediata',
-    action: 'https://wa.me/34916216237',
+    action: 'https://wa.me/34677614129',
     color: 'from-green-400 to-green-600'
   },
       {

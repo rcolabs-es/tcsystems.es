@@ -36,7 +36,7 @@ const quickActions = [
     icon: MessageCircle,
     title: 'WhatsApp',
     description: 'Chat directo para consultas rápidas',
-    action: 'https://wa.me/34916216237',
+    action: 'https://wa.me/34677614129',
     color: 'from-green-400 to-green-600'
   },
   {
