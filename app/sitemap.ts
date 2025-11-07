@@ -1,8 +1,22 @@
 import type { MetadataRoute } from 'next'
+import { getAllPosts } from '@/lib/sanity'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const revalidate = 3600 // Revalidar cada hora
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://tcsystems.es'
   const currentDate = new Date()
+
+  // Obtener todos los posts del blog desde Sanity
+  const posts = await getAllPosts()
+
+  // Generar URLs para todos los posts
+  const blogPosts = posts.map((post) => ({
+    url: `${baseUrl}/blog/${post.slug.current}`,
+    lastModified: new Date(post.publishedAt),
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }))
 
   return [
     // Página principal
@@ -48,27 +62,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${baseUrl}/blog`,
       lastModified: currentDate,
-      changeFrequency: 'weekly',
+      changeFrequency: 'daily',
       priority: 0.7,
     },
-    // Posts del blog
+    // Páginas legales
     {
-      url: `${baseUrl}/blog/beneficios-kioscos-autoservicio`,
-      lastModified: new Date('2024-12-27'),
-      changeFrequency: 'monthly',
-      priority: 0.6,
+      url: `${baseUrl}/legal/aviso-legal`,
+      lastModified: currentDate,
+      changeFrequency: 'yearly',
+      priority: 0.3,
     },
     {
-      url: `${baseUrl}/blog/guia-elegir-kiosco-autoservicio`,
-      lastModified: new Date('2024-12-25'),
-      changeFrequency: 'monthly',
-      priority: 0.6,
+      url: `${baseUrl}/legal/privacidad`,
+      lastModified: currentDate,
+      changeFrequency: 'yearly',
+      priority: 0.3,
     },
     {
-      url: `${baseUrl}/blog/mejorar-experiencia-cliente-kioscos`,
-      lastModified: new Date('2024-12-23'),
-      changeFrequency: 'monthly',
-      priority: 0.6,
+      url: `${baseUrl}/legal/cookies`,
+      lastModified: currentDate,
+      changeFrequency: 'yearly',
+      priority: 0.3,
     },
+    // Posts del blog (dinámicos desde Sanity)
+    ...blogPosts,
   ]
 } 
