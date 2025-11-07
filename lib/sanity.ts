@@ -126,8 +126,8 @@ export async function getAllCategories(): Promise<string[]> {
     category
   }`
   
-  const posts = await sanityClient.fetch(query)
-  const categories = [...new Set(posts.map((post: any) => post.category))]
+  const posts: { category: string }[] = await sanityClient.fetch(query)
+  const categories: string[] = [...new Set(posts.map((post) => post.category))]
   return categories
 }
 
