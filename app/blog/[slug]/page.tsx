@@ -78,6 +78,46 @@ export default async function BlogPostPage({ params }: Props) {
     notFound()
   }
 
-  return <PostContent post={post} />
+  // Structured Data (JSON-LD) para SEO
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt,
+    image: post.mainImage ? `https://tcsystems.es${post.mainImage}` : 'https://tcsystems.es/logo.webp',
+    datePublished: post.publishedAt,
+    dateModified: post._createdAt,
+    author: {
+      '@type': 'Organization',
+      name: 'TCSystems',
+      url: 'https://tcsystems.es',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'TCSystems',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://tcsystems.es/logo.webp',
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://tcsystems.es/blog/${slug}`,
+    },
+    keywords: post.seo?.keywords?.join(', ') || post.tags?.join(', '),
+    articleSection: post.category,
+    inLanguage: 'es-ES',
+  }
+
+  return (
+    <>
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <PostContent post={post} />
+    </>
+  )
 }
 

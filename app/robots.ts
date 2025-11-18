@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/private/', '/admin/'],
+        disallow: ['/private/', '/admin/', '/studio/', '/api/'],
       },
     ],
     sitemap: 'https://tcsystems.es/sitemap.xml',

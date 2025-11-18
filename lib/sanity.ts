@@ -45,7 +45,7 @@ export interface BlogPost {
 
 // Queries para obtener posts
 export async function getAllPosts(): Promise<BlogPost[]> {
-  const query = `*[_type == "blogPost"] | order(publishedAt desc) {
+  const query = `*[_type == "blogPost" && !(_id in path("drafts.**"))] | order(publishedAt desc) {
     _id,
     _createdAt,
     title,
@@ -64,7 +64,7 @@ export async function getAllPosts(): Promise<BlogPost[]> {
 }
 
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
-  const query = `*[_type == "blogPost" && slug.current == $slug][0] {
+  const query = `*[_type == "blogPost" && slug.current == $slug && !(_id in path("drafts.**"))][0] {
     _id,
     _createdAt,
     title,
@@ -84,7 +84,7 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
 }
 
 export async function getFeaturedPosts(): Promise<BlogPost[]> {
-  const query = `*[_type == "blogPost" && featured == true] | order(publishedAt desc) {
+  const query = `*[_type == "blogPost" && featured == true && !(_id in path("drafts.**"))] | order(publishedAt desc) {
     _id,
     _createdAt,
     title,
@@ -103,7 +103,7 @@ export async function getFeaturedPosts(): Promise<BlogPost[]> {
 }
 
 export async function getPostsByCategory(category: string): Promise<BlogPost[]> {
-  const query = `*[_type == "blogPost" && category == $category] | order(publishedAt desc) {
+  const query = `*[_type == "blogPost" && category == $category && !(_id in path("drafts.**"))] | order(publishedAt desc) {
     _id,
     _createdAt,
     title,
@@ -122,7 +122,7 @@ export async function getPostsByCategory(category: string): Promise<BlogPost[]> 
 }
 
 export async function getAllCategories(): Promise<string[]> {
-  const query = `*[_type == "blogPost"] | order(category asc) {
+  const query = `*[_type == "blogPost" && !(_id in path("drafts.**"))] | order(category asc) {
     category
   }`
   
