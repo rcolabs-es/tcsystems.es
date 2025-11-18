@@ -20,7 +20,7 @@ export default function Footer() {
       links: [
         { name: "EVO - Kioscos Completos", href: "/productos/evo", icon: undefined, isExternal: false },
         { name: "Prometheus - Terminales", href: "/productos/prometheus", icon: undefined, isExternal: false },
-        { name: "Elysium - Sistemas Premium", href: "/productos/elysium", icon: undefined, isExternal: false },
+        { name: "Elysium Plus - Terminal Completo", href: "/productos/elysium-plus", icon: undefined, isExternal: false },
       ],
     },
     {

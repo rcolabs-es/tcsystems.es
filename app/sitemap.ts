@@ -41,7 +41,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     // Páginas de productos individuales
     {
-      url: `${baseUrl}/productos/elysium`,
+      url: `${baseUrl}/productos/elysium-plus`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: 0.8,

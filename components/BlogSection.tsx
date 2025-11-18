@@ -1,47 +1,44 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { ChevronLeft, ChevronRight, Calendar, ArrowRight, Clock, Tag } from 'lucide-react'
+import { BlogPost } from '@/lib/sanity'
 
-const blogPosts = [
-  {
-    id: 1,
-    title: 'Beneficios de los kioscos de autoservicio para negocios: Ahorro de costes y mejora de la experiencia cliente',
-    excerpt: 'Descubre cómo los kioscos de autoservicio automatizan los pagos, reducen costes operativos y mejoran la experiencia del cliente en sectores como hostelería, lavanderías, parkings y estaciones de servicio.',
-    image: '/blogImages/blogpost1.jpg',
-    category: 'Tecnología',
-    date: '2024-12-27',
-    readTime: '8 min',
-    slug: 'beneficios-kioscos-autoservicio',
-    featured: true
-  },
-  {
-    id: 2,
-    title: 'Guía para elegir el kiosco de autoservicio ideal según el sector de tu negocio',
-    excerpt: 'Descubre cómo elegir el kiosco de autoservicio perfecto para tu negocio. Compara kioscos completos, terminales avanzadas y sistemas premium para hostelería, lavanderías, parkings y administraciones públicas.',
-    image: '/blogImages/blogpost2.jpg',
-    category: 'Guías',
-    date: '2024-12-25',
-    readTime: '10 min',
-    slug: 'guia-elegir-kiosco-autoservicio',
-    featured: false
-  },
-  {
-    id: 3,
-    title: 'Cómo mejorar la experiencia del cliente con kioscos de autoservicio: ventajas y mejores prácticas',
-    excerpt: 'Descubre cómo los kioscos de autoservicio pueden transformar la experiencia del cliente en tu negocio. Ventajas, consejos para su implementación y mejores prácticas para aumentar la satisfacción y eficiencia.',
-    image: '/blogImages/blogpost3.jpg',
-    category: 'Experiencia Cliente',
-    date: '2024-12-23',
-    readTime: '7 min',
-    slug: 'mejorar-experiencia-cliente-kioscos',
-    featured: false
+interface BlogSectionProps {
+  posts: BlogPost[]
+}
+
+export default function BlogSection({ posts }: BlogSectionProps) {
+  // Si no hay posts, mostrar mensaje
+  if (!posts || posts.length === 0) {
+    return (
+      <section className="py-24 bg-gradient-to-b from-white to-gray-50/50 dark:from-zinc-950 dark:to-zinc-900/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+              Próximamente <span className="text-[#0e9acd]">contenido nuevo</span>
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-zinc-400">
+              Estamos preparando artículos interesantes para ti.
+            </p>
+          </div>
+        </div>
+      </section>
+    )
   }
-]
 
-export default function BlogSection() {
+  // Transformar los posts de Sanity al formato esperado por el componente
+  const blogPosts = posts.map((post) => ({
+    id: post._id,
+    title: post.title,
+    excerpt: post.excerpt,
+    category: post.category,
+    date: post.publishedAt,
+    readTime: post.readTime,
+    slug: post.slug.current,
+    featured: post.featured
+  }))
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
   const [isMobile, setIsMobile] = useState(false)
@@ -171,31 +168,20 @@ export default function BlogSection() {
             >
               {blogPosts.map((post, index) => (
                 <div key={post.id} className={`${isMobile ? 'w-full' : 'w-1/3'} flex-shrink-0 ${isMobile ? 'px-2' : 'pr-6 last:pr-0'}`}>
-                  <div className="bg-white dark:bg-zinc-900 rounded-3xl overflow-hidden border border-gray-200 dark:border-zinc-700 transition-all duration-300 hover:-translate-y-2 group">
-                    {/* Image */}
-                    <div className="relative h-48 overflow-hidden">
-                      <Image
-                        src={post.image}
-                        alt={post.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-700"
-                      />
-                      <div className="absolute top-4 left-4">
+                  <div className="bg-white dark:bg-zinc-900 rounded-3xl overflow-hidden border border-gray-200 dark:border-zinc-700 transition-all duration-300 hover:-translate-y-2 group h-full">
+                    {/* Content */}
+                    <div className="p-6 h-full flex flex-col">
+                      {/* Category and Featured Badges */}
+                      <div className="flex items-center justify-between mb-4">
                         <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getCategoryColor(post.category)}`}>
                           {post.category}
                         </span>
-                      </div>
-                      {post.featured && (
-                        <div className="absolute top-4 right-4">
+                        {post.featured && (
                           <span className="bg-[#0e9acd] text-white px-3 py-1 rounded-full text-xs font-semibold">
                             Destacado
                           </span>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Content */}
-                    <div className="p-6">
+                        )}
+                      </div>
                       <div className="flex items-center text-sm text-gray-500 dark:text-zinc-400 mb-3 space-x-4">
                         <div className="flex items-center">
                           <Calendar className="w-4 h-4 mr-1" />
@@ -211,13 +197,13 @@ export default function BlogSection() {
                         {post.title}
                       </h3>
 
-                      <p className="text-gray-600 dark:text-zinc-300 mb-6 text-sm leading-relaxed line-clamp-3">
+                      <p className="text-gray-600 dark:text-zinc-300 mb-6 text-sm leading-relaxed line-clamp-4 flex-grow">
                         {post.excerpt}
                       </p>
 
                       <Link
                         href={`/blog/${post.slug}`}
-                        className="inline-flex items-center bg-[#0e9acd] text-white px-6 py-3 rounded-xl font-semibold hover:bg-[#0c87b8] transition-all duration-300 hover:scale-105 group"
+                        className="inline-flex items-center bg-[#0e9acd] text-white px-6 py-3 rounded-xl font-semibold hover:bg-[#0c87b8] transition-all duration-300 hover:scale-105 group mt-auto"
                       >
                         Leer más
                         <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />

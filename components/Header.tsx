@@ -32,10 +32,10 @@ export default function Header() {
       image: "/T-Cobro Prometheus.webp"
     },
     {
-      name: "Elysium",
-      href: "/productos/elysium",
-      description: "Terminal de Pago Premium", 
-      image: "/Elysium sin fondo.webp"
+      name: "Elysium Plus",
+      href: "/productos/elysium-plus",
+      description: "Terminal de Pago Avanzado", 
+      image: "/elysium-plus.png"
     }
   ];
 

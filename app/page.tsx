@@ -7,8 +7,15 @@ import SectorsSection from "@/components/SectorsSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import BlogSection from "@/components/BlogSection";
 import CTASection from "@/components/CTASection";
+import { getAllPosts } from "@/lib/sanity";
 
-export default function Home() {
+export const revalidate = 300 // Revalidar cada 5 minutos
+
+export default async function Home() {
+  // Obtener los últimos 6 posts del blog
+  const allPosts = await getAllPosts();
+  const latestPosts = allPosts.slice(0, 6);
+
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-950 transition-colors duration-300">
       <HeroSection />
@@ -18,7 +25,7 @@ export default function Home() {
       <FeaturesSection />
       <SectorsSection />
       <TestimonialsSection />
-      <BlogSection />
+      <BlogSection posts={latestPosts} />
       <CTASection />
     </div>
   );

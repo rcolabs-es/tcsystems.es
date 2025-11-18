@@ -8,6 +8,7 @@ export default function ProductsSection() {
   const products = [
     {
       name: "EVO",
+      slug: "evo",
       subtitle: "Kioscos de Autoservicio Completos",
       image: "/EVO LATERAL SIN FONDO.webp",
       description: "Sistema integral con admisión de monedas, billetes y tarjetas. Ideal para administraciones públicas.",
@@ -21,6 +22,7 @@ export default function ProductsSection() {
     },
     {
       name: "Prometheus",
+      slug: "prometheus",
       subtitle: "Terminales de Pago Avanzadas",
       image: "/T-Cobro Prometheus.webp",
       description: "Terminal de alta velocidad con sistema de audio. Perfecto para estaciones de servicio y hostelería.",
@@ -33,16 +35,17 @@ export default function ProductsSection() {
       ]
     },
     {
-      name: "Elysium",
-      subtitle: "Sistemas de Pago Premium",
-      image: "/Elysium sin fondo.webp",
-      description: "Solución premium para pagos con tarjeta. Diseño elegante para hoteles y comercios de alta gama.",
-      price: "Desde €3,499",
+      name: "Elysium Plus",
+      slug: "elysium-plus",
+      subtitle: "Terminal de Pago Completo",
+      image: "/elysium-plus.png",
+      description: "Solución completa con pantalla de 27\", múltiples métodos de pago y software integrable.",
+      price: "Desde €3,999",
       features: [
-        "Pago exclusivo con tarjeta",
-        "Pantalla táctil 21.5 pulgadas",
-        "Diseño elegante y moderno",
-        "Instalación rápida"
+        "Pantalla táctil de 27 pulgadas",
+        "Pago con tarjeta, efectivo o mixto",
+        "Lector de usuarios y QR",
+        "Software TCSystems integrable"
       ]
     }
   ];
@@ -112,7 +115,7 @@ export default function ProductsSection() {
                 {/* CTA */}
                 <div className="pt-4 space-y-3">
                   <Link
-                    href={`/productos/${product.name.toLowerCase()}`}
+                    href={`/productos/${product.slug}`}
                     className="w-full bg-[#0e9acd] text-white py-3 px-6 rounded-xl font-semibold hover:bg-[#0c7ba3] transition-all duration-200 flex items-center justify-center group shadow-lg hover:shadow-xl"
                   >
                     Ver detalles
