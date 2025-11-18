@@ -1,0 +1,534 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 9
+            }
+          ]
+        }
+      },
+      "id": "30de06c9-63f1-4582-862b-04b52f10f09e",
+      "name": "Daily Trigger at 09:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -1328,
+        -80
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "sanityProjectId",
+              "value": "y39srr1t",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "sanityDataset",
+              "value": "production",
+              "type": "string"
+            },
+            {
+              "id": "id-3",
+              "name": "sanityApiVersion",
+              "value": "2024-11-06",
+              "type": "string"
+            },
+            {
+              "id": "id-4",
+              "name": "notificationEmail",
+              "value": "contacto@rcolabs.es",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "c5397bfe-161e-48b2-ae58-a961ca01c84b",
+      "name": "Workflow Configuration",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1104,
+        -80
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "18MyA9MsCmwIkUYIF1PYlgwz0iBrpVckdrZt5sleoFAs",
+          "mode": "list",
+          "cachedResultName": "CALENDARIO DE POSTS - SEO - TCSYSTEMS.ES",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/18MyA9MsCmwIkUYIF1PYlgwz0iBrpVckdrZt5sleoFAs/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/18MyA9MsCmwIkUYIF1PYlgwz0iBrpVckdrZt5sleoFAs/edit#gid=0"
+        },
+        "options": {}
+      },
+      "id": "7c913665-8e73-4b28-985b-0bf774f55706",
+      "name": "Read Google Sheets Posts",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -880,
+        -80
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "XGri0YJfIXstR0XX",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "id-1",
+              "leftValue": "={{ $json.normalized_date }}",
+              "rightValue": "={{ $now.toFormat('dd/MM/yyyy') }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "5e6bb423-2d98-4e59-86b1-f99e6928c247",
+      "name": "Check if Post is Scheduled for Today",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -528,
+        -80
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-5-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-5-MINI"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "=Eres un experto redactor SEO y desarrollador de contenido para blogs especializados en tecnología de autoservicio y sistemas de pago automático. Tu tarea es crear un artículo completo, extenso y profundamente detallado optimizado para SEO, usando los datos que te proporciono. El resultado debe estar listo para subir a Sanity CMS en formato Portable Text.\n\nDatos del artículo:\n- Título: {{ $json[\"Título\"] }}\n- Categorías: {{ $json[\"Categorías\"] }}\n- Tipo: {{ $json.Tipo }}\n- Meta Título: {{ $json[\"Meta Título\"] }}\n- Meta Descripción: {{ $json[\"Meta Descripción\"] }}\n- Keywords: {{ $json.Keywords }}\n\nInstrucciones:\n1. Genera un contenido COMPLETO, EXTENSO y PROFUNDO (MÍNIMO 2800-3500 palabras), dividido en múltiples secciones con encabezados H2 y H3.\n\n2. Incluye los términos de las keywords de forma natural en el texto, distribuyéndolos estratégicamente.\n\n3. Crea un extracto de hasta 160 caracteres para la vista previa.\n\n4. Mantén el estilo profesional, educativo, persuasivo y narrativo.\n\n5. Genera UN ÚNICO _key por bloque usando este formato: 'block-' + número secuencial (block-1, block-2, etc)\n\n6. Genera UN ÚNICO _key por span usando este formato: 'span-' + número secuencial (span-1, span-2, etc)\n\n7. El slug debe ser: minúsculas, con guiones, sin acentos, sin caracteres especiales.\n\n8. La categoría DEBE ser exactamente una de estas: \"Tecnología\", \"Casos de Éxito\", \"Guías\", \"Experiencia Cliente\", \"Sostenibilidad\", \"Seguridad\"\n\n9. Usa negritas (marks: [\"strong\"]) en términos clave importantes, conceptos destacados y palabras relevantes para SEO.\n\n10. Calcula el tiempo de lectura aproximado (200 palabras por minuto).\n\nREQUISITOS DE ESTRUCTURA EXTENDIDA:\n\n- Mínimo de 25-35 bloques de contenido total\n- Al menos 6-8 secciones principales con H2\n- Al menos 8-12 subsecciones con H3\n- Cada sección H2 debe tener al menos 2-4 párrafos extensos (150-250 palabras cada uno)\n- Incluye una introducción de al menos 2-3 párrafos (300-400 palabras)\n- Añade una conclusión robusta de al menos 2-3 párrafos (300-400 palabras)\n\nCONTENIDO DETALLADO REQUERIDO:\n\nPara cada sección principal, incluye:\n- Explicaciones detalladas y contexto histórico cuando sea relevante\n- Ejemplos concretos y casos de uso específicos\n- Datos, estadísticas o tendencias del sector (pueden ser generalizadas pero realistas)\n- Beneficios específicos y aplicaciones prácticas\n- Comparaciones cuando sea apropiado\n- Listas o enumeraciones de puntos clave (integradas como texto en los párrafos)\n- Consideraciones técnicas explicadas de forma accesible\n- Implicaciones para diferentes tipos de negocios\n- Mejores prácticas y recomendaciones\n\nSECCIONES SUGERIDAS A INCLUIR (adaptar según el tema):\n\n1. Introducción contextual extensa\n2. ¿Qué es [tema principal]? - Definición profunda\n3. Evolución e historia del [tema]\n4. Componentes o elementos clave (desglosados en detalle)\n5. Beneficios y ventajas (explicados exhaustivamente)\n6. Casos de aplicación práctica (múltiples escenarios)\n7. Desafíos y cómo superarlos\n8. Tendencias actuales y futuro del sector\n9. Mejores prácticas de implementación\n10. Impacto en la experiencia del cliente\n11. Consideraciones de ROI o rentabilidad\n12. Conclusión y llamada a la acción\n\nDevuelve ÚNICAMENTE este JSON (sin comentarios, sin explicaciones, SOLO el JSON):\n\n{\n  \"mutations\": [\n    {\n      \"create\": {\n        \"_id\": \"drafts.DRAFT_ID_PLACEHOLDER\",\n        \"_type\": \"blogPost\",\n        \"title\": \"[TÍTULO COMPLETO AQUÍ]\",\n        \"slug\": {\n          \"_type\": \"slug\",\n          \"_key\": \"slug\",\n          \"current\": \"[slug-url-friendly]\"\n        },\n        \"excerpt\": \"[Extracto de máximo 160 caracteres]\",\n        \"category\": \"[UNA de las categorías válidas]\",\n        \"tags\": [\"tag1\", \"tag2\", \"tag3\", \"tag4\", \"tag5\", \"tag6\"],\n        \"publishedAt\": \"{{ $now.toISO() }}\",\n        \"readTime\": \"[X min]\",\n        \"featured\": false,\n        \"content\": [\n          {\n            \"_type\": \"block\",\n            \"_key\": \"block-1\",\n            \"style\": \"normal\",\n            \"children\": [\n              {\n                \"_type\": \"span\",\n                \"_key\": \"span-1\",\n                \"text\": \"Párrafo introductorio extenso y completo aquí. Este primer párrafo debe establecer el contexto, captar la atención del lector y presentar el tema de manera atractiva. Debe incluir al menos 150-200 palabras y mencionar las keywords principales de forma natural...\",\n                \"marks\": []\n              }\n            ],\n            \"markDefs\": []\n          },\n          {\n            \"_type\": \"block\",\n            \"_key\": \"block-2\",\n            \"style\": \"normal\",\n            \"children\": [\n              {\n                \"_type\": \"span\",\n                \"_key\": \"span-2\",\n                \"text\": \"Segundo párrafo introductorio que profundiza en la importancia del tema, establece el problema o necesidad que se va a abordar, y explica qué encontrará el lector en el artículo. Incluye \",\n                \"marks\": []\n              },\n              {\n                \"_type\": \"span\",\n                \"_key\": \"span-3\",\n                \"text\": \"términos clave en negrita\",\n                \"marks\": [\"strong\"]\n              },\n              {\n                \"_type\": \"span\",\n                \"_key\": \"span-4\",\n                \"text\": \" para destacar conceptos importantes y mejorar la legibilidad...\",\n                \"marks\": []\n              }\n            ],\n            \"markDefs\": []\n          },\n          {\n            \"_type\": \"block\",\n            \"_key\": \"block-3\",\n            \"style\": \"h2\",\n            \"children\": [\n              {\n                \"_type\": \"span\",\n                \"_key\": \"span-5\",\n                \"text\": \"Primer encabezado H2 - Título de sección principal\",\n                \"marks\": []\n              }\n            ],\n            \"markDefs\": []\n          },\n          {\n            \"_type\": \"block\",\n            \"_key\": \"block-4\",\n            \"style\": \"normal\",\n            \"children\": [\n              {\n                \"_type\": \"span\",\n                \"_key\": \"span-6\",\n                \"text\": \"Primer párrafo extenso bajo este H2. Debe contener al menos 150-200 palabras, desarrollar la idea principal de esta sección, incluir ejemplos específicos y usar \",\n                \"marks\": []\n              },\n              {\n                \"_type\": \"span\",\n                \"_key\": \"span-7\",\n                \"text\": \"negritas para términos importantes\",\n                \"marks\": [\"strong\"]\n              },\n              {\n                \"_type\": \"span\",\n                \"_key\": \"span-8\",\n                \"text\": \" y continúa desarrollando el contenido de manera natural y fluida...\",\n                \"marks\": []\n              }\n            ],\n            \"markDefs\": []\n          },\n          {\n            \"_type\": \"block\",\n            \"_key\": \"block-5\",\n            \"style\": \"normal\",\n            \"children\": [\n              {\n                \"_type\": \"span\",\n                \"_key\": \"span-9\",\n                \"text\": \"Segundo párrafo que continúa desarrollando la sección, aportando más detalles, ejemplos adicionales, datos o estadísticas relevantes. Este párrafo también debe ser extenso y sustancioso...\",\n                \"marks\": []\n              }\n            ],\n            \"markDefs\": []\n          },\n          {\n            \"_type\": \"block\",\n            \"_key\": \"block-6\",\n            \"style\": \"h3\",\n            \"children\": [\n              {\n                \"_type\": \"span\",\n                \"_key\": \"span-10\",\n                \"text\": \"Primera subsección H3 dentro del H2\",\n                \"marks\": []\n              }\n            ],\n            \"markDefs\": []\n          },\n          {\n            \"_type\": \"block\",\n            \"_key\": \"block-7\",\n            \"style\": \"normal\",\n            \"children\": [\n              {\n                \"_type\": \"span\",\n                \"_key\": \"span-11\",\n                \"text\": \"Contenido detallado para esta subsección H3...\",\n                \"marks\": []\n              }\n            ],\n            \"markDefs\": []\n          }\n        ],\n        \"seo\": {\n          \"_type\": \"object\",\n          \"metaTitle\": \"{{ $json[\"Meta Título\"] }}\",\n          \"metaDescription\": \"{{ $json[\"Meta Descripción\"] }}\",\n          \"keywords\": [\"keyword1\", \"keyword2\", \"keyword3\", \"keyword4\", \"keyword5\"]\n        }\n      }\n    }\n  ]\n}\n\nRECUERDA:\n- DEBE incluir \"_id\": \"drafts.DRAFT_ID_PLACEHOLDER\" para crear el documento como borrador\n- DEBE ser \"_type\": \"blogPost\" (NO \"post\")\n- Cada bloque necesita _key ÚNICO secuencial\n- Cada span necesita _key ÚNICO secuencial\n- MÍNIMO 25-35 bloques de contenido (para alcanzar 2800-3500 palabras)\n- Usa H2 para secciones principales (mínimo 6-8 secciones)\n- Usa H3 para subsecciones (mínimo 8-12 subsecciones)\n- Incluye al menos 6-8 secciones H2 completas\n- Cada sección H2 debe tener mínimo 2-4 párrafos extensos\n- Los párrafos deben ser densos y detallados (150-250 palabras cada uno)\n- Usa negritas generosamente para mejorar la legibilidad y SEO\n- NO uses comillas dobles dentro del texto (usa comillas simples si es necesario)\n- El JSON debe ser válido y parseable\n- El contenido debe ser educativo, profesional y aportar VALOR REAL\n- Desarrolla cada idea completamente, no te limites a mencionarla superficialmente\n- Incluye contexto, ejemplos, beneficios, aplicaciones y consideraciones en cada sección"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "id": "ac24a8e7-6715-4699-a5ab-af01aa8f7961",
+      "name": "Generate Blog Content with ChatGPT",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2,
+      "position": [
+        -304,
+        -96
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "lbEvDP05q8sa8CC3",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Extrae el texto del output de ChatGPT\nconst chatGPTText = $input.item.json.output[0].content[0].text;\n\n// Limpia el texto por si tiene markdown\nlet cleanedText = chatGPTText.trim();\n\n// Si el texto viene envuelto en ```json ... ```, quitarlo\nif (cleanedText.startsWith('```json')) {\n  cleanedText = cleanedText.replace(/^```json\\s*/, '').replace(/```\\s*$/, '');\n} else if (cleanedText.startsWith('```')) {\n  cleanedText = cleanedText.replace(/^```\\s*/, '').replace(/```\\s*$/, '');\n}\n\n// Convierte el string en JSON real\nconst sanityPost = JSON.parse(cleanedText);\n\n// Genera un ID único para el draft\nconst timestamp = Date.now();\nconst randomSuffix = Math.random().toString(36).substring(2, 9);\nconst draftId = `drafts.${timestamp}-${randomSuffix}`;\n\n// Asigna el ID de draft al documento\nsanityPost.mutations[0].create._id = draftId;\n\n// Retorna para el siguiente nodo (HTTP Request a Sanity)\nreturn {\n  json: {\n    ...sanityPost,\n    draftId: draftId,\n    slug: sanityPost.mutations[0].create.slug.current,\n    title: sanityPost.mutations[0].create.title,\n    excerpt: sanityPost.mutations[0].create.excerpt,\n    category: sanityPost.mutations[0].create.category\n  }\n};"
+      },
+      "id": "353b337a-ed1a-4172-832b-4f838de3f78e",
+      "name": "Format Content for Sanity",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        16,
+        -96
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://{{ $('Workflow Configuration').first().json.sanityProjectId }}.api.sanity.io/v{{ $('Workflow Configuration').first().json.sanityApiVersion }}/data/mutate/{{ $('Workflow Configuration').first().json.sanityDataset }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer sk0dY7p2pwKoykJbLZx3UFVakWLsapvXoKZi4On70HFx5pW2ZYT2WcgmD2PxQO79D97u6xojSLmE6KV82YWKGM9mCpZrRk9GewmXVHS2YjQyUHwd085PYLdybTMSi5b1pol0pf7fLdWs1I7D4NidFQgGUVHjSKMVN1nlV44pDZ9AJPFR9ZGU"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($('Format Content for Sanity').first().json.mutations ? { mutations: $('Format Content for Sanity').first().json.mutations } : $('Format Content for Sanity').first().json) }}",
+        "options": {}
+      },
+      "id": "c049dc4b-8fd5-4ac7-8305-fc36f449b841",
+      "name": "Create Post in Sanity CMS",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        176,
+        -96
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "18MyA9MsCmwIkUYIF1PYlgwz0iBrpVckdrZt5sleoFAs"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "Hoja 1"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Estado": "borrador",
+            "URL": "={{ 'https://tcsystems.es/studio/desk/production;blogPost;' + $('Format Content for Sanity').item.json.draftId }}",
+            "row_number": 0,
+            "Título": "={{ $('Format Content for Sanity').item.json.title }}"
+          },
+          "matchingColumns": [
+            "Título"
+          ],
+          "schema": [
+            {
+              "id": "Título",
+              "displayName": "Título",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Categorías",
+              "displayName": "Categorías",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Tipo",
+              "displayName": "Tipo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Meta Título",
+              "displayName": "Meta Título",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Meta Descripción",
+              "displayName": "Meta Descripción",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Keywords",
+              "displayName": "Keywords",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Fecha",
+              "displayName": "Fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "URL",
+              "displayName": "URL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "477fa127-41cd-4fbe-b8a9-4b9a0d1f87bd",
+      "name": "Update Google Sheets Status",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        368,
+        -96
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "XGri0YJfIXstR0XX",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer re_YztzrCbi_BEbEWtqcjGoKan24E2SkP2pA"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "from",
+              "value": "notificaciones@rcolabs.es"
+            },
+            {
+              "name": "to",
+              "value": "r.estepa@tcsystems.es"
+            },
+            {
+              "name": "cc",
+              "value": "r.munoz@tcsystems.es"
+            },
+            {
+              "name": "html",
+              "value": "=<span style=\"display:none !important; visibility:hidden; opacity:0; height:0; width:0; font-size:0; line-height:0;\">Nuevo borrador creado en TCSystems — requiere revisión antes de publicar.</span><table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#ffffff; padding:40px 16px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; color:#111111;\"><tr><td align=\"center\"><table role=\"presentation\" width=\"680\" style=\"max-width:680px; margin:0 auto; border-collapse:collapse;\"><tr><td style=\"padding:24px 24px 8px; text-align:left;\"><h1 style=\"margin:0; font-size:20px; font-weight:700; letter-spacing:-0.2px;\">📝 Nuevo Borrador para Revisar</h1><p style=\"margin:8px 0 0; color:#f59e0b; font-size:13px; font-weight:600;\">Sistema de Publicación Automática • TCSystems</p></td></tr><tr><td style=\"padding:18px 24px; border:1px solid #e5e5e5; border-radius:12px; background:#fafafa;\"><h2 style=\"margin:0 0 10px; font-size:18px; line-height:1.3; color:#111111; font-weight:700;\">{{$('Format Content for Sanity').item.json.title}}</h2><p style=\"margin:0 0 16px; color:#666666; font-size:13px;\"><strong style=\"color:#111111;\">Fecha programada:</strong> {{$now.toFormat('dd/MM/yyyy')}} &nbsp; • &nbsp;<strong style=\"color:#111111;\">Categoría:</strong> {{$('Format Content for Sanity').item.json.category}}</p><div style=\"color:#444444; font-size:14px; line-height:1.6; margin-bottom:20px; padding:16px; background:#ffffff; border-radius:8px; border-left:4px solid #f59e0b;\">{{$('Format Content for Sanity').item.json.excerpt}}</div><div style=\"background:#fef3c7; border:1px solid #fbbf24; border-radius:8px; padding:12px; margin-bottom:20px;\"><p style=\"margin:0; font-size:13px; color:#92400e;\"><strong>⚠️ Acción requerida:</strong> Este artículo ha sido generado automáticamente y está guardado como borrador. Por favor, revísalo y publícalo manualmente desde Sanity Studio.</p></div><table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin:0; width:100%;\"><tr><td align=\"left\" style=\"padding-bottom:8px;\"><a href=\"https://tcsystems.es/studio/desk/production;blogPost;{{$('Format Content for Sanity').item.json.draftId}}\" target=\"_blank\" style=\"display:inline-block; padding:14px 28px; background:#0e9acd; color:#ffffff; text-decoration:none; border-radius:8px; font-weight:600; font-size:14px;\">🔍 Revisar y Publicar en Sanity</a></td></tr><tr><td align=\"left\"><a href=\"https://docs.google.com/spreadsheets/d/18MyA9MsCmwIkUYIF1PYlgwz0iBrpVckdrZt5sleoFAs\" target=\"_blank\" style=\"display:inline-block; padding:12px 24px; background:#ffffff; color:#0e9acd; text-decoration:none; border-radius:8px; font-weight:600; font-size:14px; border:2px solid #0e9acd;\">📊 Ver Calendario en Google Sheets</a></td></tr></table></td></tr><tr><td style=\"padding:0 24px; margin-top:16px;\"><table role=\"presentation\" width=\"100%\" style=\"margin-top:20px; border-top:1px solid #e5e5e5; padding-top:16px;\"><tr><td style=\"padding:8px; background:#f8f8f8; border-radius:8px;\"><p style=\"margin:0 0 6px; font-size:12px; color:#888888; font-weight:600; text-transform:uppercase; letter-spacing:0.5px;\">Detalles del Borrador</p><p style=\"margin:0; font-size:13px; color:#666666;\"><strong>Estado:</strong> <span style=\"color:#f59e0b; font-weight:600;\">📝 Borrador (pendiente de revisión)</span><br><strong>Plataforma:</strong> Sanity CMS<br><strong>ID del borrador:</strong> <code style=\"background:#e5e5e5; padding:2px 6px; border-radius:4px; font-size:12px;\">{{$('Format Content for Sanity').item.json.draftId}}</code><br><strong>Slug previsto:</strong> tcsystems.es/blog/{{$('Format Content for Sanity').item.json.slug}}</p></td></tr></table></td></tr><tr><td style=\"padding:18px 24px 0; color:#666666; font-size:13px;\"><p style=\"margin:0 0 8px; line-height:1.5;\">Esta notificación ha sido generada automáticamente por el sistema de publicación de contenido. Una vez revisado, puedes publicar el artículo desde Sanity Studio o contactar con nosotros en <a href=\"mailto:contacto@rcolabs.es\" style=\"color:#0e9acd; text-decoration:underline; font-weight:500;\">contacto@rcolabs.es</a>.</p><p style=\"margin:0; color:#aaaaaa; font-size:12px;\">TCSystems · Sistema de Publicación Automática · Powered by RCOLABS</p></td></tr></table></td></tr></table>"
+            },
+            {
+              "name": "subject",
+              "value": "=Nuevo borrador para revisar: {{ $('Format Content for Sanity').item.json.title }} - tcsystems.es"
+            },
+            {
+              "name": "bcc",
+              "value": "contacto@rcolabs.es"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d7ec51c3-9554-45cd-867e-ce82663e8c96",
+      "name": "Send Notification via Resend",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        592,
+        -96
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Get the Fecha field from Google Sheets\nconst fecha = $input.item.json.Fecha;\n\n// Function to normalize date to dd/MM/yyyy format\nfunction normalizeDate(dateStr) {\n  if (!dateStr) return '';\n  \n  // Trim whitespace\n  dateStr = dateStr.trim();\n  \n  // Split by /\n  const parts = dateStr.split('/');\n  \n  if (parts.length !== 3) return dateStr; // Return original if not in expected format\n  \n  // Pad day and month with leading zeros if needed\n  const day = parts[0].padStart(2, '0');\n  const month = parts[1].padStart(2, '0');\n  const year = parts[2];\n  \n  return `${day}/${month}/${year}`;\n}\n\n// Normalize the date\nconst normalizedDate = normalizeDate(fecha);\n\n// Return all original fields plus the normalized_date field\nreturn {\n  json: {\n    ...$input.item.json,\n    normalized_date: normalizedDate\n  }\n};"
+      },
+      "id": "f8c62430-ebff-45a0-b66c-32ebd0c49506",
+      "name": "Parse and Normalize Date",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -704,
+        -80
+      ]
+    }
+  ],
+  "connections": {
+    "Daily Trigger at 09:00": {
+      "main": [
+        [
+          {
+            "node": "Workflow Configuration",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Workflow Configuration": {
+      "main": [
+        [
+          {
+            "node": "Read Google Sheets Posts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Google Sheets Posts": {
+      "main": [
+        [
+          {
+            "node": "Parse and Normalize Date",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check if Post is Scheduled for Today": {
+      "main": [
+        [
+          {
+            "node": "Generate Blog Content with ChatGPT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Blog Content with ChatGPT": {
+      "main": [
+        [
+          {
+            "node": "Format Content for Sanity",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Content for Sanity": {
+      "main": [
+        [
+          {
+            "node": "Create Post in Sanity CMS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Post in Sanity CMS": {
+      "main": [
+        [
+          {
+            "node": "Update Google Sheets Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Google Sheets Status": {
+      "main": [
+        [
+          {
+            "node": "Send Notification via Resend",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse and Normalize Date": {
+      "main": [
+        [
+          {
+            "node": "Check if Post is Scheduled for Today",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "eb42600728a42b3dc9825446f05ec088a7d6fab24b82d3568b2e007ef931335f"
+  }
+}
+
