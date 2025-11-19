@@ -32,7 +32,7 @@ export interface UserConfirmationProps {
 // Constantes para configuración de emails
 export const EMAIL_CONFIG = {
   FROM: 'TCSystems <noreply@tcsystems.es>',
-  ADMIN_EMAIL: 'consultoria@tcsystems.es',
+  ADMIN_EMAIL: 'r.munoz@tcsystems.es',
   DOMAIN: 'tcsystems.es',
 } as const;
 
