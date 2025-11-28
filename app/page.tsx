@@ -3,6 +3,7 @@ import StatsStripe from "@/components/StatsStripe";
 import CompanySection from "@/components/CompanySection";
 import ProductsSection from "@/components/ProductsSection";
 import FeaturesSection from "@/components/FeaturesSection";
+import VerifactuSection from "@/components/VerifactuSection";
 import SectorsSection from "@/components/SectorsSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import BlogSection from "@/components/BlogSection";
@@ -23,6 +24,7 @@ export default async function Home() {
       <CompanySection />
       <ProductsSection />
       <FeaturesSection />
+      <VerifactuSection />
       <SectorsSection />
       <TestimonialsSection />
       <BlogSection posts={latestPosts} />
