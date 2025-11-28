@@ -14,20 +14,20 @@ export default function VerifactuSection() {
           <div className="space-y-8">
             <div className="space-y-6">
               <div className="inline-flex items-center bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-full px-4 py-2 text-sm text-gray-600 dark:text-zinc-400 shadow-sm">
-                Verifactu Integrado
+                Integración Verifactu
               </div>
               
               <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
                 Verifactu 
-                <span className="text-[#0e9acd]"> integrado</span> en todos nuestros terminales
+                <span className="text-[#0e9acd]"> disponible</span> para todos nuestros terminales
               </h2>
               
               <p className="text-lg text-gray-600 dark:text-zinc-300 leading-relaxed">
-                Todos nuestros <strong className="text-gray-900 dark:text-white">terminales de pago</strong> vienen con <strong className="text-[#0e9acd]">Verifactu integrado</strong>, garantizando el <strong className="text-gray-900 dark:text-white">cumplimiento normativo</strong> y la <strong className="text-gray-900 dark:text-white">facturación electrónica</strong> desde el primer día.
+                Ofrecemos la <strong className="text-[#0e9acd]">integración de Verifactu</strong> en todos nuestros <strong className="text-gray-900 dark:text-white">terminales de pago</strong>, garantizando el <strong className="text-gray-900 dark:text-white">cumplimiento normativo</strong> y la <strong className="text-gray-900 dark:text-white">facturación electrónica</strong> para tu negocio.
               </p>
               
               <p className="text-base text-gray-600 dark:text-zinc-300 leading-relaxed">
-                No necesitas configuraciones adicionales. <strong className="text-[#0e9acd]">Verifactu está listo para usar</strong> en todos nuestros productos.
+                Si necesitas <strong className="text-[#0e9acd]">facturación electrónica</strong>, podemos integrar Verifactu en cualquiera de nuestros productos de forma sencilla y eficiente.
               </p>
             </div>
 
@@ -67,10 +67,10 @@ export default function VerifactuSection() {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
-                    Sin configuraciones adicionales
+                    Integración sencilla
                   </h3>
                   <p className="text-gray-600 dark:text-zinc-400">
-                    Todo viene preconfigurado y listo para usar desde el primer momento.
+                    Proceso de integración directo y sin complicaciones en todos nuestros terminales.
                   </p>
                 </div>
               </div>
@@ -92,7 +92,7 @@ export default function VerifactuSection() {
                     Sistema de facturación electrónica
                   </p>
                   <p className="text-base text-gray-600 dark:text-zinc-400">
-                    Solución integrada que garantiza el cumplimiento de la normativa española de facturación electrónica en todos nuestros terminales.
+                    Solución disponible para integrar en nuestros terminales, garantizando el cumplimiento de la normativa española de facturación electrónica.
                   </p>
                 </div>
                 
@@ -100,15 +100,15 @@ export default function VerifactuSection() {
                   <div className="flex items-start">
                     <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
                     <div>
-                      <span className="font-semibold text-gray-900 dark:text-white block">Integrado en todos los terminales</span>
-                      <span className="text-sm text-gray-600 dark:text-zinc-400">Incluido de serie sin coste adicional</span>
+                      <span className="font-semibold text-gray-900 dark:text-white block">Disponible para todos los terminales</span>
+                      <span className="text-sm text-gray-600 dark:text-zinc-400">Opción de integración en cualquier producto</span>
                     </div>
                   </div>
                   <div className="flex items-start">
                     <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
                     <div>
-                      <span className="font-semibold text-gray-900 dark:text-white block">Configuración automática</span>
-                      <span className="text-sm text-gray-600 dark:text-zinc-400">Listo para usar desde el primer día</span>
+                      <span className="font-semibold text-gray-900 dark:text-white block">Integración profesional</span>
+                      <span className="text-sm text-gray-600 dark:text-zinc-400">Proceso de integración gestionado por nuestro equipo</span>
                     </div>
                   </div>
                   <div className="flex items-start">
