@@ -13,6 +13,7 @@ export default function Header() {
   const navigation = [
     { name: "Empresa", href: "/#empresa" },
     { name: "Productos", href: "/#productos", hasDropdown: true },
+    { name: "Verifactu", href: "/verifactu" },
     { name: "Clientes", href: "/#clientes" },
     { name: "Blog", href: "/blog" },
     { name: "Contacto", href: "/contacto" }
