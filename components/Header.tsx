@@ -3,18 +3,20 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X, Phone, Mail, ChevronDown } from "lucide-react";
+import { Menu, X, Phone, Mail, ChevronDown, Car, Shield, FileText } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [isMobileProductsOpen, setIsMobileProductsOpen] = useState(false);
+  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
 
   const navigation = [
     { name: "Empresa", href: "/#empresa" },
-    { name: "Productos", href: "/#productos", hasDropdown: true },
-    { name: "Parkings", href: "/parkings" },
-    { name: "Verifactu", href: "/verifactu" },
+    { name: "Productos", href: "/#productos", dropdown: "products" as const },
+    { name: "Servicios", href: "#", dropdown: "services" as const },
     { name: "Clientes", href: "/#clientes" },
     { name: "Blog", href: "/blog" },
     { name: "Contacto", href: "/contacto" }
@@ -38,6 +40,27 @@ export default function Header() {
       href: "/productos/elysium-plus",
       description: "Terminal de Pago Avanzado", 
       image: "/elysium-plus.png"
+    }
+  ];
+
+  const services = [
+    {
+      name: "Parkings",
+      href: "/parkings",
+      description: "Gestión y automatización de parkings",
+      icon: Car
+    },
+    {
+      name: "Control de Accesos",
+      href: "/control-accesos",
+      description: "Seguridad inteligente para instalaciones",
+      icon: Shield
+    },
+    {
+      name: "Verifactu",
+      href: "/verifactu",
+      description: "Facturación electrónica integrada",
+      icon: FileText
     }
   ];
 
@@ -83,7 +106,7 @@ export default function Header() {
           <nav className="hidden lg:flex items-center space-x-8">
             {navigation.map((item) => (
               <div key={item.name} className="relative">
-                {item.hasDropdown ? (
+                {item.dropdown === "products" ? (
                   <div
                     className="relative"
                     onMouseEnter={() => setIsProductsOpen(true)}
@@ -97,37 +120,37 @@ export default function Header() {
                       <ChevronDown className="w-4 h-4 ml-1" />
                     </Link>
                     
-                    {/* Dropdown Menu */}
+                    {/* Products Dropdown */}
                     {isProductsOpen && (
                       <div className="absolute top-full left-0 pt-2 w-80 z-50">
                         <div className="bg-white dark:bg-zinc-950 rounded-2xl shadow-2xl border border-gray-200 dark:border-zinc-800 p-6">
-                        <div className="space-y-4">
-                          {products.map((product) => (
-                            <Link
-                              key={product.name}
-                              href={product.href}
-                              className="flex items-center p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-zinc-900 transition-colors duration-200 group"
-                            >
-                              <div className="w-12 h-12 bg-gray-100 dark:bg-zinc-800 rounded-lg flex items-center justify-center mr-4 overflow-hidden">
-                                <Image
-                                  src={product.image}
-                                  alt={product.name}
-                                  width={48}
-                                  height={48}
-                                  className="w-8 h-8 object-contain"
-                                />
-                              </div>
-                              <div>
-                                <h4 className="font-semibold text-gray-900 dark:text-white group-hover:text-[#0e9acd] transition-colors">
-                                  {product.name}
-                                </h4>
-                                <p className="text-sm text-gray-600 dark:text-zinc-400">
-                                  {product.description}
-                                </p>
-                              </div>
-                            </Link>
-                          ))}
-                        </div>
+                          <div className="space-y-4">
+                            {products.map((product) => (
+                              <Link
+                                key={product.name}
+                                href={product.href}
+                                className="flex items-center p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-zinc-900 transition-colors duration-200 group"
+                              >
+                                <div className="w-12 h-12 bg-gray-100 dark:bg-zinc-800 rounded-lg flex items-center justify-center mr-4 overflow-hidden">
+                                  <Image
+                                    src={product.image}
+                                    alt={product.name}
+                                    width={48}
+                                    height={48}
+                                    className="w-8 h-8 object-contain"
+                                  />
+                                </div>
+                                <div>
+                                  <h4 className="font-semibold text-gray-900 dark:text-white group-hover:text-[#0e9acd] transition-colors">
+                                    {product.name}
+                                  </h4>
+                                  <p className="text-sm text-gray-600 dark:text-zinc-400">
+                                    {product.description}
+                                  </p>
+                                </div>
+                              </Link>
+                            ))}
+                          </div>
                           <div className="mt-4 pt-4 border-t border-gray-200 dark:border-zinc-800">
                             <Link
                               href="/#productos"
@@ -135,6 +158,48 @@ export default function Header() {
                             >
                               Ver todos los productos →
                             </Link>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ) : item.dropdown === "services" ? (
+                  <div
+                    className="relative"
+                    onMouseEnter={() => setIsServicesOpen(true)}
+                    onMouseLeave={() => setIsServicesOpen(false)}
+                  >
+                    <button
+                      className="text-gray-600 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-white font-medium transition-colors duration-200 flex items-center"
+                    >
+                      {item.name}
+                      <ChevronDown className="w-4 h-4 ml-1" />
+                    </button>
+                    
+                    {/* Services Dropdown */}
+                    {isServicesOpen && (
+                      <div className="absolute top-full left-0 pt-2 w-80 z-50">
+                        <div className="bg-white dark:bg-zinc-950 rounded-2xl shadow-2xl border border-gray-200 dark:border-zinc-800 p-6">
+                          <div className="space-y-4">
+                            {services.map((service) => (
+                              <Link
+                                key={service.name}
+                                href={service.href}
+                                className="flex items-center p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-zinc-900 transition-colors duration-200 group"
+                              >
+                                <div className="w-12 h-12 bg-[#0e9acd]/10 dark:bg-[#0e9acd]/20 rounded-lg flex items-center justify-center mr-4">
+                                  <service.icon className="w-6 h-6 text-[#0e9acd]" />
+                                </div>
+                                <div>
+                                  <h4 className="font-semibold text-gray-900 dark:text-white group-hover:text-[#0e9acd] transition-colors">
+                                    {service.name}
+                                  </h4>
+                                  <p className="text-sm text-gray-600 dark:text-zinc-400">
+                                    {service.description}
+                                  </p>
+                                </div>
+                              </Link>
+                            ))}
                           </div>
                         </div>
                       </div>
@@ -155,12 +220,12 @@ export default function Header() {
           {/* CTA Button and Theme Toggle */}
           <div className="hidden lg:flex items-center space-x-4">
             <ThemeToggle />
-                          <Link
-                href="/contacto#presupuesto"
-                className="bg-[#0e9acd] text-white px-6 py-2.5 rounded-lg font-medium hover:bg-[#0c7ba3] transition-colors duration-200"
-              >
-                Solicitar presupuesto
-              </Link>
+            <Link
+              href="/contacto#presupuesto"
+              className="bg-[#0e9acd] text-white px-6 py-2.5 rounded-lg font-medium hover:bg-[#0c7ba3] transition-colors duration-200"
+            >
+              Solicitar presupuesto
+            </Link>
           </div>
 
           {/* Mobile controls */}
@@ -187,50 +252,91 @@ export default function Header() {
             <nav className="flex flex-col space-y-4">
               {navigation.map((item) => (
                 <div key={item.name}>
-                  <Link
-                    href={item.href}
-                    className="text-gray-600 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-white font-medium py-2 transition-colors duration-200 flex items-center"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.name}
-                    {item.hasDropdown && <ChevronDown className="w-4 h-4 ml-1" />}
-                  </Link>
-                  {item.hasDropdown && (
-                    <div className="ml-4 mt-2 space-y-2">
-                      {products.map((product) => (
-                        <Link
-                          key={product.name}
-                          href={product.href}
-                          className="flex items-center py-2 text-gray-500 dark:text-zinc-500 hover:text-[#0e9acd] transition-colors duration-200"
-                          onClick={() => setIsMenuOpen(false)}
-                        >
-                          <div className="w-8 h-8 bg-gray-100 dark:bg-zinc-800 rounded-lg flex items-center justify-center mr-3 overflow-hidden">
-                            <Image
-                              src={product.image}
-                              alt={product.name}
-                              width={32}
-                              height={32}
-                              className="w-6 h-6 object-contain"
-                            />
-                          </div>
-                          <div>
-                            <div className="font-medium">{product.name}</div>
-                            <div className="text-xs">{product.description}</div>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
+                  {item.dropdown === "products" ? (
+                    <>
+                      <button
+                        className="text-gray-600 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-white font-medium py-2 transition-colors duration-200 flex items-center w-full"
+                        onClick={() => setIsMobileProductsOpen(!isMobileProductsOpen)}
+                      >
+                        {item.name}
+                        <ChevronDown className={`w-4 h-4 ml-1 transition-transform duration-200 ${isMobileProductsOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                      {isMobileProductsOpen && (
+                        <div className="ml-4 mt-2 space-y-2">
+                          {products.map((product) => (
+                            <Link
+                              key={product.name}
+                              href={product.href}
+                              className="flex items-center py-2 text-gray-500 dark:text-zinc-500 hover:text-[#0e9acd] transition-colors duration-200"
+                              onClick={() => setIsMenuOpen(false)}
+                            >
+                              <div className="w-8 h-8 bg-gray-100 dark:bg-zinc-800 rounded-lg flex items-center justify-center mr-3 overflow-hidden">
+                                <Image
+                                  src={product.image}
+                                  alt={product.name}
+                                  width={32}
+                                  height={32}
+                                  className="w-6 h-6 object-contain"
+                                />
+                              </div>
+                              <div>
+                                <div className="font-medium">{product.name}</div>
+                                <div className="text-xs">{product.description}</div>
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </>
+                  ) : item.dropdown === "services" ? (
+                    <>
+                      <button
+                        className="text-gray-600 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-white font-medium py-2 transition-colors duration-200 flex items-center w-full"
+                        onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
+                      >
+                        {item.name}
+                        <ChevronDown className={`w-4 h-4 ml-1 transition-transform duration-200 ${isMobileServicesOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                      {isMobileServicesOpen && (
+                        <div className="ml-4 mt-2 space-y-2">
+                          {services.map((service) => (
+                            <Link
+                              key={service.name}
+                              href={service.href}
+                              className="flex items-center py-2 text-gray-500 dark:text-zinc-500 hover:text-[#0e9acd] transition-colors duration-200"
+                              onClick={() => setIsMenuOpen(false)}
+                            >
+                              <div className="w-8 h-8 bg-[#0e9acd]/10 dark:bg-[#0e9acd]/20 rounded-lg flex items-center justify-center mr-3">
+                                <service.icon className="w-4 h-4 text-[#0e9acd]" />
+                              </div>
+                              <div>
+                                <div className="font-medium">{service.name}</div>
+                                <div className="text-xs">{service.description}</div>
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      className="text-gray-600 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-white font-medium py-2 transition-colors duration-200 flex items-center"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
                   )}
                 </div>
               ))}
               <div className="pt-4">
-                                  <Link
-                    href="/contacto#presupuesto"
-                    className="bg-[#0e9acd] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#0c7ba3] transition-colors duration-200 text-center block"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Solicitar presupuesto
-                  </Link>
+                <Link
+                  href="/contacto#presupuesto"
+                  className="bg-[#0e9acd] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#0c7ba3] transition-colors duration-200 text-center block"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Solicitar presupuesto
+                </Link>
               </div>
             </nav>
           </div>
