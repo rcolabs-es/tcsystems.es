@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, CreditCard, Coins, Users, QrCode, Monitor, Cpu, Phone, Mail, MessageCircle, Zap, Shield, Settings } from 'lucide-react'
 import ContactForm from '@/components/ContactForm'
+import ThemedProductImage from '@/components/ThemedProductImage'
 import type { Metadata } from 'next'
 
 // Video local: coloca tu archivo en public/videos/elysium-plus.mp4 (y opcionalmente .webm)
@@ -189,20 +190,13 @@ export default function ElysiumPlusPage() {
             {/* Image - 1/3 */}
             <div className="lg:col-span-1">
               <div className="relative aspect-[3/4] max-w-sm mx-auto">
-                <Image
-                  src="/elysium-plus.png"
+                <ThemedProductImage
+                  lightSrc="/elysium-plus.png"
+                  darkSrc="/elysium-plus-white.png"
                   alt="Elysium Plus - Terminal de Pago Avanzado"
                   width={400}
                   height={500}
-                  className="w-full h-[35rem] object-contain block dark:hidden"
-                  priority
-                />
-                <Image
-                  src="/elysium-plus-white.png"
-                  alt="Elysium Plus - Terminal de Pago Avanzado"
-                  width={400}
-                  height={500}
-                  className="w-full h-[35rem] object-contain hidden dark:block"
+                  className="w-full h-[35rem] object-contain"
                   priority
                 />
               </div>
