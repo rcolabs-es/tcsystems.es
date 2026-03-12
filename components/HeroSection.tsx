@@ -95,7 +95,7 @@ export default function HeroSection() {
           <div className="lg:col-span-1 relative">
             <div className="relative">
               <ThemedProductImage
-                lightSrc="/Elysium sin fondo.webp"
+                lightSrc="/elysium-plus.png"
                 darkSrc="/elysium-plus-white.png"
                 alt="Sistema de cobro automático TCSystems"
                 width={1000}
