@@ -1,7 +1,6 @@
 'use client'
 
 import Image from 'next/image'
-import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 
 interface ThemedProductImageProps {
@@ -23,18 +22,30 @@ export default function ThemedProductImage({
   className,
   priority
 }: ThemedProductImageProps) {
-  const { resolvedTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
+  const [isDark, setIsDark] = useState(false)
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    const html = document.documentElement
 
-  const src = !mounted || resolvedTheme === 'light' ? lightSrc : darkSrc
+    // Estado inicial
+    setIsDark(html.classList.contains('dark'))
+
+    // Observar cambios en la clase del <html>
+    const observer = new MutationObserver(() => {
+      setIsDark(html.classList.contains('dark'))
+    })
+
+    observer.observe(html, {
+      attributes: true,
+      attributeFilter: ['class']
+    })
+
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <Image
-      src={src}
+      src={isDark ? darkSrc : lightSrc}
       alt={alt}
       width={width}
       height={height}
