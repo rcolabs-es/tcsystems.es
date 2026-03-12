@@ -1,63 +1,68 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowLeft, ArrowRight, CreditCard, Volume2, QrCode, Monitor, Cpu, Phone, Mail, MessageCircle, Zap, Shield, Settings } from 'lucide-react'
+import { ArrowRight, CreditCard, Users, QrCode, Monitor, Cpu, Phone, Mail, MessageCircle, Zap, Shield, Settings } from 'lucide-react'
 import ContactForm from '@/components/ContactForm'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Elysium - Terminal de Pago Premium | TCSystems',
-  description: 'Descubre Elysium, nuestro terminal de pago premium. Sistema de pago por tarjeta, audio integrado, lector QR, pantalla táctil de 21,5" y Mini PC Industrial.',
-  keywords: 'Elysium, terminal pago premium, pago tarjeta, sistema audio, lector QR, pantalla táctil 21.5, TPV automático premium',
+  title: 'Elysium - Terminal de Pago con Tarjeta | TCSystems',
+  description: 'Descubre Elysium, terminal de pago como Elysium Plus pero exclusivo para pagos con tarjeta. Pantalla táctil de 27", lector de usuarios, lector QR y PC Industrial.',
+  keywords: 'Elysium, terminal pago tarjeta, pago tarjeta exclusivo, pantalla táctil 27, TPV automático, lector usuarios, lector QR',
   openGraph: {
-    title: 'Elysium - Terminal de Pago Premium | TCSystems',
-    description: 'Descubre Elysium, nuestro terminal de pago premium. Sistema de pago por tarjeta, audio integrado, lector QR, pantalla táctil de 21,5" y Mini PC Industrial.',
+    title: 'Elysium - Terminal de Pago con Tarjeta | TCSystems',
+    description: 'Descubre Elysium, terminal de pago como Elysium Plus pero exclusivo para pagos con tarjeta. Pantalla táctil de 27", lector de usuarios, lector QR y PC Industrial.',
     images: ['/Elysium sin fondo.webp'],
   },
 }
 
 const features = [
   {
-    title: 'Sistema de pago por tarjeta',
-    description: 'Tecnología avanzada para tarjetas de débito y crédito con máxima seguridad',
+    title: 'Pago exclusivo con tarjeta',
+    description: 'Terminal diseñado para entornos que priorizan pagos con tarjeta de débito y crédito',
     icon: CreditCard
   },
   {
-    title: 'Sistema de audio',
-    description: 'Audio premium integrado para guía y confirmación de operaciones',
-    icon: Volume2
-  },
-  {
-    title: 'Lector QR',
-    description: 'Lectura ultrarrápida de códigos QR para pagos móviles modernos',
-    icon: QrCode
-  },
-  {
-    title: 'Pantalla táctil 21,5"',
+    title: 'Pantalla táctil de 27 pulgadas',
     description: 'Pantalla grande de alta resolución para experiencia premium del usuario',
     icon: Monitor
   },
   {
-    title: 'Mini PC Industrial',
-    description: 'Potencia industrial compacta diseñada para funcionamiento continuo 24/7',
+    title: 'Lector de usuarios',
+    description: 'Sistema de identificación para personalizar la experiencia',
+    icon: Users
+  },
+  {
+    title: 'Lector de QR',
+    description: 'Lectura ultrarrápida de códigos QR para pagos móviles modernos',
+    icon: QrCode
+  },
+  {
+    title: 'PC Industrial',
+    description: 'Potencia industrial diseñada para funcionamiento continuo 24/7',
     icon: Cpu
+  },
+  {
+    title: 'Software TCSystems integrable',
+    description: 'Software propietario con capacidad de integración con sistemas de terceros',
+    icon: Settings
   }
 ]
 
 const benefits = [
   {
     icon: Monitor,
-    title: 'Pantalla Premium',
-    description: 'La pantalla más grande de nuestra gama para máxima comodidad visual'
+    title: 'Pantalla XL',
+    description: 'La pantalla más grande del mercado para máxima comodidad y visibilidad'
   },
   {
-    icon: Shield,
-    title: 'Diseño Elegante',
-    description: 'Estética refinada que se integra perfectamente en cualquier entorno premium'
+    icon: CreditCard,
+    title: 'Solo Tarjeta',
+    description: 'Solución simplificada para entornos que no requieren efectivo'
   },
   {
     icon: Zap,
-    title: 'Simplicidad Avanzada',
-    description: 'Interfaz intuitiva que combina funcionalidad avanzada con facilidad de uso'
+    title: 'Integración Total',
+    description: 'Software TCSystems compatible con tus sistemas existentes'
   }
 ]
 
@@ -76,13 +81,13 @@ const contactOptions = [
     action: 'https://wa.me/34677614129',
     color: 'from-green-400 to-green-600'
   },
-      {
-      icon: Mail,
-      title: 'Email',
-      subtitle: 'consultoria@tcsystems.es',
-      action: 'mailto:consultoria@tcsystems.es',
-      color: 'from-blue-400 to-[#0e9acd]'
-    }
+  {
+    icon: Mail,
+    title: 'Email',
+    subtitle: 'consultoria@tcsystems.es',
+    action: 'mailto:consultoria@tcsystems.es',
+    color: 'from-blue-400 to-[#0e9acd]'
+  }
 ]
 
 export default function ElysiumPage() {
@@ -91,7 +96,6 @@ export default function ElysiumPage() {
       {/* Hero Section */}
       <section className="relative py-16 bg-gradient-to-br from-gray-50 via-white to-blue-50/30 dark:from-zinc-950 dark:via-zinc-900/30 dark:to-zinc-950 overflow-hidden">
 
-
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           <div className="grid lg:grid-cols-3 gap-16 items-center">
@@ -99,7 +103,7 @@ export default function ElysiumPage() {
             <div className="lg:col-span-2 space-y-8">
               {/* Category Badge */}
               <div className="inline-flex items-center bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-full px-4 py-2 text-sm text-gray-600 dark:text-zinc-400 shadow-sm">
-                Terminal de Pago Premium
+                Terminal de Pago con Tarjeta
               </div>
               
               {/* Title */}
@@ -113,8 +117,8 @@ export default function ElysiumPage() {
               
               {/* Description */}
               <p className="text-2xl text-gray-700 dark:text-zinc-300 leading-relaxed max-w-2xl">
-                La <strong className="text-[#0e9acd]">elegancia perfecta</strong> en <strong className="text-gray-900 dark:text-white">automatización de pagos</strong>. 
-                Elysium combina <strong className="text-gray-900 dark:text-white">diseño premium</strong>, <strong className="text-gray-900 dark:text-white">tecnología avanzada</strong> y la <strong className="text-[#0e9acd]">pantalla más grande</strong> para una experiencia única.
+                Como <strong className="text-[#0e9acd]">Elysium Plus</strong> pero <strong className="text-gray-900 dark:text-white">solo pagos con tarjeta</strong>. 
+                Elysium integra <strong className="text-gray-900 dark:text-white">pantalla de 27"</strong>, <strong className="text-[#0e9acd]">pago exclusivo con tarjeta</strong> y <strong className="text-gray-900 dark:text-white">software integrable</strong>.
               </p>
 
               {/* Feature Tags */}
@@ -122,19 +126,19 @@ export default function ElysiumPage() {
                 <div className="group px-6 py-3 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-sm rounded-2xl border border-[#0e9acd]/20 hover:border-[#0e9acd]/40 transition-all duration-300 hover:scale-105 shadow-lg">
                   <span className="text-[#0e9acd] font-semibold flex items-center">
                     <div className="w-2 h-2 bg-[#0e9acd] rounded-full mr-2"></div>
-                    Pantalla 21,5"
+                    Pantalla 27"
                   </span>
                 </div>
                 <div className="group px-6 py-3 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-sm rounded-2xl border border-[#0e9acd]/20 hover:border-[#0e9acd]/40 transition-all duration-300 hover:scale-105 shadow-lg">
                   <span className="text-[#0e9acd] font-semibold flex items-center">
                     <div className="w-2 h-2 bg-[#0e9acd] rounded-full mr-2"></div>
-                    Audio Premium
+                    Solo Tarjeta
                   </span>
                 </div>
                 <div className="group px-6 py-3 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-sm rounded-2xl border border-[#0e9acd]/20 hover:border-[#0e9acd]/40 transition-all duration-300 hover:scale-105 shadow-lg">
                   <span className="text-[#0e9acd] font-semibold flex items-center">
                     <div className="w-2 h-2 bg-[#0e9acd] rounded-full mr-2"></div>
-                    Diseño Elegante
+                    Software Integrable
                   </span>
                 </div>
               </div>
@@ -165,18 +169,18 @@ export default function ElysiumPage() {
               {/* Stats */}
               <div className="flex items-center space-x-8 pt-8">
                 <div className="text-center group">
-                  <div className="text-3xl font-black text-[#0e9acd] group-hover:scale-110 transition-transform">21,5"</div>
+                  <div className="text-3xl font-black text-[#0e9acd] group-hover:scale-110 transition-transform">27"</div>
                   <div className="text-sm text-[#0e9acd] font-medium">Pantalla</div>
                 </div>
                 <div className="w-px h-12 bg-[#0e9acd]/30"></div>
                 <div className="text-center group">
-                  <div className="text-3xl font-black text-[#0e9acd] group-hover:scale-110 transition-transform">Premium</div>
-                  <div className="text-sm text-[#0e9acd] font-medium">Audio</div>
+                  <div className="text-3xl font-black text-[#0e9acd] group-hover:scale-110 transition-transform">Tarjeta</div>
+                  <div className="text-sm text-[#0e9acd] font-medium">Exclusivo</div>
                 </div>
                 <div className="w-px h-12 bg-[#0e9acd]/30"></div>
                 <div className="text-center group">
-                  <div className="text-3xl font-black text-[#0e9acd] group-hover:scale-110 transition-transform">Elite</div>
-                  <div className="text-sm text-[#0e9acd] font-medium">Elegante</div>
+                  <div className="text-3xl font-black text-[#0e9acd] group-hover:scale-110 transition-transform">100%</div>
+                  <div className="text-sm text-[#0e9acd] font-medium">Integrable</div>
                 </div>
               </div>
             </div>
@@ -186,7 +190,7 @@ export default function ElysiumPage() {
               <div className="relative aspect-[3/4] max-w-sm mx-auto">
                 <Image
                   src="/Elysium sin fondo.webp"
-                  alt="Elysium - Terminal de Pago Premium"
+                  alt="Elysium - Terminal de Pago con Tarjeta"
                   width={400}
                   height={500}
                   className="w-full h-[35rem] object-contain"
@@ -206,17 +210,17 @@ export default function ElysiumPage() {
               Especificaciones Técnicas
             </div>
             <h2 className="text-5xl font-bold text-gray-900 dark:text-white mb-6">
-              Elegancia <span className="text-[#0e9acd]">Premium</span>
+              Tecnología <span className="text-[#0e9acd]">Tarjeta</span>
             </h2>
             <p className="text-xl text-gray-600 dark:text-zinc-400 max-w-4xl mx-auto leading-relaxed">
-              Elysium representa la síntesis perfecta entre funcionalidad avanzada y diseño premium, 
-              creado para entornos que demandan lo mejor.
+              Elysium es la versión de Elysium Plus enfocada exclusivamente en pagos con tarjeta. 
+              Misma pantalla de 27", lectores y software integrable, sin efectivo.
             </p>
           </div>
 
           {/* Características Detalladas */}
           <div className="mb-16">
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 justify-center">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {features.map((feature, index) => (
                 <div 
                   key={index}
@@ -238,7 +242,6 @@ export default function ElysiumPage() {
             </div>
           </div>
 
-
         </div>
       </section>
 
@@ -250,7 +253,7 @@ export default function ElysiumPage() {
               ¿Por qué elegir Elysium?
             </h2>
             <p className="text-xl text-gray-600 dark:text-zinc-400">
-              La opción premium que redefine estándares de elegancia y funcionalidad
+              La opción ideal cuando solo necesitas pagos con tarjeta
             </p>
           </div>
 
@@ -280,18 +283,16 @@ export default function ElysiumPage() {
               ¿Interesado en Elysium?
             </h2>
             <p className="text-xl text-gray-600 dark:text-zinc-400 max-w-3xl mx-auto mb-12">
-              Descubre cómo Elysium puede elevar la experiencia de tus clientes con elegancia 
-                              y tecnología premium. Contacta para más información.
+              Descubre cómo Elysium puede optimizar tu negocio con pagos exclusivos por tarjeta. 
+              Contacta para más información.
             </p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12 items-start">
-            {/* Contact Form - Primero en móvil */}
             <div className="order-2 lg:order-2">
               <ContactForm productName="Elysium" />
             </div>
 
-            {/* Contact Options - Segundo en móvil */}
             <div className="space-y-6 order-1 lg:order-1">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
                 Otras formas de contacto
@@ -323,4 +324,4 @@ export default function ElysiumPage() {
       </section>
     </div>
   )
-} 
+}

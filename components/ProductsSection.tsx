@@ -35,6 +35,20 @@ export default function ProductsSection() {
       ]
     },
     {
+      name: "Elysium",
+      slug: "elysium",
+      subtitle: "Terminal de Pago con Tarjeta",
+      image: "/Elysium sin fondo.webp",
+      description: "Como Elysium Plus pero exclusivo para pagos con tarjeta. Pantalla 27\", lector usuarios, QR y software integrable.",
+      price: "Desde €3,499",
+      features: [
+        "Pantalla táctil de 27 pulgadas",
+        "Pago exclusivo con tarjeta",
+        "Lector de usuarios y QR",
+        "Software TCSystems integrable"
+      ]
+    },
+    {
       name: "Elysium Plus",
       slug: "elysium-plus",
       subtitle: "Terminal de Pago Completo",
@@ -76,7 +90,7 @@ export default function ProductsSection() {
         </div>
 
         {/* Products Grid */}
-        <div className="grid lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           {products.map((product, index) => (
             <div 
               key={index}

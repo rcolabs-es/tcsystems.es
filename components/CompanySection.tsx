@@ -105,6 +105,36 @@ export default function CompanySection() {
                   <div className="text-sm text-white/80">Solución automatizada</div>
                 </div>
               </div>
+
+              {/* Control de accesos */}
+              <div className="relative h-40 bg-gradient-to-br from-gray-100 to-gray-50 dark:from-zinc-900 dark:to-zinc-800 rounded-2xl overflow-hidden shadow-xl group cursor-pointer">
+                <Image
+                  src="/c-acceso.jpg"
+                  alt="Control de accesos - Torniquete con pago integrado"
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute bottom-4 left-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="text-lg font-semibold">Control de Accesos</div>
+                  <div className="text-sm text-white/80">Torniquete con pago integrado</div>
+                </div>
+              </div>
+
+              {/* Kiosco interactivo */}
+              <div className="relative h-40 bg-gradient-to-br from-gray-100 to-gray-50 dark:from-zinc-900 dark:to-zinc-800 rounded-2xl overflow-hidden shadow-xl group cursor-pointer">
+                <Image
+                  src="/cerca.jpg"
+                  alt="Kiosco interactivo - Bilbao Kirolak"
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute bottom-4 left-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="text-lg font-semibold">Kiosco Interactivo</div>
+                  <div className="text-sm text-white/80">Experiencia de usuario</div>
+                </div>
+              </div>
             </div>
 
 

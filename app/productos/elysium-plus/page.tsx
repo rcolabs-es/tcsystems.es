@@ -4,6 +4,7 @@ import { ArrowRight, CreditCard, Coins, Users, QrCode, Monitor, Cpu, Phone, Mail
 import ContactForm from '@/components/ContactForm'
 import type { Metadata } from 'next'
 
+// Video local: coloca tu archivo en public/videos/elysium-plus.mp4 (y opcionalmente .webm)
 export const metadata: Metadata = {
   title: 'Elysium Plus - Terminal de Pago Avanzado | TCSystems',
   description: 'Descubre Elysium Plus, nuestro terminal de pago más completo. Pantalla táctil de 27", pagos con tarjeta, efectivo o mixto, lector de usuarios, lector QR y PC Industrial.',
@@ -193,7 +194,15 @@ export default function ElysiumPlusPage() {
                   alt="Elysium Plus - Terminal de Pago Avanzado"
                   width={400}
                   height={500}
-                  className="w-full h-[35rem] object-contain"
+                  className="w-full h-[35rem] object-contain block dark:hidden"
+                  priority
+                />
+                <Image
+                  src="/elysium-plus-white.png"
+                  alt="Elysium Plus - Terminal de Pago Avanzado"
+                  width={400}
+                  height={500}
+                  className="w-full h-[35rem] object-contain hidden dark:block"
                   priority
                 />
               </div>
@@ -242,6 +251,35 @@ export default function ElysiumPlusPage() {
             </div>
           </div>
 
+        </div>
+      </section>
+
+      {/* Video Section */}
+      <section className="py-24 bg-white dark:bg-zinc-950">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              Descubre Elysium
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-zinc-400 max-w-2xl mx-auto">
+              Conoce las capacidades del terminal de pago más completo del mercado
+            </p>
+          </div>
+          <div className="max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-2xl border border-gray-200 dark:border-zinc-800 aspect-video bg-gray-100 dark:bg-zinc-900">
+            <video
+              className="w-full h-full object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              poster="/elysium-plus.png"
+            >
+              <source src="/videos/elysium-plus.webm" type="video/webm" />
+              <source src="/videos/elysium-plus.mp4" type="video/mp4" />
+              Tu navegador no soporta la reproducción de video.
+            </video>
+          </div>
         </div>
       </section>
 

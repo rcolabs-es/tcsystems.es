@@ -36,6 +36,12 @@ export default function Header() {
       image: "/T-Cobro Prometheus.webp"
     },
     {
+      name: "Elysium",
+      href: "/productos/elysium",
+      description: "Terminal de Pago con Tarjeta",
+      image: "/Elysium sin fondo.webp"
+    },
+    {
       name: "Elysium Plus",
       href: "/productos/elysium-plus",
       description: "Terminal de Pago Avanzado", 
@@ -122,7 +128,7 @@ export default function Header() {
                     
                     {/* Products Dropdown */}
                     {isProductsOpen && (
-                      <div className="absolute top-full left-0 pt-2 w-80 z-50">
+                      <div className="absolute top-full left-0 pt-2 w-96 z-50">
                         <div className="bg-white dark:bg-zinc-950 rounded-2xl shadow-2xl border border-gray-200 dark:border-zinc-800 p-6">
                           <div className="space-y-4">
                             {products.map((product) => (
@@ -131,13 +137,13 @@ export default function Header() {
                                 href={product.href}
                                 className="flex items-center p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-zinc-900 transition-colors duration-200 group"
                               >
-                                <div className="w-12 h-12 bg-gray-100 dark:bg-zinc-800 rounded-lg flex items-center justify-center mr-4 overflow-hidden">
+                                <div className="w-20 h-20 bg-gray-100 dark:bg-zinc-800 rounded-xl flex items-center justify-center mr-4 overflow-hidden shrink-0">
                                   <Image
                                     src={product.image}
                                     alt={product.name}
-                                    width={48}
-                                    height={48}
-                                    className="w-8 h-8 object-contain"
+                                    width={80}
+                                    height={80}
+                                    className="w-16 h-16 object-contain"
                                   />
                                 </div>
                                 <div>
@@ -267,16 +273,16 @@ export default function Header() {
                             <Link
                               key={product.name}
                               href={product.href}
-                              className="flex items-center py-2 text-gray-500 dark:text-zinc-500 hover:text-[#0e9acd] transition-colors duration-200"
+                              className="flex items-center py-3 text-gray-500 dark:text-zinc-500 hover:text-[#0e9acd] transition-colors duration-200"
                               onClick={() => setIsMenuOpen(false)}
                             >
-                              <div className="w-8 h-8 bg-gray-100 dark:bg-zinc-800 rounded-lg flex items-center justify-center mr-3 overflow-hidden">
+                              <div className="w-14 h-14 bg-gray-100 dark:bg-zinc-800 rounded-xl flex items-center justify-center mr-4 overflow-hidden shrink-0">
                                 <Image
                                   src={product.image}
                                   alt={product.name}
-                                  width={32}
-                                  height={32}
-                                  className="w-6 h-6 object-contain"
+                                  width={56}
+                                  height={56}
+                                  className="w-12 h-12 object-contain"
                                 />
                               </div>
                               <div>
