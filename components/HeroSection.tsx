@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Play, CheckCircle } from "lucide-react";
 import { useTheme } from "next-themes";
+import ThemedProductImage from "./ThemedProductImage";
 
 export default function HeroSection() {
   const { theme } = useTheme();
@@ -93,8 +94,9 @@ export default function HeroSection() {
           {/* Image - 1/3 width */}
           <div className="lg:col-span-1 relative">
             <div className="relative">
-              <Image
-                src="/Elysium sin fondo.webp"
+              <ThemedProductImage
+                lightSrc="/Elysium sin fondo.webp"
+                darkSrc="/elysium-plus-white.png"
                 alt="Sistema de cobro automático TCSystems"
                 width={1000}
                 height={1500}
