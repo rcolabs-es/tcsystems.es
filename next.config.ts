@@ -1,8 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Mueve el cache de build al disco local para evitar problemas con ExFAT
-  distDir: '/tmp/tcsystems-next',
   eslint: {
     // Desactiva ESLint durante el build en producción
     ignoreDuringBuilds: true,
