@@ -1,0 +1,352 @@
+{
+  "name": "TCSystems · Blog Automation (Gemini → Sanity)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 0 9 * * *"
+            }
+          ]
+        }
+      },
+      "id": "node-trigger",
+      "name": "Daily 09:00 (Europe/Madrid)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [-1600, 0],
+      "notesInFlow": true,
+      "notes": "Cron diario a las 09:00. La TZ se hereda del workflow settings (Europe/Madrid)."
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cfg-1",
+              "name": "sanityProjectId",
+              "value": "y39srr1t",
+              "type": "string"
+            },
+            {
+              "id": "cfg-2",
+              "name": "sanityDataset",
+              "value": "production",
+              "type": "string"
+            },
+            {
+              "id": "cfg-3",
+              "name": "sanityApiVersion",
+              "value": "2024-11-06",
+              "type": "string"
+            },
+            {
+              "id": "cfg-4",
+              "name": "geminiModel",
+              "value": "gemini-2.5-flash",
+              "type": "string"
+            },
+            {
+              "id": "cfg-5",
+              "name": "sheetId",
+              "value": "REPLACE_WITH_GOOGLE_SHEET_ID",
+              "type": "string"
+            },
+            {
+              "id": "cfg-6",
+              "name": "sheetTab",
+              "value": "Calendario Editorial",
+              "type": "string"
+            },
+            {
+              "id": "cfg-7",
+              "name": "notificationEmail",
+              "value": "r.munoz@tcsystems.es",
+              "type": "string"
+            },
+            {
+              "id": "cfg-8",
+              "name": "studioUrl",
+              "value": "https://tcsystems.es/studio",
+              "type": "string"
+            },
+            {
+              "id": "cfg-9",
+              "name": "siteName",
+              "value": "TCSystems",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-config",
+      "name": "Workflow Configuration",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [-1400, 0],
+      "notesInFlow": true,
+      "notes": "Centralizamos toda la config aquí. NO incluye credenciales (esas van en Credentials de n8n)."
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Workflow Configuration').first().json.sheetId }}",
+          "mode": "id",
+          "cachedResultName": "Calendario Editorial TCSystems"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "={{ $('Workflow Configuration').first().json.sheetTab }}",
+          "mode": "name",
+          "cachedResultName": "Calendario Editorial"
+        },
+        "options": {}
+      },
+      "id": "node-read-sheet",
+      "name": "Read Calendario Editorial",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "onError": "stopWorkflow",
+      "position": [-1200, 0],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REPLACE_WITH_SHEETS_CREDENTIAL_ID",
+          "name": "Google Sheets account"
+        }
+      },
+      "notesInFlow": true,
+      "notes": "Lee TODAS las filas. La selección 'siguiente pendiente' la hacemos en el siguiente nodo."
+    },
+    {
+      "parameters": {
+        "jsCode": "// Selecciona la siguiente fila pendiente de la cola editorial.\n// Criterio: primera fila cuyo campo Status esté vacío.\n// Si todas tienen Status, no hay nada que generar y abortamos.\n\nconst items = $input.all();\nif (!items.length) {\n  return [];\n}\n\n// Encuentra primera fila SIN Status (o con Status vacío)\nconst pending = items.find((it) => {\n  const status = (it.json.Status || it.json.status || '').toString().trim();\n  return status === '';\n});\n\nif (!pending) {\n  // No hay pendientes. Devolvemos array vacío para cortar el flujo.\n  return [];\n}\n\n// Normalizamos los nombres de campo (las cabeceras del sheet pueden variar en\n// acentos/mayúsculas; toleramos ambas variantes).\nconst row = pending.json;\nconst pick = (...keys) => {\n  for (const k of keys) {\n    if (row[k] !== undefined && row[k] !== null && row[k] !== '') return row[k];\n  }\n  return '';\n};\n\nreturn [{\n  json: {\n    rowNumber: pending.json.row_number || pending.json._rowNumber, // n8n inyecta uno de estos\n    dia: pick('Día', 'Dia', 'day', 'Day'),\n    keyword: pick('Palabra Clave Principal', 'Keyword', 'palabra clave principal'),\n    intent: pick('Intención de Búsqueda', 'Intencion de Busqueda', 'Intent'),\n    seoTitle: pick('Título SEO', 'Titulo SEO', 'SEO Title'),\n    h2Structure: pick('Estructura H2 Sugerida', 'H2 Structure', 'estructura h2'),\n    cta: pick('Call to Action (CTA)', 'CTA', 'Call to Action'),\n    rawRow: row\n  }\n}];\n"
+      },
+      "id": "node-pick-row",
+      "name": "Pick Next Pending Row",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "onError": "stopWorkflow",
+      "position": [-1000, 0],
+      "notesInFlow": true,
+      "notes": "Selecciona la primera fila SIN Status. Si no hay → corta el flujo (return [])."
+    },
+    {
+      "parameters": {
+        "resource": "text",
+        "operation": "message",
+        "modelId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "models/gemini-2.5-flash"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Datos del encargo de hoy ({{ $json.dia }}):\n- Palabra clave principal: \"{{ $json.keyword }}\"\n- Intención de búsqueda: {{ $json.intent }}\n- Título SEO objetivo: \"{{ $json.seoTitle }}\"\n- Estructura H2 sugerida: {{ $json.h2Structure }}\n- Call to Action a integrar: {{ $json.cta }}\n\nDevuelve EXCLUSIVAMENTE un JSON válido (sin ```json ni markdown) con esta forma exacta:\n{\n  \"title\": \"<título atractivo, ≤80 chars, incluye la keyword>\",\n  \"slug\": \"<slug-en-kebab-case-ascii>\",\n  \"excerpt\": \"<150-180 chars, incluye keyword>\",\n  \"category\": \"<una de: Tecnología | Casos de Éxito | Guías | Experiencia Cliente | Sostenibilidad | Seguridad>\",\n  \"tags\": [\"4-6 tags relevantes\"],\n  \"readTime\": \"<X min>\",\n  \"metaTitle\": \"<≤60 chars>\",\n  \"metaDescription\": \"<≤160 chars>\",\n  \"keywords\": [\"4-8 keywords SEO\"],\n  \"blocks\": [\n    { \"type\": \"intro\", \"text\": \"párrafo de apertura de 80-120 palabras, incluye keyword\" },\n    { \"type\": \"h2\", \"text\": \"título del primer H2 sugerido\" },\n    { \"type\": \"paragraph\", \"text\": \"...\" },\n    { \"type\": \"paragraph\", \"text\": \"...\" },\n    { \"type\": \"highlightBox\", \"style\": \"blue\", \"title\": \"...\", \"content\": \"...\" },\n    { \"type\": \"h2\", \"text\": \"...\" },\n    { \"type\": \"paragraph\", \"text\": \"...\" },\n    { \"type\": \"h3\", \"text\": \"...\" },\n    { \"type\": \"paragraph\", \"text\": \"...\" },\n    { \"type\": \"cta\", \"text\": \"párrafo final con el CTA del cliente, redactado naturalmente\" }\n  ]\n}\n\nReglas duras:\n- 1000-1400 palabras totales.\n- Cada H2 con al menos 2 párrafos sustanciales.\n- 1-2 highlightBox máximo, style ∈ {blue, green, purple, red, yellow}.\n- La keyword principal aparece en el intro y en cada H2.\n- NO inventes cifras concretas (\"40%\", \"500 clientes\"). Usa rangos: \"decenas\", \"múltiples\", \"diversos sectores\".\n- Idioma: español de España, registro profesional, sin marketing vacío."
+            }
+          ]
+        },
+        "options": {
+          "systemMessage": "Eres redactor SEO senior de TCSystems, empresa española con 14+ años de experiencia y más de 500 instalaciones de kioscos de autoservicio en sectores como ayuntamientos, parkings, lavaderos, centros deportivos, hostelería e industria. Escribes contenido editorial profundo, no genérico ni promocional. Devuelves siempre JSON válido sin envolver en markdown.",
+          "temperature": 0.7,
+          "topP": 0.95,
+          "maxOutputTokens": 8192
+        }
+      },
+      "id": "node-gemini",
+      "name": "Generate with Gemini 2.5",
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.2,
+      "position": [-800, 0],
+      "credentials": {
+        "googlePalmApi": {
+          "id": "REPLACE_WITH_GEMINI_CREDENTIAL_ID",
+          "name": "Google Gemini API"
+        }
+      },
+      "notesInFlow": true,
+      "notes": "Nodo nativo Google Gemini (resource=text, operation=message). Modelo gemini-2.5-flash.\nCredencial: Google Palm API (n8n usa este nombre interno para Gemini API key).\nSystem message instruye el rol; user message lleva los datos de la fila + plantilla JSON."
+    },
+    {
+      "parameters": {
+        "jsCode": "// Transforma la salida JSON de Gemini en una mutación lista para Sanity.\n// Construye el array `content` en formato Portable Text.\n\nconst sourceRow = $('Pick Next Pending Row').first().json;\nconst geminiResp = $input.first().json;\n\n// El nodo nativo Google Gemini puede devolver el texto en distintos lugares\n// según versión. Probamos los más habituales en orden.\nlet rawText =\n  geminiResp?.content?.parts?.[0]?.text ??\n  geminiResp?.content ??\n  geminiResp?.text ??\n  geminiResp?.response ??\n  geminiResp?.candidates?.[0]?.content?.parts?.[0]?.text ??\n  '';\n\nif (typeof rawText !== 'string') {\n  rawText = JSON.stringify(rawText);\n}\nrawText = rawText.trim();\n\nif (!rawText) {\n  throw new Error('No se pudo extraer texto de la respuesta de Gemini. Keys: ' + Object.keys(geminiResp || {}).join(','));\n}\n\n// Quita posibles wrappers ```json ... ```\nrawText = rawText.replace(/^```(?:json)?\\s*/i, '').replace(/```\\s*$/, '').trim();\n\nlet data;\ntry {\n  data = JSON.parse(rawText);\n} catch (e) {\n  throw new Error('La respuesta de Gemini no es JSON válido: ' + e.message + '\\n---\\n' + rawText.substring(0, 500));\n}\n\n// Validación mínima\nconst required = ['title', 'slug', 'excerpt', 'category', 'tags', 'readTime', 'metaTitle', 'metaDescription', 'keywords', 'blocks'];\nfor (const k of required) {\n  if (data[k] === undefined || data[k] === null) {\n    throw new Error(`Campo requerido ausente en la respuesta: ${k}`);\n  }\n}\nif (!Array.isArray(data.blocks) || data.blocks.length < 3) {\n  throw new Error('blocks debe ser un array con al menos 3 elementos');\n}\n\n// Helpers Portable Text\nconst key = () => Math.random().toString(36).slice(2, 14);\n\nfunction textBlock(style, text) {\n  return {\n    _type: 'block',\n    _key: key(),\n    style,\n    markDefs: [],\n    children: [\n      { _type: 'span', _key: key(), text, marks: [] }\n    ]\n  };\n}\n\nfunction highlightBlock(style, title, content) {\n  return {\n    _type: 'highlightBox',\n    _key: key(),\n    style: style || 'blue',\n    title: title || '',\n    content: content || ''\n  };\n}\n\nconst content = [];\nfor (const b of data.blocks) {\n  switch (b.type) {\n    case 'intro':\n    case 'paragraph':\n    case 'cta':\n      if (b.text) content.push(textBlock('normal', b.text));\n      break;\n    case 'h2':\n    case 'h3':\n    case 'h4':\n      if (b.text) content.push(textBlock(b.type, b.text));\n      break;\n    case 'blockquote':\n      if (b.text) content.push(textBlock('blockquote', b.text));\n      break;\n    case 'highlightBox':\n      content.push(highlightBlock(b.style, b.title, b.content));\n      break;\n  }\n}\n\nif (content.length === 0) {\n  throw new Error('Tras transformar a Portable Text quedaron 0 bloques. Revisa la respuesta de Gemini.');\n}\n\n// _id en draft → Sanity lo crea como borrador\nconst rawSlug = (data.slug || '').toString().trim();\nconst safeSlug = rawSlug.length > 0 ? rawSlug.replace(/[^a-z0-9-]/gi, '-').toLowerCase() : 'post-' + Date.now();\nconst draftId = 'drafts.' + safeSlug + '-' + Math.random().toString(36).slice(2, 8);\nconst nowIso = new Date().toISOString();\n\nreturn [{\n  json: {\n    sourceRowNumber: sourceRow.rowNumber,\n    draftId,\n    title: data.title,\n    slug: safeSlug,\n    sanityMutation: {\n      mutations: [\n        {\n          create: {\n            _type: 'blogPost',\n            _id: draftId,\n            title: data.title,\n            slug: { _type: 'slug', current: safeSlug },\n            excerpt: data.excerpt,\n            status: 'pending_review',\n            category: data.category,\n            tags: data.tags || [],\n            publishedAt: nowIso,\n            readTime: data.readTime || '6 min',\n            featured: false,\n            content,\n            seo: {\n              metaTitle: (data.metaTitle || data.title).slice(0, 60),\n              metaDescription: (data.metaDescription || data.excerpt).slice(0, 160),\n              keywords: data.keywords || []\n            }\n          }\n        }\n      ]\n    }\n  }\n}];\n"
+      },
+      "id": "node-format",
+      "name": "Format for Sanity",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "onError": "stopWorkflow",
+      "position": [-600, 0],
+      "notesInFlow": true,
+      "notes": "Parsea Gemini JSON, valida campos, y construye el documento Sanity en formato Portable Text. Crea el doc como DRAFT (id prefijado con 'drafts.')."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://{{ $('Workflow Configuration').first().json.sanityProjectId }}.api.sanity.io/v{{ $('Workflow Configuration').first().json.sanityApiVersion }}/data/mutate/{{ $('Workflow Configuration').first().json.sanityDataset }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.sanityMutation) }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "node-sanity",
+      "name": "Create Draft in Sanity",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000,
+      "onError": "stopWorkflow",
+      "position": [-400, 0],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "REPLACE_WITH_SANITY_TOKEN_CREDENTIAL_ID",
+          "name": "Sanity Bearer token (Editor scope)"
+        }
+      },
+      "notesInFlow": true,
+      "notes": "POST a /data/mutate. La credencial es Header Auth con name=Authorization, value=Bearer <SANITY_TOKEN>.\nEl token debe tener permisos de Editor (Sanity dashboard → API → Tokens)."
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Workflow Configuration').first().json.sheetId }}",
+          "mode": "id",
+          "cachedResultName": "Calendario Editorial TCSystems"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "={{ $('Workflow Configuration').first().json.sheetTab }}",
+          "mode": "name",
+          "cachedResultName": "Calendario Editorial"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $('Pick Next Pending Row').first().json.rowNumber }}",
+            "Status": "Generado, pendiente revisión",
+            "SanityID": "={{ $('Format for Sanity').first().json.draftId }}",
+            "GeneradoEn": "={{ $now.toISO() }}"
+          },
+          "matchingColumns": ["row_number"],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false,
+          "schema": [
+            { "id": "Día", "displayName": "Día", "type": "string", "display": true, "removed": false, "required": false, "defaultMatch": false, "canBeUsedToMatch": true },
+            { "id": "Palabra Clave Principal", "displayName": "Palabra Clave Principal", "type": "string", "display": true, "removed": false, "required": false, "defaultMatch": false, "canBeUsedToMatch": true },
+            { "id": "Intención de Búsqueda", "displayName": "Intención de Búsqueda", "type": "string", "display": true, "removed": false, "required": false, "defaultMatch": false, "canBeUsedToMatch": true },
+            { "id": "Título SEO", "displayName": "Título SEO", "type": "string", "display": true, "removed": false, "required": false, "defaultMatch": false, "canBeUsedToMatch": true },
+            { "id": "Estructura H2 Sugerida", "displayName": "Estructura H2 Sugerida", "type": "string", "display": true, "removed": false, "required": false, "defaultMatch": false, "canBeUsedToMatch": true },
+            { "id": "Call to Action (CTA)", "displayName": "Call to Action (CTA)", "type": "string", "display": true, "removed": false, "required": false, "defaultMatch": false, "canBeUsedToMatch": true },
+            { "id": "Status", "displayName": "Status", "type": "string", "display": true, "removed": false, "required": false, "defaultMatch": false, "canBeUsedToMatch": false },
+            { "id": "SanityID", "displayName": "SanityID", "type": "string", "display": true, "removed": false, "required": false, "defaultMatch": false, "canBeUsedToMatch": false },
+            { "id": "GeneradoEn", "displayName": "GeneradoEn", "type": "string", "display": true, "removed": false, "required": false, "defaultMatch": false, "canBeUsedToMatch": false },
+            { "id": "row_number", "displayName": "row_number", "type": "string", "display": true, "removed": false, "readOnly": true, "required": false, "defaultMatch": false, "canBeUsedToMatch": true }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-update-sheet",
+      "name": "Mark Sheet Row as Generated",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "onError": "continueRegularOutput",
+      "position": [-200, 0],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REPLACE_WITH_SHEETS_CREDENTIAL_ID",
+          "name": "Google Sheets account"
+        }
+      },
+      "notesInFlow": true,
+      "notes": "Actualiza la fila procesada con Status, SanityID y timestamp.\nIMPORTANTE: el sheet debe tener las columnas Status, SanityID y GeneradoEn."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.resend.com/emails",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"from\": \"TCSystems Blog <noreply@tcsystems.es>\",\n  \"to\": [\"{{ $('Workflow Configuration').first().json.notificationEmail }}\"],\n  \"subject\": \"📝 Nuevo post pendiente de revisión: {{ $('Format for Sanity').first().json.title }}\",\n  \"html\": \"<div style=\\\"font-family:system-ui,sans-serif;max-width:560px;margin:0 auto;padding:24px;color:#0a0a0a\\\"><h2 style=\\\"margin:0 0 8px;font-size:20px;letter-spacing:-0.01em\\\">Hay un post nuevo esperando tu revisión</h2><p style=\\\"color:#52525b;margin:0 0 16px\\\">Generado automáticamente por la automation diaria.</p><div style=\\\"border:1px solid #e4e4e7;border-radius:12px;padding:16px;margin:16px 0\\\"><div style=\\\"font-size:12px;color:#71717a;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px\\\">Título</div><div style=\\\"font-size:16px;font-weight:500\\\">{{ $('Format for Sanity').first().json.title }}</div></div><a href=\\\"{{ $('Workflow Configuration').first().json.studioUrl }}\\\" style=\\\"display:inline-block;background:#0a0a0a;color:white;text-decoration:none;padding:12px 20px;border-radius:9999px;font-weight:500\\\">Abrir en Sanity Studio</a><p style=\\\"color:#a1a1aa;font-size:12px;margin-top:24px\\\">Revisa, edita lo que necesites y pulsa <strong>«Aprobar y publicar»</strong> para que aparezca en el blog.</p></div>\"\n}",
+        "options": {}
+      },
+      "id": "node-email",
+      "name": "Notify via Resend",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "onError": "continueRegularOutput",
+      "position": [0, 0],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "REPLACE_WITH_RESEND_CREDENTIAL_ID",
+          "name": "Resend API key"
+        }
+      },
+      "notesInFlow": true,
+      "notes": "Aviso al revisor humano. La credencial es Header Auth con name=Authorization, value=Bearer <RESEND_API_KEY>."
+    }
+  ],
+  "connections": {
+    "Daily 09:00 (Europe/Madrid)": {
+      "main": [[{ "node": "Workflow Configuration", "type": "main", "index": 0 }]]
+    },
+    "Workflow Configuration": {
+      "main": [[{ "node": "Read Calendario Editorial", "type": "main", "index": 0 }]]
+    },
+    "Read Calendario Editorial": {
+      "main": [[{ "node": "Pick Next Pending Row", "type": "main", "index": 0 }]]
+    },
+    "Pick Next Pending Row": {
+      "main": [[{ "node": "Generate with Gemini 2.5", "type": "main", "index": 0 }]]
+    },
+    "Generate with Gemini 2.5": {
+      "main": [[{ "node": "Format for Sanity", "type": "main", "index": 0 }]]
+    },
+    "Format for Sanity": {
+      "main": [[{ "node": "Create Draft in Sanity", "type": "main", "index": 0 }]]
+    },
+    "Create Draft in Sanity": {
+      "main": [[{ "node": "Mark Sheet Row as Generated", "type": "main", "index": 0 }]]
+    },
+    "Mark Sheet Row as Generated": {
+      "main": [[{ "node": "Notify via Resend", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": {
+    "timezone": "Europe/Madrid",
+    "saveExecutionProgress": true,
+    "saveManualExecutions": true,
+    "executionOrder": "v1"
+  },
+  "tags": [
+    { "name": "TCSystems" },
+    { "name": "Blog" },
+    { "name": "Gemini" }
+  ]
+}

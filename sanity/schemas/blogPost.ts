@@ -44,6 +44,21 @@ export default defineType({
       ],
     }),
     defineField({
+      name: 'status',
+      title: 'Estado',
+      type: 'string',
+      description: 'Estado del post en el flujo de revisión.',
+      options: {
+        list: [
+          { title: '🟡 Pendiente de revisión', value: 'pending_review' },
+          { title: '🟢 Publicado', value: 'published' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'pending_review',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: 'category',
       title: 'Categoría',
       type: 'string',

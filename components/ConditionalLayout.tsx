@@ -13,10 +13,11 @@ export default function ConditionalLayout({
 }) {
   const pathname = usePathname()
   
-  // No mostrar Header/Footer en el Studio de Sanity
+  // No mostrar Header/Footer en el Studio de Sanity ni en landings con chrome propio
   const isStudio = pathname?.startsWith('/studio')
+  const isStandaloneLanding = pathname?.startsWith('/kioscos-autoservicio')
 
-  if (isStudio) {
+  if (isStudio || isStandaloneLanding) {
     return <>{children}</>
   }
 

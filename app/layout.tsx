@@ -1,11 +1,30 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Fraunces, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import ConditionalLayout from "@/components/ConditionalLayout";
 
 const inter = Inter({ subsets: ["latin"] });
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
+  display: "swap",
+  axes: ["opsz", "SOFT"],
+});
+
+const geistSans = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist-sans",
+  display: "swap",
+});
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://tcsystems.es'),
@@ -79,7 +98,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" className="scroll-smooth" suppressHydrationWarning>
+    <html lang="es" className={`scroll-smooth ${fraunces.variable} ${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="canonical" href="https://tcsystems.es" />
