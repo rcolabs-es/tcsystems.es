@@ -39,10 +39,10 @@ export default function ProductsSection() {
       slug: "elysium",
       subtitle: "Terminal de Pago con Tarjeta",
       image: "/Elysium sin fondo.webp",
-      description: "Como Elysium Plus pero exclusivo para pagos con tarjeta. Pantalla 27\", lector usuarios, QR y software integrable.",
+      description: "Como Elysium Plus pero solo tarjeta. Pantalla 21.5\", lectores y software integrable.",
       price: "Desde €3,499",
       features: [
-        "Pantalla táctil de 27 pulgadas",
+        "Pantalla táctil de 21.5 pulgadas",
         "Pago exclusivo con tarjeta",
         "Lector de usuarios y QR",
         "Software TCSystems integrable"

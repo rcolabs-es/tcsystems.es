@@ -6,11 +6,11 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Elysium - Terminal de Pago con Tarjeta | TCSystems',
-  description: 'Descubre Elysium, terminal de pago como Elysium Plus pero exclusivo para pagos con tarjeta. Pantalla táctil de 27", lector de usuarios, lector QR y PC Industrial.',
-  keywords: 'Elysium, terminal pago tarjeta, pago tarjeta exclusivo, pantalla táctil 27, TPV automático, lector usuarios, lector QR',
+  description: 'Descubre Elysium, terminal de pago como Elysium Plus pero exclusivo para pagos con tarjeta. Pantalla táctil de 21.5", lector de usuarios, lector QR y PC Industrial.',
+  keywords: 'Elysium, terminal pago tarjeta, pago tarjeta exclusivo, pantalla táctil 21.5, TPV automático, lector usuarios, lector QR',
   openGraph: {
     title: 'Elysium - Terminal de Pago con Tarjeta | TCSystems',
-    description: 'Descubre Elysium, terminal de pago como Elysium Plus pero exclusivo para pagos con tarjeta. Pantalla táctil de 27", lector de usuarios, lector QR y PC Industrial.',
+    description: 'Descubre Elysium, terminal de pago como Elysium Plus pero exclusivo para pagos con tarjeta. Pantalla táctil de 21.5", lector de usuarios, lector QR y PC Industrial.',
     images: ['/Elysium sin fondo.webp'],
   },
 }
@@ -22,8 +22,8 @@ const features = [
     icon: CreditCard
   },
   {
-    title: 'Pantalla táctil de 27 pulgadas',
-    description: 'Pantalla grande de alta resolución para experiencia premium del usuario',
+    title: 'Pantalla táctil de 21.5 pulgadas',
+    description: 'Pantalla de alta resolución para una experiencia de usuario fluida y nítida',
     icon: Monitor
   },
   {
@@ -118,7 +118,7 @@ export default function ElysiumPage() {
               {/* Description */}
               <p className="text-2xl text-gray-700 dark:text-zinc-300 leading-relaxed max-w-2xl">
                 Como <strong className="text-[#0e9acd]">Elysium Plus</strong> pero <strong className="text-gray-900 dark:text-white">solo pagos con tarjeta</strong>. 
-                Elysium integra <strong className="text-gray-900 dark:text-white">pantalla de 27"</strong>, <strong className="text-[#0e9acd]">pago exclusivo con tarjeta</strong> y <strong className="text-gray-900 dark:text-white">software integrable</strong>.
+                Elysium integra <strong className="text-gray-900 dark:text-white">pantalla de 21.5"</strong>, <strong className="text-[#0e9acd]">pago exclusivo con tarjeta</strong> y <strong className="text-gray-900 dark:text-white">software integrable</strong>.
               </p>
 
               {/* Feature Tags */}
@@ -126,7 +126,7 @@ export default function ElysiumPage() {
                 <div className="group px-6 py-3 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-sm rounded-2xl border border-[#0e9acd]/20 hover:border-[#0e9acd]/40 transition-all duration-300 hover:scale-105 shadow-lg">
                   <span className="text-[#0e9acd] font-semibold flex items-center">
                     <div className="w-2 h-2 bg-[#0e9acd] rounded-full mr-2"></div>
-                    Pantalla 27"
+                    Pantalla 21.5"
                   </span>
                 </div>
                 <div className="group px-6 py-3 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-sm rounded-2xl border border-[#0e9acd]/20 hover:border-[#0e9acd]/40 transition-all duration-300 hover:scale-105 shadow-lg">
@@ -169,7 +169,7 @@ export default function ElysiumPage() {
               {/* Stats */}
               <div className="flex items-center space-x-8 pt-8">
                 <div className="text-center group">
-                  <div className="text-3xl font-black text-[#0e9acd] group-hover:scale-110 transition-transform">27"</div>
+                  <div className="text-3xl font-black text-[#0e9acd] group-hover:scale-110 transition-transform">21.5"</div>
                   <div className="text-sm text-[#0e9acd] font-medium">Pantalla</div>
                 </div>
                 <div className="w-px h-12 bg-[#0e9acd]/30"></div>
@@ -213,8 +213,8 @@ export default function ElysiumPage() {
               Tecnología <span className="text-[#0e9acd]">Tarjeta</span>
             </h2>
             <p className="text-xl text-gray-600 dark:text-zinc-400 max-w-4xl mx-auto leading-relaxed">
-              Elysium es la versión de Elysium Plus enfocada exclusivamente en pagos con tarjeta. 
-              Misma pantalla de 27", lectores y software integrable, sin efectivo.
+              Elysium es la versión de Elysium Plus enfocada exclusivamente en pagos con tarjeta.
+              Pantalla de 21.5", lectores y software integrable, sin efectivo.
             </p>
           </div>
 

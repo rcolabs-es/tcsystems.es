@@ -269,8 +269,7 @@ export default function ElysiumPlusPage() {
               preload="auto"
               poster="/elysium-plus.png"
             >
-              <source src="/videos/elysium-plus.webm" type="video/webm" />
-              <source src="/videos/elysium-plus.mp4" type="video/mp4" />
+              <source src="/videos/web/elysium-plus.mp4" type="video/mp4" />
               Tu navegador no soporta la reproducción de video.
             </video>
           </div>

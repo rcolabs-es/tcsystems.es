@@ -48,18 +48,23 @@ export default function CompanySection() {
           
           {/* Images Grid - Reestructurado */}
           <div className="relative space-y-6">
-            {/* Imagen principal grande */}
+            {/* Video principal grande */}
             <div className="relative h-96 bg-gradient-to-br from-gray-100 to-gray-50 dark:from-zinc-900 dark:to-zinc-800 rounded-3xl overflow-hidden shadow-2xl group">
-              <Image
-                src="/twash.tiff"
-                alt="Instalación TCSystems - Sistema de cobro automático en funcionamiento"
-                fill
-                className="object-cover group-hover:scale-110 transition-transform duration-500"
+              <video
+                src="/videos/web/elysium-plus.mp4"
+                poster="/videos/web/elysium-plus.jpg"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-label="Elysium Plus - Kiosco autoservicio TCSystems en funcionamiento"
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="absolute bottom-8 left-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="text-xl font-bold">T-Wash</div>
-                <div className="text-sm text-white/90">Instalación real de cliente</div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent"></div>
+              <div className="absolute bottom-8 left-8 text-white">
+                <div className="text-xl font-bold drop-shadow-lg">Elysium Plus</div>
+                <div className="text-sm text-white/90 drop-shadow-lg">Kiosco autoservicio inteligente</div>
               </div>
 
               {/* Logo badge flotante */}
@@ -74,45 +79,20 @@ export default function CompanySection() {
               </div>
             </div>
 
-            {/* Grid de imágenes secundarias - Más grandes */}
+            {/* Grid de videos secundarios */}
             <div className="grid grid-cols-2 gap-6">
-              {/* Imagen cliente Hanna */}
-              <div className="relative h-40 bg-gradient-to-br from-gray-100 to-gray-50 dark:from-zinc-900 dark:to-zinc-800 rounded-2xl overflow-hidden shadow-xl group cursor-pointer">
-                <Image
-                  src="/Hanna.webp"
-                  alt="Cliente satisfecho TCSystems"
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="absolute bottom-4 left-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="text-lg font-semibold">Cliente Satisfecho</div>
-                  <div className="text-sm text-white/80">Experiencia positiva</div>
-                </div>
-              </div>
-
-              {/* Cliente TWash */}
-              <div className="relative h-40 bg-gradient-to-br from-gray-100 to-gray-50 dark:from-zinc-900 dark:to-zinc-800 rounded-2xl overflow-hidden shadow-xl group cursor-pointer">
-                <Image
-                  src="/Speedywash.webp"
-                  alt="Cliente TWash - Sistema TCSystems"
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="absolute bottom-4 left-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="text-lg font-semibold">Speedywash</div>
-                  <div className="text-sm text-white/80">Solución automatizada</div>
-                </div>
-              </div>
-
-              {/* Control de accesos */}
-              <div className="relative h-40 bg-gradient-to-br from-gray-100 to-gray-50 dark:from-zinc-900 dark:to-zinc-800 rounded-2xl overflow-hidden shadow-xl group cursor-pointer">
-                <Image
-                  src="/c-acceso.jpg"
-                  alt="Control de accesos - Torniquete con pago integrado"
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-300"
+              {/* Control de accesos - Video */}
+              <div className="relative h-48 bg-gradient-to-br from-gray-100 to-gray-50 dark:from-zinc-900 dark:to-zinc-800 rounded-2xl overflow-hidden shadow-xl group cursor-pointer">
+                <video
+                  src="/videos/web/grid-1.mp4"
+                  poster="/videos/web/grid-1.jpg"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  aria-label="Solución TCSystems en funcionamiento"
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div className="absolute bottom-4 left-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -121,13 +101,18 @@ export default function CompanySection() {
                 </div>
               </div>
 
-              {/* Kiosco interactivo */}
-              <div className="relative h-40 bg-gradient-to-br from-gray-100 to-gray-50 dark:from-zinc-900 dark:to-zinc-800 rounded-2xl overflow-hidden shadow-xl group cursor-pointer">
-                <Image
-                  src="/cerca.jpg"
-                  alt="Kiosco interactivo - Bilbao Kirolak"
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-300"
+              {/* Kiosco interactivo - Video */}
+              <div className="relative h-48 bg-gradient-to-br from-gray-100 to-gray-50 dark:from-zinc-900 dark:to-zinc-800 rounded-2xl overflow-hidden shadow-xl group cursor-pointer">
+                <video
+                  src="/videos/web/grid-2.mp4"
+                  poster="/videos/web/grid-2.jpg"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  aria-label="Kiosco interactivo TCSystems"
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div className="absolute bottom-4 left-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">

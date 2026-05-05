@@ -115,56 +115,66 @@ export default function ControlAccesosPage() {
             
             {/* Visual Element */}
             <div className="relative">
-              <div className="bg-linear-to-br from-[#0e9acd]/10 to-blue-600/10 dark:from-[#0e9acd]/20 dark:to-blue-600/20 rounded-3xl p-12 border border-[#0e9acd]/20 dark:border-[#0e9acd]/30">
-                <div className="space-y-6">
-                  <div className="text-center">
-                    <div className="inline-flex items-center justify-center w-20 h-20 bg-[#0e9acd] rounded-2xl mb-4 shadow-lg">
-                      <Shield className="w-10 h-10 text-white" />
+              <div className="bg-linear-to-br from-[#0e9acd]/10 to-blue-600/10 dark:from-[#0e9acd]/20 dark:to-blue-600/20 rounded-3xl p-8 lg:p-10 border border-[#0e9acd]/20 dark:border-[#0e9acd]/30">
+                {/* Video demo - Sistema en acción */}
+                <div className="relative mx-auto w-full max-w-[280px] mb-8">
+                  <div className="relative rounded-[2.5rem] p-2 bg-linear-to-br from-[#0e9acd] to-blue-600 shadow-2xl">
+                    <div className="relative aspect-[9/16] rounded-[2rem] overflow-hidden bg-zinc-950">
+                      <video
+                        src="/videos/web/grid-1.mp4"
+                        poster="/videos/web/grid-1.jpg"
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        preload="metadata"
+                        aria-label="Sistema TCSystems de control de accesos con pago integrado en funcionamiento"
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
                     </div>
-                    <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-                      Control de Accesos
-                    </h3>
-                    <p className="text-lg text-gray-600 dark:text-zinc-400 mb-4">
-                      Seguridad inteligente para tu instalación
-                    </p>
-                    <p className="text-base text-gray-600 dark:text-zinc-400">
-                      Solución integral que gestiona y controla todos los puntos de acceso de tu instalación, con tecnología de identificación avanzada y gestión centralizada.
-                    </p>
                   </div>
-                  
-                  <div className="space-y-4 pt-6 border-t border-gray-200 dark:border-zinc-700">
-                    <div className="flex items-start">
-                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 shrink-0 mt-0.5" />
-                      <div>
-                        <span className="font-semibold text-gray-900 dark:text-white block">Lectores biométricos y RFID</span>
-                        <span className="text-sm text-gray-600 dark:text-zinc-400">Huella, facial, tarjeta y acceso móvil</span>
-                      </div>
+                  {/* Badge "EN VIVO" sutil */}
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 inline-flex items-center gap-2 bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-full px-3 py-1.5 shadow-lg">
+                    <span className="relative flex h-2 w-2">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75"></span>
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500"></span>
+                    </span>
+                    <span className="text-xs font-semibold text-gray-700 dark:text-zinc-300 uppercase tracking-wide">En vivo</span>
+                  </div>
+                </div>
+
+                <div className="space-y-4 pt-6 border-t border-gray-200 dark:border-zinc-700">
+                  <div className="flex items-start">
+                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-semibold text-gray-900 dark:text-white block">Lectores biométricos y RFID</span>
+                      <span className="text-sm text-gray-600 dark:text-zinc-400">Huella, facial, tarjeta y acceso móvil</span>
                     </div>
-                    <div className="flex items-start">
-                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 shrink-0 mt-0.5" />
-                      <div>
-                        <span className="font-semibold text-gray-900 dark:text-white block">Tornos y barreras inteligentes</span>
-                        <span className="text-sm text-gray-600 dark:text-zinc-400">Control físico robusto con integración completa</span>
-                      </div>
+                  </div>
+                  <div className="flex items-start">
+                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-semibold text-gray-900 dark:text-white block">Tornos y barreras inteligentes</span>
+                      <span className="text-sm text-gray-600 dark:text-zinc-400">Control físico robusto con integración completa</span>
                     </div>
-                    <div className="flex items-start">
-                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 shrink-0 mt-0.5" />
-                      <div>
-                        <span className="font-semibold text-gray-900 dark:text-white block">Gestión de visitantes</span>
-                        <span className="text-sm text-gray-600 dark:text-zinc-400">Registro, preautorización y seguimiento de visitas</span>
-                      </div>
+                  </div>
+                  <div className="flex items-start">
+                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-semibold text-gray-900 dark:text-white block">Gestión de visitantes</span>
+                      <span className="text-sm text-gray-600 dark:text-zinc-400">Registro, preautorización y seguimiento de visitas</span>
                     </div>
-                    <div className="flex items-start">
-                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 shrink-0 mt-0.5" />
-                      <div>
-                        <span className="font-semibold text-gray-900 dark:text-white block">Software de gestión centralizado</span>
-                        <span className="text-sm text-gray-600 dark:text-zinc-400">Paneles, reportes y alertas en tiempo real</span>
-                      </div>
+                  </div>
+                  <div className="flex items-start">
+                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-semibold text-gray-900 dark:text-white block">Software de gestión centralizado</span>
+                      <span className="text-sm text-gray-600 dark:text-zinc-400">Paneles, reportes y alertas en tiempo real</span>
                     </div>
                   </div>
                 </div>
               </div>
-              
+
               {/* Elementos decorativos */}
               <div className="absolute -top-6 -right-6 w-24 h-24 bg-linear-to-br from-[#0e9acd]/20 to-blue-600/20 rounded-full blur-3xl"></div>
               <div className="absolute -bottom-6 -left-6 w-20 h-20 bg-linear-to-br from-[#0e9acd]/15 to-blue-600/15 rounded-full blur-2xl"></div>
