@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://tcsystems.es'),
+  metadataBase: new URL('https://www.tcsystems.es'),
   title: 'Verifactu - Integración de Facturación Electrónica | TCSystems',
   description: 'Integra Verifactu en tus terminales TCSystems. Solución de facturación electrónica que garantiza el cumplimiento normativo español y la facturación automática. Disponible para todos nuestros terminales de pago.',
   keywords: [
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'es_ES',
-    url: 'https://tcsystems.es/verifactu',
+    url: 'https://www.tcsystems.es/verifactu',
     siteName: 'TCSystems',
     title: 'Verifactu - Integración de Facturación Electrónica | TCSystems',
     description: 'Integra Verifactu en tus terminales TCSystems. Solución de facturación electrónica que garantiza el cumplimiento normativo y la facturación automática.',
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     images: ['/logo.webp'],
   },
   alternates: {
-    canonical: 'https://tcsystems.es/verifactu',
+    canonical: 'https://www.tcsystems.es/verifactu',
   },
 }
 
@@ -81,8 +81,8 @@ export default function VerifactuLayout({
             "provider": {
               "@type": "Organization",
               "name": "TCSystems",
-              "url": "https://tcsystems.es",
-              "logo": "https://tcsystems.es/logo.webp"
+              "url": "https://www.tcsystems.es",
+              "logo": "https://www.tcsystems.es/logo.webp"
             },
             "areaServed": {
               "@type": "Country",
@@ -105,12 +105,12 @@ export default function VerifactuLayout({
             "@type": "WebPage",
             "name": "Verifactu - Integración de Facturación Electrónica",
             "description": "Página informativa sobre la integración de Verifactu en terminales TCSystems para facturación electrónica automática",
-            "url": "https://tcsystems.es/verifactu",
+            "url": "https://www.tcsystems.es/verifactu",
             "inLanguage": "es-ES",
             "isPartOf": {
               "@type": "WebSite",
               "name": "TCSystems",
-              "url": "https://tcsystems.es"
+              "url": "https://www.tcsystems.es"
             },
             "about": {
               "@type": "Thing",

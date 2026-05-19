@@ -32,8 +32,8 @@ const structuredData = {
   provider: {
     '@type': 'Organization',
     name: 'TCSystems',
-    url: 'https://tcsystems.es',
-    logo: 'https://tcsystems.es/logo.webp',
+    url: 'https://www.tcsystems.es',
+    logo: 'https://www.tcsystems.es/logo.webp',
   },
   areaServed: { '@type': 'Country', name: 'España' },
   description:

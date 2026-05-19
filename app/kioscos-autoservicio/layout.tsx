@@ -16,12 +16,12 @@ export const metadata: Metadata = {
     "fabricante kioscos España",
   ],
   alternates: {
-    canonical: "https://tcsystems.es/kioscos-autoservicio",
+    canonical: "https://www.tcsystems.es/kioscos-autoservicio",
   },
   openGraph: {
     type: "website",
     locale: "es_ES",
-    url: "https://tcsystems.es/kioscos-autoservicio",
+    url: "https://www.tcsystems.es/kioscos-autoservicio",
     siteName: "TCSystems",
     title: "Kioscos de Autoservicio para empresas | TCSystems",
     description:

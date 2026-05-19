@@ -21,8 +21,8 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const postUrl = `https://tcsystems.es/blog/${slug}`
-    const sitemapUrl = 'https://tcsystems.es/sitemap.xml'
+    const postUrl = `https://www.tcsystems.es/blog/${slug}`
+    const sitemapUrl = 'https://www.tcsystems.es/sitemap.xml'
 
     // Ping a Google para que recrawlee el sitemap
     const googlePingUrl = `https://www.google.com/ping?sitemap=${encodeURIComponent(sitemapUrl)}`

@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://tcsystems.es'),
+  metadataBase: new URL('https://www.tcsystems.es'),
   title: 'Control de Accesos | Sistemas de Seguridad Inteligente | TCSystems',
   description: 'Sistemas profesionales de control de accesos para empresas e instalaciones. Tornos, barreras, lectores biométricos, tarjetas RFID, gestión de visitantes y software de control centralizado. Soluciones integrales de seguridad.',
   keywords: [
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'es_ES',
-    url: 'https://tcsystems.es/control-accesos',
+    url: 'https://www.tcsystems.es/control-accesos',
     siteName: 'TCSystems',
     title: 'Control de Accesos | Sistemas de Seguridad Inteligente | TCSystems',
     description: 'Sistemas profesionales de control de accesos para empresas e instalaciones. Tornos, barreras, lectores biométricos, tarjetas RFID y software de gestión centralizado.',
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     images: ['/logo.webp'],
   },
   alternates: {
-    canonical: 'https://tcsystems.es/control-accesos',
+    canonical: 'https://www.tcsystems.es/control-accesos',
   },
 }
 
@@ -86,8 +86,8 @@ export default function ControlAccesosLayout({
             "provider": {
               "@type": "Organization",
               "name": "TCSystems",
-              "url": "https://tcsystems.es",
-              "logo": "https://tcsystems.es/logo.webp"
+              "url": "https://www.tcsystems.es",
+              "logo": "https://www.tcsystems.es/logo.webp"
             },
             "areaServed": {
               "@type": "Country",
@@ -110,12 +110,12 @@ export default function ControlAccesosLayout({
             "@type": "WebPage",
             "name": "Sistemas de Control de Accesos",
             "description": "Soluciones integrales de control de accesos para empresas incluyendo tornos, barreras, lectores biométricos y software de gestión centralizado",
-            "url": "https://tcsystems.es/control-accesos",
+            "url": "https://www.tcsystems.es/control-accesos",
             "inLanguage": "es-ES",
             "isPartOf": {
               "@type": "WebSite",
               "name": "TCSystems",
-              "url": "https://tcsystems.es"
+              "url": "https://www.tcsystems.es"
             },
             "about": {
               "@type": "Thing",

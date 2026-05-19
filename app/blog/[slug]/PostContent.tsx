@@ -51,19 +51,19 @@ export default function PostContent({ post }: PostContentProps) {
     "author": {
       "@type": "Organization",
       "name": "TCSystems",
-      "url": "https://tcsystems.es"
+      "url": "https://www.tcsystems.es"
     },
     "publisher": {
       "@type": "Organization",
       "name": "TCSystems",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://tcsystems.es/logo.webp"
+        "url": "https://www.tcsystems.es/logo.webp"
       }
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://tcsystems.es/blog/${post.slug.current}`
+      "@id": `https://www.tcsystems.es/blog/${post.slug.current}`
     },
     "keywords": post.tags?.join(', '),
     "articleSection": post.category,

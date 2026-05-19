@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://tcsystems.es'),
+  metadataBase: new URL('https://www.tcsystems.es'),
   title: 'Sistemas de Pago para Parkings | Soluciones Automatizadas | TCSystems',
   description: 'Sistemas especializados de cobro automático para parkings. Control de acceso, gestión de tarifas, pago con tarjeta y efectivo, lectura de matrículas y software de gestión integrado. Soluciones completas para parkings públicos y privados.',
   keywords: [
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'es_ES',
-    url: 'https://tcsystems.es/parkings',
+    url: 'https://www.tcsystems.es/parkings',
     siteName: 'TCSystems',
     title: 'Sistemas de Pago para Parkings | Soluciones Automatizadas | TCSystems',
     description: 'Sistemas especializados de cobro automático para parkings. Control de acceso, gestión de tarifas, pago con tarjeta y efectivo. Soluciones completas para parkings públicos y privados.',
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     images: ['/logo.webp'],
   },
   alternates: {
-    canonical: 'https://tcsystems.es/parkings',
+    canonical: 'https://www.tcsystems.es/parkings',
   },
 }
 
@@ -85,8 +85,8 @@ export default function ParkingsLayout({
             "provider": {
               "@type": "Organization",
               "name": "TCSystems",
-              "url": "https://tcsystems.es",
-              "logo": "https://tcsystems.es/logo.webp"
+              "url": "https://www.tcsystems.es",
+              "logo": "https://www.tcsystems.es/logo.webp"
             },
             "areaServed": {
               "@type": "Country",
@@ -109,12 +109,12 @@ export default function ParkingsLayout({
             "@type": "WebPage",
             "name": "Sistemas de Pago para Parkings",
             "description": "Soluciones completas de automatización para parkings incluyendo control de acceso, gestión de tarifas y sistemas de pago",
-            "url": "https://tcsystems.es/parkings",
+            "url": "https://www.tcsystems.es/parkings",
             "inLanguage": "es-ES",
             "isPartOf": {
               "@type": "WebSite",
               "name": "TCSystems",
-              "url": "https://tcsystems.es"
+              "url": "https://www.tcsystems.es"
             },
             "about": {
               "@type": "Thing",

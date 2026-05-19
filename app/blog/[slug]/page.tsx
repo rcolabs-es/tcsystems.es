@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import PostContent from './PostContent'
-import { getAllPosts, getPostBySlug } from '@/lib/sanity'
+import { getAllPosts, getPostBySlug, urlFor } from '@/lib/sanity'
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title,
       description,
-      url: `https://tcsystems.es/blog/${slug}`,
+      url: `https://www.tcsystems.es/blog/${slug}`,
       siteName: 'TCSystems',
       locale: 'es_ES',
       type: 'article',
@@ -63,7 +63,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
     },
     alternates: {
-      canonical: `https://tcsystems.es/blog/${slug}`,
+      canonical: `https://www.tcsystems.es/blog/${slug}`,
     },
   }
 }
@@ -84,25 +84,27 @@ export default async function BlogPostPage({ params }: Props) {
     '@type': 'BlogPosting',
     headline: post.title,
     description: post.excerpt,
-    image: post.mainImage ? `https://tcsystems.es${post.mainImage}` : 'https://tcsystems.es/logo.webp',
+    image: post.mainImage
+      ? urlFor(post.mainImage).width(1200).height(630).fit('crop').url()
+      : 'https://www.tcsystems.es/logo.webp',
     datePublished: post.publishedAt,
     dateModified: post._createdAt,
     author: {
       '@type': 'Organization',
       name: 'TCSystems',
-      url: 'https://tcsystems.es',
+      url: 'https://www.tcsystems.es',
     },
     publisher: {
       '@type': 'Organization',
       name: 'TCSystems',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://tcsystems.es/logo.webp',
+        url: 'https://www.tcsystems.es/logo.webp',
       },
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://tcsystems.es/blog/${slug}`,
+      '@id': `https://www.tcsystems.es/blog/${slug}`,
     },
     keywords: post.seo?.keywords?.join(', ') || post.tags?.join(', '),
     articleSection: post.category,

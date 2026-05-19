@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Blog TCSystems | Sistemas de pago automático y kioscos de autoservicio',
     description: 'Descubre las últimas tendencias, casos de éxito y guías especializadas en sistemas de pago automático y tecnología de autoservicio.',
-    url: 'https://tcsystems.es/blog',
+    url: 'https://www.tcsystems.es/blog',
     siteName: 'TCSystems',
     images: [
       {
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://tcsystems.es/blog',
+    canonical: 'https://www.tcsystems.es/blog',
   },
 }
 

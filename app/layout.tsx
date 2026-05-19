@@ -27,7 +27,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://tcsystems.es'),
+  metadataBase: new URL('https://www.tcsystems.es'),
   title: "TCSystems - Kioscos de Autoservicio | Líderes en España",
   description: "Empresa española líder en sistemas de cobro automático, máquinas de pago automáticas y kioscos de autoservicio. Más de 14 años desarrollando soluciones de TPV automático y kioscos de autoservicio para empresas. Automatización de cobros con soporte 24/7 en toda España.",
   keywords: [
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "es_ES",
-    url: "https://tcsystems.es",
+    url: "https://www.tcsystems.es",
     siteName: "TCSystems",
     title: "TCSystems - Sistemas de Cobro Automático | Líderes en España",
     description: "Empresa española líder en sistemas de cobro automático. Más de 14 años desarrollando soluciones de automatización de cobros para empresas en toda España.",
@@ -88,7 +88,7 @@ export const metadata: Metadata = {
     images: ["/logo.webp"]
   },
   alternates: {
-    canonical: "https://tcsystems.es"
+    canonical: "https://www.tcsystems.es"
   }
 };
 
@@ -101,7 +101,6 @@ export default function RootLayout({
     <html lang="es" className={`scroll-smooth ${fraunces.variable} ${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" />
-        <link rel="canonical" href="https://tcsystems.es" />
         <meta name="geo.region" content="ES" />
         <meta name="geo.country" content="Spain" />
         <meta name="geo.placename" content="España" />
@@ -116,8 +115,8 @@ export default function RootLayout({
               "@type": "Organization",
               "name": "TCSystems",
               "description": "Empresa española líder en sistemas de cobro automático y automatización de cobros",
-              "url": "https://tcsystems.es",
-              "logo": "https://tcsystems.es/logo.webp",
+              "url": "https://www.tcsystems.es",
+              "logo": "https://www.tcsystems.es/logo.webp",
               "foundingDate": "2010",
               "address": {
                 "@type": "PostalAddress",
