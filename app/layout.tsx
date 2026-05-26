@@ -137,26 +137,59 @@ export default function RootLayout({
                 "itemListElement": [
                   {
                     "@type": "Offer",
+                    "url": "https://www.tcsystems.es/productos/evo",
+                    "priceCurrency": "EUR",
+                    "priceSpecification": {
+                      "@type": "PriceSpecification",
+                      "priceCurrency": "EUR",
+                      "valueAddedTaxIncluded": false
+                    },
+                    "availability": "https://schema.org/InStock",
+                    "areaServed": { "@type": "Country", "name": "España" },
+                    "seller": { "@type": "Organization", "name": "TCSystems" },
                     "itemOffered": {
-                      "@type": "Product",
+                      "@type": "Service",
                       "name": "EVO - Kioscos de Autoservicio",
-                      "description": "Sistema integral de cobro automático con admisión de monedas, billetes y tarjetas"
-                    }
-                  },
-                  {
-                    "@type": "Offer", 
-                    "itemOffered": {
-                      "@type": "Product",
-                      "name": "Prometheus - Terminales de Pago",
-                      "description": "Terminal de alta velocidad con expendedor de billetes y sistema de audio"
+                      "description": "Sistema integral de cobro automático con admisión de monedas, billetes y tarjetas",
+                      "provider": { "@type": "Organization", "name": "TCSystems" }
                     }
                   },
                   {
                     "@type": "Offer",
+                    "url": "https://www.tcsystems.es/productos/prometheus",
+                    "priceCurrency": "EUR",
+                    "priceSpecification": {
+                      "@type": "PriceSpecification",
+                      "priceCurrency": "EUR",
+                      "valueAddedTaxIncluded": false
+                    },
+                    "availability": "https://schema.org/InStock",
+                    "areaServed": { "@type": "Country", "name": "España" },
+                    "seller": { "@type": "Organization", "name": "TCSystems" },
                     "itemOffered": {
-                      "@type": "Product", 
+                      "@type": "Service",
+                      "name": "Prometheus - Terminales de Pago",
+                      "description": "Terminal de alta velocidad con expendedor de billetes y sistema de audio",
+                      "provider": { "@type": "Organization", "name": "TCSystems" }
+                    }
+                  },
+                  {
+                    "@type": "Offer",
+                    "url": "https://www.tcsystems.es/productos/elysium",
+                    "priceCurrency": "EUR",
+                    "priceSpecification": {
+                      "@type": "PriceSpecification",
+                      "priceCurrency": "EUR",
+                      "valueAddedTaxIncluded": false
+                    },
+                    "availability": "https://schema.org/InStock",
+                    "areaServed": { "@type": "Country", "name": "España" },
+                    "seller": { "@type": "Organization", "name": "TCSystems" },
+                    "itemOffered": {
+                      "@type": "Service",
                       "name": "Elysium - Sistemas Premium",
-                      "description": "Solución premium enfocada en pagos con tarjeta y sistemas sin contacto"
+                      "description": "Solución premium enfocada en pagos con tarjeta y sistemas sin contacto",
+                      "provider": { "@type": "Organization", "name": "TCSystems" }
                     }
                   }
                 ]
