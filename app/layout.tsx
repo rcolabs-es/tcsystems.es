@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter, Fraunces, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import { GoogleAnalytics } from "@next/third-parties/google";
 import ConditionalLayout from "@/components/ConditionalLayout";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -168,7 +167,6 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} bg-white dark:bg-zinc-950 text-gray-900 dark:text-white transition-colors duration-300`}>
         <ThemeProvider>
-          <GoogleAnalytics gaId="G-FTNY37SJ4W" />
           <ConditionalLayout>{children}</ConditionalLayout>
         </ThemeProvider>
       </body>

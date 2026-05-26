@@ -121,53 +121,61 @@ export default function Header() {
                     <Link
                       href={item.href}
                       className="text-gray-600 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-white font-medium transition-colors duration-200 flex items-center"
+                      aria-expanded={isProductsOpen}
+                      aria-haspopup="true"
                     >
                       {item.name}
                       <ChevronDown className="w-4 h-4 ml-1" />
                     </Link>
-                    
-                    {/* Products Dropdown */}
-                    {isProductsOpen && (
-                      <div className="absolute top-full left-0 pt-2 w-96 z-50">
-                        <div className="bg-white dark:bg-zinc-950 rounded-2xl shadow-2xl border border-gray-200 dark:border-zinc-800 p-6">
-                          <div className="space-y-4">
-                            {products.map((product) => (
-                              <Link
-                                key={product.name}
-                                href={product.href}
-                                className="flex items-center p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-zinc-900 transition-colors duration-200 group"
-                              >
-                                <div className="w-20 h-20 bg-gray-100 dark:bg-zinc-800 rounded-xl flex items-center justify-center mr-4 overflow-hidden shrink-0">
-                                  <Image
-                                    src={product.image}
-                                    alt={product.name}
-                                    width={80}
-                                    height={80}
-                                    className="w-16 h-16 object-contain"
-                                  />
-                                </div>
-                                <div>
-                                  <h4 className="font-semibold text-gray-900 dark:text-white group-hover:text-[#0e9acd] transition-colors">
-                                    {product.name}
-                                  </h4>
-                                  <p className="text-sm text-gray-600 dark:text-zinc-400">
-                                    {product.description}
-                                  </p>
-                                </div>
-                              </Link>
-                            ))}
-                          </div>
-                          <div className="mt-4 pt-4 border-t border-gray-200 dark:border-zinc-800">
+
+                    {/* Products Dropdown — siempre en el DOM para SEO */}
+                    <div
+                      className={`absolute top-full left-0 pt-2 w-96 z-50 transition-opacity duration-200 ${
+                        isProductsOpen
+                          ? "opacity-100 visible"
+                          : "opacity-0 invisible pointer-events-none"
+                      }`}
+                    >
+                      <div className="bg-white dark:bg-zinc-950 rounded-2xl shadow-2xl border border-gray-200 dark:border-zinc-800 p-6">
+                        <div className="space-y-4">
+                          {products.map((product) => (
                             <Link
-                              href="/#productos"
-                              className="text-[#0e9acd] hover:text-blue-600 font-medium text-sm transition-colors"
+                              key={product.name}
+                              href={product.href}
+                              className="flex items-center p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-zinc-900 transition-colors duration-200 group"
+                              tabIndex={isProductsOpen ? 0 : -1}
                             >
-                              Ver todos los productos →
+                              <div className="w-20 h-20 bg-gray-100 dark:bg-zinc-800 rounded-xl flex items-center justify-center mr-4 overflow-hidden shrink-0">
+                                <Image
+                                  src={product.image}
+                                  alt={product.name}
+                                  width={80}
+                                  height={80}
+                                  className="w-16 h-16 object-contain"
+                                />
+                              </div>
+                              <div>
+                                <h4 className="font-semibold text-gray-900 dark:text-white group-hover:text-[#0e9acd] transition-colors">
+                                  {product.name}
+                                </h4>
+                                <p className="text-sm text-gray-600 dark:text-zinc-400">
+                                  {product.description}
+                                </p>
+                              </div>
                             </Link>
-                          </div>
+                          ))}
+                        </div>
+                        <div className="mt-4 pt-4 border-t border-gray-200 dark:border-zinc-800">
+                          <Link
+                            href="/#productos"
+                            className="text-[#0e9acd] hover:text-blue-600 font-medium text-sm transition-colors"
+                            tabIndex={isProductsOpen ? 0 : -1}
+                          >
+                            Ver todos los productos →
+                          </Link>
                         </div>
                       </div>
-                    )}
+                    </div>
                   </div>
                 ) : item.dropdown === "services" ? (
                   <div
@@ -177,39 +185,46 @@ export default function Header() {
                   >
                     <button
                       className="text-gray-600 dark:text-zinc-400 hover:text-gray-900 dark:hover:text-white font-medium transition-colors duration-200 flex items-center"
+                      aria-expanded={isServicesOpen}
+                      aria-haspopup="true"
                     >
                       {item.name}
                       <ChevronDown className="w-4 h-4 ml-1" />
                     </button>
-                    
-                    {/* Services Dropdown */}
-                    {isServicesOpen && (
-                      <div className="absolute top-full left-0 pt-2 w-80 z-50">
-                        <div className="bg-white dark:bg-zinc-950 rounded-2xl shadow-2xl border border-gray-200 dark:border-zinc-800 p-6">
-                          <div className="space-y-4">
-                            {services.map((service) => (
-                              <Link
-                                key={service.name}
-                                href={service.href}
-                                className="flex items-center p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-zinc-900 transition-colors duration-200 group"
-                              >
-                                <div className="w-12 h-12 bg-[#0e9acd]/10 dark:bg-[#0e9acd]/20 rounded-lg flex items-center justify-center mr-4">
-                                  <service.icon className="w-6 h-6 text-[#0e9acd]" />
-                                </div>
-                                <div>
-                                  <h4 className="font-semibold text-gray-900 dark:text-white group-hover:text-[#0e9acd] transition-colors">
-                                    {service.name}
-                                  </h4>
-                                  <p className="text-sm text-gray-600 dark:text-zinc-400">
-                                    {service.description}
-                                  </p>
-                                </div>
-                              </Link>
-                            ))}
-                          </div>
+
+                    {/* Services Dropdown — siempre en el DOM para que Google lo crawlee */}
+                    <div
+                      className={`absolute top-full left-0 pt-2 w-80 z-50 transition-opacity duration-200 ${
+                        isServicesOpen
+                          ? "opacity-100 visible"
+                          : "opacity-0 invisible pointer-events-none"
+                      }`}
+                    >
+                      <div className="bg-white dark:bg-zinc-950 rounded-2xl shadow-2xl border border-gray-200 dark:border-zinc-800 p-6">
+                        <div className="space-y-4">
+                          {services.map((service) => (
+                            <Link
+                              key={service.name}
+                              href={service.href}
+                              className="flex items-center p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-zinc-900 transition-colors duration-200 group"
+                              tabIndex={isServicesOpen ? 0 : -1}
+                            >
+                              <div className="w-12 h-12 bg-[#0e9acd]/10 dark:bg-[#0e9acd]/20 rounded-lg flex items-center justify-center mr-4">
+                                <service.icon className="w-6 h-6 text-[#0e9acd]" />
+                              </div>
+                              <div>
+                                <h4 className="font-semibold text-gray-900 dark:text-white group-hover:text-[#0e9acd] transition-colors">
+                                  {service.name}
+                                </h4>
+                                <p className="text-sm text-gray-600 dark:text-zinc-400">
+                                  {service.description}
+                                </p>
+                              </div>
+                            </Link>
+                          ))}
                         </div>
                       </div>
-                    )}
+                    </div>
                   </div>
                 ) : (
                   <Link

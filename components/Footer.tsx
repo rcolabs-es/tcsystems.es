@@ -24,6 +24,14 @@ export default function Footer() {
       ],
     },
     {
+      title: "Servicios",
+      links: [
+        { name: "Parkings", href: "/parkings", icon: undefined, isExternal: false },
+        { name: "Control de Accesos", href: "/control-accesos", icon: undefined, isExternal: false },
+        { name: "Verifactu", href: "/verifactu", icon: undefined, isExternal: false },
+      ],
+    },
+    {
       title: "Empresa",
       links: [
         { name: "Sobre Nosotros", href: "/#empresa", icon: undefined, isExternal: false },
@@ -34,17 +42,17 @@ export default function Footer() {
     {
       title: "Social",
       links: [
-        { 
-          name: "LinkedIn", 
+        {
+          name: "LinkedIn",
           href: "https://www.linkedin.com/company/tcsystems-grupotcobro/",
           icon: Linkedin,
-          isExternal: true 
+          isExternal: true
         },
-        { 
-          name: "Facebook", 
+        {
+          name: "Facebook",
           href: "https://www.facebook.com/profile.php?id=61572716694969",
           icon: Facebook,
-          isExternal: true 
+          isExternal: true
         },
       ],
     },
@@ -169,7 +177,7 @@ export default function Footer() {
 
             {/* Footer Links */}
             <div className="lg:col-span-7">
-              <div className="grid md:grid-cols-3 gap-8">
+              <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
                 {footerSections.map((section, index) => (
                   <div key={index}>
                     <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-6">
