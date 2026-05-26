@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowLeft, ArrowRight, Coins, Banknote, Receipt, Volume2, CreditCard, QrCode, Printer, Monitor, Wifi, Cpu, Phone, Mail, MessageCircle, Zap, Shield, Settings } from 'lucide-react'
 import ContactForm from '@/components/ContactForm'
+import ProductServiceSchema from '@/components/ProductServiceSchema'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -112,7 +113,15 @@ const contactOptions = [
 
 export default function PrometheusPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-zinc-950">
+    <>
+      <ProductServiceSchema
+        name="Prometheus - Terminal de Pago Avanzado"
+        description='Terminal de pago de alta velocidad con expendedor de billetes ultrarrápido, admisión y devolución de monedas y billetes, sistema de audio con guía por voz, pago con tarjeta contactless, lector QR, impresora térmica 80mm y pantalla táctil de 19". Diseñado para entornos con alto volumen de transacciones que requieren máxima rapidez.'
+        slug="/productos/prometheus"
+        image="/T-Cobro Prometheus.webp"
+        serviceType="Terminal de pago de alta velocidad"
+      />
+      <div className="min-h-screen bg-white dark:bg-zinc-950">
       {/* Hero Section */}
       <section className="relative py-16 bg-gradient-to-br from-gray-50 via-white to-blue-50/30 dark:from-zinc-950 dark:via-zinc-900/30 dark:to-zinc-950 overflow-hidden">
 
@@ -408,6 +417,7 @@ export default function PrometheusPage() {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   )
 } 

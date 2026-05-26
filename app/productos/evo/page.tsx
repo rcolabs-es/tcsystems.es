@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowLeft, ArrowRight, Coins, Banknote, CreditCard, QrCode, Printer, Monitor, Wifi, Cpu, Phone, Mail, MessageCircle, Zap, Shield, Settings } from 'lucide-react'
 import ContactForm from '@/components/ContactForm'
+import ProductServiceSchema from '@/components/ProductServiceSchema'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -102,7 +103,15 @@ const contactOptions = [
 
 export default function EvoPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-zinc-950">
+    <>
+      <ProductServiceSchema
+        name="EVO - Kiosco de Autoservicio"
+        description='Kiosco de autoservicio integral para puntos de venta con admisión y devolución de monedas y billetes, pago con tarjeta contactless, lector QR, impresora térmica 80mm, pantalla táctil de 19" y mini PC industrial. Ideal para retail, hostelería, lavanderías y administraciones públicas.'
+        slug="/productos/evo"
+        image="/EVO LATERAL SIN FONDO.webp"
+        serviceType="Kiosco de autoservicio"
+      />
+      <div className="min-h-screen bg-white dark:bg-zinc-950">
       {/* Hero Section */}
       <section className="relative py-16 bg-gradient-to-br from-gray-50 via-white to-blue-50/30 dark:from-zinc-950 dark:via-zinc-900/30 dark:to-zinc-950 overflow-hidden">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -395,6 +404,7 @@ export default function EvoPage() {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   )
 } 

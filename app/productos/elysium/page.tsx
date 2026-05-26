@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, CreditCard, Users, QrCode, Monitor, Cpu, Phone, Mail, MessageCircle, Zap, Shield, Settings } from 'lucide-react'
 import ContactForm from '@/components/ContactForm'
+import ProductServiceSchema from '@/components/ProductServiceSchema'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -92,7 +93,15 @@ const contactOptions = [
 
 export default function ElysiumPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-zinc-950">
+    <>
+      <ProductServiceSchema
+        name="Elysium - Terminal de Pago con Tarjeta"
+        description='Terminal de pago exclusivo para tarjeta con pantalla táctil de 21.5", lector de usuarios, lector QR y PC industrial. Software TCSystems integrable. Ideal para entornos sin efectivo: gimnasios, oficinas, autoservicios premium y entornos corporativos.'
+        slug="/productos/elysium"
+        image="/Elysium sin fondo.webp"
+        serviceType="Terminal de pago con tarjeta"
+      />
+      <div className="min-h-screen bg-white dark:bg-zinc-950">
       {/* Hero Section */}
       <section className="relative py-16 bg-gradient-to-br from-gray-50 via-white to-blue-50/30 dark:from-zinc-950 dark:via-zinc-900/30 dark:to-zinc-950 overflow-hidden">
 
@@ -322,6 +331,7 @@ export default function ElysiumPage() {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   )
 }

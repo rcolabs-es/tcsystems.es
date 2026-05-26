@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { ArrowRight, CreditCard, Coins, Users, QrCode, Monitor, Cpu, Phone, Mail, MessageCircle, Zap, Shield, Settings } from 'lucide-react'
 import ContactForm from '@/components/ContactForm'
 import ThemedProductImage from '@/components/ThemedProductImage'
+import ProductServiceSchema from '@/components/ProductServiceSchema'
 import type { Metadata } from 'next'
 
 // Video local: coloca tu archivo en public/videos/elysium-plus.mp4 (y opcionalmente .webm)
@@ -94,7 +95,15 @@ const contactOptions = [
 
 export default function ElysiumPlusPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-zinc-950">
+    <>
+      <ProductServiceSchema
+        name="Elysium Plus - Terminal de Pago Avanzado"
+        description='Terminal de pago multifunción con pantalla táctil de 27", admisión y devolución de monedas y billetes, pago con tarjeta contactless, lector QR, lector de usuarios y PC industrial. Software TCSystems integrable. Ideal para retail, hostelería y zonas con alto volumen de transacciones.'
+        slug="/productos/elysium-plus"
+        image="/elysium-plus.png"
+        serviceType="Terminal de pago multifunción"
+      />
+      <div className="min-h-screen bg-white dark:bg-zinc-950">
       {/* Hero Section */}
       <section className="relative py-16 bg-gradient-to-br from-gray-50 via-white to-blue-50/30 dark:from-zinc-950 dark:via-zinc-900/30 dark:to-zinc-950 overflow-hidden">
 
@@ -355,7 +364,8 @@ export default function ElysiumPlusPage() {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   )
 }
 
