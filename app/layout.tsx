@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Fraunces, Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import ConditionalLayout from "@/components/ConditionalLayout";
@@ -199,6 +200,18 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.className} bg-white dark:bg-zinc-950 text-gray-900 dark:text-white transition-colors duration-300`}>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18233086137"
+          strategy="afterInteractive"
+        />
+        <Script id="google-ads-gtag" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-18233086137');
+          `}
+        </Script>
         <ThemeProvider>
           <ConditionalLayout>{children}</ConditionalLayout>
         </ThemeProvider>
