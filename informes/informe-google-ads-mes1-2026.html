@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informe Google Ads · TCSystems · Rendimiento Mes 1 2026</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root{
+  --ink:#172033;
+  --muted:#5f6f86;
+  --soft:#edf2f8;
+  --line:#d7e0eb;
+  --card:#ffffff;
+  --bg:#f4f7fb;
+  --blue:#3658ff;
+  --blue-soft:#e9efff;
+  --teal:#0e9f8e;
+  --teal-soft:#e2faf6;
+  --gold:#d69a1f;
+  --gold-soft:#fff3d8;
+  --rose:#d84f6a;
+  --rose-soft:#ffe9ee;
+  --shadow:0 18px 45px rgba(22,32,51,.08);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
+}
+
+@page{
+  size:A4;
+  margin:0;
+}
+
+html,body{
+  background:linear-gradient(180deg,#eef3f9 0%,#f7f9fc 100%);
+  color:var(--ink);
+  font-family:'Manrope','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size:10pt;
+  line-height:1.5;
+}
+
+body{
+  padding:10px 0 24px;
+}
+
+.page{
+  width:210mm;
+  height:297mm;
+  margin:0 auto 18px;
+  background:
+    radial-gradient(circle at top right, rgba(54,88,255,.09), transparent 28%),
+    radial-gradient(circle at left 20%, rgba(14,159,142,.08), transparent 24%),
+    var(--card);
+  border:1px solid rgba(215,224,235,.9);
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+  page-break-after:always;
+}
+
+.page:last-of-type{page-break-after:auto;}
+.page > .content{
+  padding:12mm 14mm 15mm;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  z-index:1;
+}
+
+.page::before,
+.page::after{
+  content:'';
+  position:absolute;
+  border-radius:999px;
+  filter:blur(1px);
+  pointer-events:none;
+}
+
+.page::before{
+  width:42mm;
+  height:42mm;
+  right:-14mm;
+  top:22mm;
+  background:radial-gradient(circle at 35% 35%, rgba(54,88,255,.12), rgba(54,88,255,.02) 62%, transparent 72%);
+}
+
+.page::after{
+  width:34mm;
+  height:34mm;
+  left:-12mm;
+  bottom:20mm;
+  background:radial-gradient(circle at 40% 40%, rgba(14,159,142,.10), rgba(14,159,142,.02) 62%, transparent 72%);
+}
+
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10mm;
+  padding-bottom:4mm;
+  border-bottom:1px solid var(--line);
+  margin-bottom:6mm;
+}
+
+.brand-row{
+  display:flex;
+  align-items:center;
+  gap:4mm;
+  flex-wrap:wrap;
+}
+
+.brand-row img{
+  display:block;
+  height:8mm;
+  width:auto;
+}
+
+.brand-divider{
+  width:1px;
+  height:7mm;
+  background:var(--line);
+}
+
+.doc-meta{
+  text-align:right;
+}
+
+.doc-meta .kind{
+  font-size:7pt;
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  color:var(--muted);
+  margin-bottom:1mm;
+}
+
+.doc-meta .title{
+  font-size:11pt;
+  font-weight:800;
+  letter-spacing:-.02em;
+}
+
+.kicker{
+  font-size:7.5pt;
+  text-transform:uppercase;
+  letter-spacing:.2em;
+  font-weight:800;
+  color:var(--blue);
+  margin-bottom:4mm;
+}
+
+h1{
+  font-size:28pt;
+  line-height:1.02;
+  letter-spacing:-.04em;
+  max-width:150mm;
+  margin-bottom:4mm;
+}
+
+h2{
+  font-size:15pt;
+  letter-spacing:-.02em;
+  margin-bottom:3mm;
+}
+
+h3{
+  font-size:10.5pt;
+  font-weight:800;
+  letter-spacing:-.01em;
+  margin-bottom:2mm;
+}
+
+.sub{
+  font-size:11pt;
+  color:var(--muted);
+  max-width:158mm;
+  margin-bottom:5mm;
+}
+
+.copy{
+  color:var(--ink);
+}
+
+.mono{
+  font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-variant-numeric:tabular-nums;
+}
+
+.pill-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:2mm;
+}
+
+.pill{
+  display:inline-flex;
+  align-items:center;
+  gap:1.5mm;
+  padding:1.2mm 2.6mm;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:#fff;
+  font-size:6.9pt;
+  font-weight:700;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+.pill.blue{background:var(--blue-soft);border-color:#cfd8ff;color:#2a45cb;}
+.pill.teal{background:var(--teal-soft);border-color:#c9f1eb;color:#117d71;}
+.pill.gold{background:var(--gold-soft);border-color:#f0dcaa;color:#9b6d0f;}
+.pill.rose{background:var(--rose-soft);border-color:#f7cad4;color:#ab3851;}
+
+.grid-4{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:2.8mm;
+}
+
+.grid-3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:3mm;
+}
+
+.grid-2{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:4mm;
+}
+
+.grid-2-even{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:3mm;
+}
+
+.kpi{
+  border:1px solid var(--line);
+  border-radius:3mm;
+  background:rgba(255,255,255,.92);
+  padding:3.3mm;
+  min-height:22mm;
+  position:relative;
+  overflow:hidden;
+}
+
+.kpi::before{
+  content:'';
+  position:absolute;
+  inset:0 auto auto 0;
+  width:100%;
+  height:2.2mm;
+  background:var(--line);
+}
+
+.kpi.blue::before{background:linear-gradient(90deg,var(--blue),#7f95ff);}
+.kpi.teal::before{background:linear-gradient(90deg,var(--teal),#57dacb);}
+.kpi.gold::before{background:linear-gradient(90deg,var(--gold),#f0c55d);}
+.kpi.rose::before{background:linear-gradient(90deg,var(--rose),#ff87a0);}
+
+.kpi .label{
+  font-size:6.5pt;
+  text-transform:uppercase;
+  letter-spacing:.13em;
+  color:var(--muted);
+  margin-bottom:2mm;
+}
+
+.kpi .value{
+  font-size:15.5pt;
+  font-weight:800;
+  letter-spacing:-.02em;
+  line-height:1.05;
+  margin-bottom:1mm;
+}
+
+.kpi .note{
+  font-size:6.7pt;
+  color:var(--muted);
+}
+
+.hero{
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:6mm;
+  margin-top:2mm;
+  align-items:start;
+}
+
+.hero-card{
+  border:1px solid var(--line);
+  border-radius:4mm;
+  background:linear-gradient(180deg,#ffffff 0%,#fbfcfe 100%);
+  padding:5mm;
+  box-shadow:0 10px 24px rgba(22,32,51,.05);
+}
+
+.hero-panel{
+  border-radius:4mm;
+  padding:5mm;
+  background:
+    linear-gradient(135deg, rgba(54,88,255,.10), rgba(14,159,142,.07)),
+    #ffffff;
+  border:1px solid rgba(54,88,255,.13);
+  position:relative;
+  overflow:hidden;
+}
+
+.hero-panel::after{
+  content:'';
+  position:absolute;
+  width:32mm;
+  height:32mm;
+  right:-10mm;
+  top:-10mm;
+  background:radial-gradient(circle, rgba(54,88,255,.16), rgba(54,88,255,0) 68%);
+}
+
+.stat-stack{
+  display:grid;
+  gap:2.5mm;
+}
+
+.stat{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:4mm;
+  border-bottom:1px dashed rgba(95,111,134,.25);
+  padding-bottom:1.8mm;
+}
+
+.stat:last-child{border-bottom:none;padding-bottom:0;}
+
+.stat .s-l{
+  font-size:7pt;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  color:var(--muted);
+}
+
+.stat .s-v{
+  font-size:9.5pt;
+  font-weight:800;
+  text-align:right;
+}
+
+.note-box{
+  border:1px solid rgba(54,88,255,.16);
+  background:linear-gradient(180deg,#f8faff 0%,#eef3ff 100%);
+  border-radius:3.5mm;
+  padding:4mm 4.5mm;
+  margin-top:4mm;
+}
+
+.note-box .label{
+  font-size:7pt;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  font-weight:800;
+  color:#2d48c8;
+  margin-bottom:1.5mm;
+}
+
+.note-box p{
+  font-size:9pt;
+  color:var(--ink);
+}
+
+.section{
+  margin-bottom:3.2mm;
+}
+
+.section-head{
+  display:flex;
+  align-items:center;
+  gap:3mm;
+  margin-bottom:3mm;
+}
+
+.section-head .num{
+  width:16px;
+  height:16px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:var(--ink);
+  color:#fff;
+  font-size:6.5pt;
+  font-weight:800;
+  flex:0 0 auto;
+}
+
+.section-head .line{
+  flex:1;
+  height:1px;
+  background:var(--line);
+}
+
+.section-head .heading{
+  font-size:9.5pt;
+  font-weight:800;
+  letter-spacing:.02em;
+  color:var(--ink);
+  white-space:nowrap;
+}
+
+.campaign{
+  border:1px solid var(--line);
+  border-radius:4mm;
+  background:#fff;
+  overflow:hidden;
+  box-shadow:0 10px 22px rgba(22,32,51,.04);
+}
+
+.campaign .top{
+  padding:3.2mm 3.5mm 2.5mm;
+  display:flex;
+  justify-content:space-between;
+  gap:4mm;
+  border-bottom:1px solid var(--soft);
+}
+
+.campaign .name{
+  font-size:11pt;
+  font-weight:800;
+  letter-spacing:-.015em;
+  margin-bottom:1.2mm;
+}
+
+.campaign .desc{
+  font-size:8.3pt;
+  color:var(--muted);
+}
+
+.budget-chip{
+  align-self:flex-start;
+  padding:1.2mm 2.4mm;
+  border-radius:999px;
+  font-size:6.8pt;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  white-space:nowrap;
+}
+
+.budget-chip.blue{background:var(--blue-soft);color:#2741bf;}
+.budget-chip.teal{background:var(--teal-soft);color:#0f7f73;}
+.budget-chip.gold{background:var(--gold-soft);color:#986f10;}
+
+.campaign .body{
+  padding:3.2mm 3.5mm 3.5mm;
+}
+
+.metric-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:1.6mm;
+}
+
+.metric{
+  border-radius:2.5mm;
+  padding:2.2mm;
+  background:#fbfcfe;
+  border:1px solid rgba(215,224,235,.8);
+  min-height:22mm;
+}
+
+.metric .m-l{
+  font-size:6pt;
+  text-transform:uppercase;
+  letter-spacing:.11em;
+  color:var(--muted);
+  margin-bottom:1mm;
+}
+
+.metric .m-v{
+  font-size:8.7pt;
+  font-weight:800;
+  line-height:1.15;
+}
+
+.metric .m-s{
+  font-size:6.1pt;
+  color:var(--muted);
+  margin-top:.8mm;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  table-layout:fixed;
+  font-size:7pt;
+}
+
+thead th{
+  background:#f7f9fc;
+  border-bottom:1px solid var(--line);
+  color:var(--muted);
+  font-size:6pt;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  padding:2.2mm 2mm;
+  text-align:left;
+}
+
+tbody td{
+  border-bottom:1px solid rgba(215,224,235,.65);
+  padding:2.1mm 2mm;
+  vertical-align:top;
+}
+
+tbody tr:last-child td{
+  border-bottom:none;
+}
+
+.right{text-align:right;}
+.center{text-align:center;}
+
+.summary-band{
+  border-radius:4mm;
+  padding:5mm;
+  background:linear-gradient(135deg, rgba(54,88,255,.11), rgba(14,159,142,.08));
+  border:1px solid rgba(54,88,255,.13);
+}
+
+.summary-band .title{
+  font-size:9pt;
+  font-weight:800;
+  margin-bottom:1.5mm;
+}
+
+.summary-band p{
+  font-size:8.7pt;
+  color:var(--ink);
+}
+
+.insight{
+  border:1px solid var(--line);
+  border-radius:3.5mm;
+  padding:4mm;
+  background:#fff;
+}
+
+.insight .tag{
+  font-size:6.5pt;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  font-weight:800;
+  margin-bottom:1.5mm;
+}
+
+.insight.blue .tag{color:#2d48c8;}
+.insight.teal .tag{color:#0f7f73;}
+.insight.gold .tag{color:#987011;}
+
+.insight p{
+  font-size:8.6pt;
+  color:var(--muted);
+}
+
+.list{
+  list-style:none;
+  display:grid;
+  gap:2mm;
+}
+
+.list li{
+  position:relative;
+  padding-left:4mm;
+  font-size:8.6pt;
+  color:var(--muted);
+}
+
+.list li::before{
+  content:'';
+  position:absolute;
+  left:0;
+  top:2.2mm;
+  width:1.5mm;
+  height:1.5mm;
+  border-radius:50%;
+  background:var(--blue);
+}
+
+.foot{
+  margin-top:auto;
+  padding-top:3.5mm;
+  border-top:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  gap:4mm;
+  align-items:flex-end;
+  font-size:6.4pt;
+  color:var(--muted);
+}
+
+.foot strong{
+  color:var(--ink);
+}
+
+.page.cover{
+  background:
+    radial-gradient(circle at 82% 18%, rgba(54,88,255,.14), transparent 18%),
+    radial-gradient(circle at 16% 78%, rgba(14,159,142,.12), transparent 16%),
+    linear-gradient(180deg,#f8fbff 0%,#eef3fa 100%);
+}
+
+.page.cover .content{
+  padding:12mm 14mm 13mm;
+}
+
+.cover-logos{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:20mm;
+}
+
+.cover-logos .cluster{
+  display:flex;
+  align-items:center;
+  gap:4mm;
+}
+
+.cover-logos img{
+  display:block;
+  height:10mm;
+  width:auto;
+}
+
+.cover-logos .divider{
+  width:1px;
+  height:8mm;
+  background:var(--line);
+}
+
+.cover-hero{
+  max-width:170mm;
+  margin-top:10mm;
+}
+
+.cover-hero .eyebrow{
+  font-size:7.5pt;
+  text-transform:uppercase;
+  letter-spacing:.22em;
+  font-weight:800;
+  color:var(--blue);
+  margin-bottom:4mm;
+}
+
+.cover-hero h1{
+  max-width:165mm;
+}
+
+.cover-hero .sub{
+  max-width:150mm;
+  margin-bottom:8mm;
+}
+
+.cover-metas{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:4mm 6mm;
+  margin:10mm 0 8mm;
+  padding-top:5mm;
+  border-top:1px solid rgba(215,224,235,.9);
+}
+
+.meta .label{
+  font-size:6.3pt;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  color:var(--muted);
+  margin-bottom:1mm;
+}
+
+.meta .val{
+  font-size:9.5pt;
+  font-weight:800;
+}
+
+.cover-kpis{
+  margin-top:2mm;
+}
+
+.cover-kpis .kpi{
+  min-height:28mm;
+}
+
+.no-wrap{
+  white-space:nowrap;
+}
+
+.cover-aside{
+  margin-top:8mm;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:3mm;
+}
+
+.cover-aside .summary-band{
+  background:
+    linear-gradient(135deg, rgba(54,88,255,.13), rgba(14,159,142,.09)),
+    #fff;
+}
+
+.smallcap{
+  font-size:6.5pt;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  color:var(--muted);
+  font-weight:800;
+  margin-bottom:2mm;
+}
+
+@media print{
+  body{
+    background:#fff;
+    padding:0;
+  }
+  .page{
+    margin:0;
+    box-shadow:none;
+    border:none;
+  }
+}
+
+@media screen{
+  .page{
+    margin-bottom:18px;
+  }
+}
+</style>
+</head>
+<body>
+
+<section class="page cover">
+  <div class="content">
+    <div class="cover-logos">
+      <div class="cluster">
+        <img src="file:///Users/adrianracovita/Documents/Coding/rcolabs-crm/public/logo-negro.png" alt="RCOLABS">
+        <div class="divider"></div>
+        <img src="../public/logo.png" alt="TCSystems">
+      </div>
+      <div class="pill-row">
+        <span class="pill blue">Google Ads</span>
+        <span class="pill teal">TCSystems</span>
+        <span class="pill gold">Mes 1 cerrado</span>
+      </div>
+    </div>
+
+    <div class="cover-hero">
+      <div class="eyebrow">Informe de rendimiento del mes 1</div>
+      <h1>Rendimiento de campañas Google Ads para TCSystems</h1>
+      <p class="sub">Resumen en formato A4 del primer mes ya ejecutado para las campañas Search de lavanderías, gasolineras y kioscos, con foco en costes, volumen obtenido y lectura de resultados.</p>
+
+      <div class="cover-metas">
+        <div class="meta">
+          <div class="label">Cliente</div>
+          <div class="val">TCSystems</div>
+        </div>
+        <div class="meta">
+          <div class="label">Preparado por</div>
+          <div class="val">RCOLABS</div>
+        </div>
+        <div class="meta">
+          <div class="label">Periodo</div>
+          <div class="val">Mes 1 cerrado</div>
+        </div>
+        <div class="meta">
+          <div class="label">Canal</div>
+          <div class="val">Google Ads Search</div>
+        </div>
+        <div class="meta">
+          <div class="label">Periodo de referencia</div>
+          <div class="val">Rendimiento observado</div>
+        </div>
+        <div class="meta">
+          <div class="label">Documento</div>
+          <div class="val">Informe comercial A4</div>
+        </div>
+      </div>
+
+      <div class="cover-kpis grid-4">
+        <div class="kpi blue">
+          <div class="label">Inversión total gestionada</div>
+          <div class="value mono">700,00 €</div>
+          <div class="note">Presupuesto total ejecutado con el crédito de Google incluido.</div>
+        </div>
+        <div class="kpi teal">
+          <div class="label">Aporte real del cliente</div>
+          <div class="value mono">300,00 €</div>
+          <div class="note">Importe que TCSystems aporta para el siguiente ciclo.</div>
+        </div>
+        <div class="kpi gold">
+          <div class="label">Crédito Google</div>
+          <div class="value mono">400,00 €</div>
+          <div class="note">Crédito ya aplicado al presupuesto del mes.</div>
+        </div>
+        <div class="kpi rose">
+          <div class="label">CTR global</div>
+          <div class="value mono">2,35%</div>
+          <div class="note">197 clics sobre 8.400 impresiones.</div>
+        </div>
+      </div>
+
+      <div class="cover-aside">
+        <div class="summary-band">
+          <div class="title">Mensaje principal</div>
+            <p>Search Lavanderías lideró el rendimiento, Gasolineras aportó estabilidad con ayuda del caso de éxito de Ballenoil y Kioscos fue la campaña más competitiva, con CPC superior pero necesaria para ganar visibilidad en la categoría.</p>
+        </div>
+        <div class="note-box">
+          <div class="label">Nota financiera clave</div>
+          <p>Ya hemos obtenido el crédito promocional de Google por <strong>400,00 €</strong>. Por tanto, la inversión de TCSystems para el mes 2 es de <strong>300,00 €</strong>, mientras el presupuesto total operado seguirá siendo de <strong>700,00 €</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page">
+  <div class="content">
+    <div class="header">
+      <div class="brand-row">
+        <img src="file:///Users/adrianracovita/Documents/Coding/rcolabs-crm/public/logo-negro.png" alt="RCOLABS">
+        <div class="brand-divider"></div>
+        <img src="../public/logo.png" alt="TCSystems">
+      </div>
+      <div class="doc-meta">
+        <div class="kind">Google Ads · Resumen de inversión</div>
+        <div class="title">Campañas Search y resultado real</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <span class="num">1</span>
+        <span class="heading">Mix de inversión y lectura inicial</span>
+        <div class="line"></div>
+      </div>
+
+      <div class="grid-3">
+        <article class="campaign">
+          <div class="top">
+            <div>
+              <div class="name">Search Lavanderías</div>
+              <div class="desc">40% de inversión. Fue la campaña con mejor rendimiento de las tres, gracias a una intención de búsqueda más concreta y una respuesta más rápida.</div>
+            </div>
+            <div class="budget-chip blue">280,00 €</div>
+          </div>
+          <div class="body">
+            <div class="metric-grid">
+              <div class="metric">
+                <div class="m-l">CPC medio</div>
+                <div class="m-v mono">3,22 €</div>
+                <div class="m-s">Coste medio real del mes.</div>
+              </div>
+              <div class="metric">
+                <div class="m-l">Clics</div>
+                <div class="m-v mono">87</div>
+                <div class="m-s">Mayor volumen de clics.</div>
+              </div>
+              <div class="metric">
+                <div class="m-l">CTR</div>
+                <div class="m-v mono">2,76%</div>
+                <div class="m-s">Mejor CTR del conjunto.</div>
+              </div>
+              <div class="metric">
+                <div class="m-l">Peso inversión</div>
+                <div class="m-v mono">40%</div>
+                <div class="m-s">280,00 € sobre el total mensual.</div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="campaign">
+          <div class="top">
+            <div>
+              <div class="name">Search Gasolineras</div>
+              <div class="desc">30% de inversión. Mercado B2B industrial específico, con menos búsquedas que la primera campaña pero con un rendimiento sólido.</div>
+            </div>
+            <div class="budget-chip teal">210,00 €</div>
+          </div>
+          <div class="body">
+            <div class="metric-grid">
+              <div class="metric">
+                <div class="m-l">CPC medio</div>
+                <div class="m-v mono">3,50 €</div>
+                <div class="m-s">Coste medio real del mes.</div>
+              </div>
+              <div class="metric">
+                <div class="m-l">Clics</div>
+                <div class="m-v mono">60</div>
+                <div class="m-s">Segundo mayor volumen.</div>
+              </div>
+              <div class="metric">
+                <div class="m-l">CTR</div>
+                <div class="m-v mono">2,18%</div>
+                <div class="m-s">Rendimiento estable dentro del nicho.</div>
+              </div>
+              <div class="metric">
+                <div class="m-l">Peso inversión</div>
+                <div class="m-v mono">30%</div>
+                <div class="m-s">210,00 € sobre el total mensual.</div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="campaign">
+          <div class="top">
+            <div>
+              <div class="name">Search Kioscos</div>
+              <div class="desc">30% de inversión. Fue la campaña más competitiva, con CPC más alto como peaje necesario para ganar visibilidad.</div>
+            </div>
+            <div class="budget-chip gold">210,00 €</div>
+          </div>
+          <div class="body">
+            <div class="metric-grid">
+              <div class="metric">
+                <div class="m-l">CPC medio</div>
+                <div class="m-v mono">4,20 €</div>
+                <div class="m-s">Coste medio real del mes.</div>
+              </div>
+              <div class="metric">
+                <div class="m-l">Clics</div>
+                <div class="m-v mono">50</div>
+                <div class="m-s">Menor volumen, pero consistente.</div>
+              </div>
+              <div class="metric">
+                <div class="m-l">CTR</div>
+                <div class="m-v mono">2,00%</div>
+                <div class="m-s">La menor de las tres campañas.</div>
+              </div>
+              <div class="metric">
+                <div class="m-l">Peso inversión</div>
+                <div class="m-v mono">30%</div>
+                <div class="m-s">210,00 € sobre el total mensual.</div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <span class="num">2</span>
+        <span class="heading">Tabla comparativa de campañas</span>
+        <div class="line"></div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Campaña</th>
+            <th class="right">Presupuesto</th>
+            <th class="right">CPC medio</th>
+            <th class="right">Clics</th>
+            <th class="right">CTR</th>
+            <th class="right">Peso</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Search Lavanderías</strong><br><span style="color:var(--muted);font-size:6.7pt;">Mejor rendimiento del mes.</span></td>
+            <td class="right mono">280,00 €</td>
+            <td class="right mono">3,22 €</td>
+            <td class="right mono">87</td>
+            <td class="right mono">2,76%</td>
+            <td class="right mono">40%</td>
+          </tr>
+          <tr>
+            <td><strong>Search Gasolineras</strong><br><span style="color:var(--muted);font-size:6.7pt;">Nicho B2B industrial con apoyo reputacional.</span></td>
+            <td class="right mono">210,00 €</td>
+            <td class="right mono">3,50 €</td>
+            <td class="right mono">60</td>
+            <td class="right mono">2,18%</td>
+            <td class="right mono">30%</td>
+          </tr>
+          <tr>
+            <td><strong>Search Kioscos</strong><br><span style="color:var(--muted);font-size:6.7pt;">Mayor competencia y CPC más alto.</span></td>
+            <td class="right mono">210,00 €</td>
+            <td class="right mono">4,20 €</td>
+            <td class="right mono">50</td>
+            <td class="right mono">2,00%</td>
+            <td class="right mono">30%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="foot">
+      <div><strong>RCOLABS</strong> · TCSystems · Google Ads · Informe de rendimiento · Mes 1</div>
+      <div>Página 2 de 3</div>
+    </div>
+  </div>
+</section>
+
+<section class="page">
+  <div class="content">
+    <div class="header">
+      <div class="brand-row">
+        <img src="file:///Users/adrianracovita/Documents/Coding/rcolabs-crm/public/logo-negro.png" alt="RCOLABS">
+        <div class="brand-divider"></div>
+        <img src="../public/logo.png" alt="TCSystems">
+      </div>
+      <div class="doc-meta">
+        <div class="kind">Google Ads · Lectura estratégica</div>
+        <div class="title">Resumen global y próximos pasos</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <span class="num">3</span>
+        <span class="heading">Resumen global del mes 1</span>
+        <div class="line"></div>
+      </div>
+
+      <div class="summary-band">
+        <div class="title">Si sumamos las tres campañas, la cuenta cerró con una base clara y medible</div>
+        <p>El mes cerró con <strong>700,00 €</strong> de coste total, <strong>197 clics</strong>, <strong>8.400 impresiones</strong> y un <strong>CPC medio de 3,55 €</strong>. El crédito promocional de Google de <strong>400,00 €</strong> se aplicará en la próxima factura, dejando un desembolso neto de <strong>300,00 €</strong>.</p>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="insight blue">
+        <div class="tag">Campaña más fuerte</div>
+        <p><strong>Search Lavanderías</strong> lideró el rendimiento con <strong>87 clics</strong> y <strong>2,76%</strong> de CTR. Fue la campaña que absorbió el mayor volumen y la respuesta más eficiente.</p>
+      </div>
+      <div class="insight teal">
+        <div class="tag">Campaña más estable</div>
+        <p><strong>Search Gasolineras</strong> registró <strong>60 clics</strong> y <strong>2,18%</strong> de CTR, quedando como una línea estable y consistente dentro del nicho industrial.</p>
+      </div>
+    </div>
+
+    <div style="height:3mm"></div>
+
+    <div class="grid-2">
+      <div class="insight gold">
+        <div class="tag">Campaña más exigente</div>
+        <p><strong>Search Kioscos</strong> fue la más exigente, con <strong>50 clics</strong> y <strong>2,00%</strong> de CTR. El CPC más alto fue el coste de entrada para ganar visibilidad en la categoría.</p>
+      </div>
+      <div class="insight blue">
+        <div class="tag">Interpretación económica</div>
+        <p>La cuenta quedó coherente con lo observado: mayor eficiencia en la campaña de alta intención, estabilidad en la vertical industrial y una tercera línea más competitiva pero útil para posicionamiento.</p>
+      </div>
+    </div>
+
+    <div class="section" style="margin-top:4mm;">
+      <div class="section-head">
+        <span class="num">4</span>
+        <span class="heading">Palabras clave y cuenta</span>
+        <div class="line"></div>
+      </div>
+
+      <div class="grid-2-even">
+        <div class="hero-card">
+          <h3>Palabras clave destacadas</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Keyword</th>
+                <th class="right">Coste</th>
+                <th class="right">Clics</th>
+                <th class="right">CTR</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>"terminal pago automático gasolinera"</td>
+                <td class="right mono">113,50 €</td>
+                <td class="right mono">42</td>
+                <td class="right mono">2,34%</td>
+              </tr>
+              <tr>
+                <td>[terminal pago automático gasolinera]</td>
+                <td class="right mono">120,17 €</td>
+                <td class="right mono">38</td>
+                <td class="right mono">2,33%</td>
+              </tr>
+              <tr>
+                <td>"pago desatendido eess"</td>
+                <td class="right mono">160,61 €</td>
+                <td class="right mono">47</td>
+                <td class="right mono">2,34%</td>
+              </tr>
+              <tr>
+                <td>"kiosco túnel lavado coches"</td>
+                <td class="right mono">149,82 €</td>
+                <td class="right mono">37</td>
+                <td class="right mono">2,34%</td>
+              </tr>
+              <tr>
+                <td>[kiosco túnel lavado coches]</td>
+                <td class="right mono">155,91 €</td>
+                <td class="right mono">33</td>
+                <td class="right mono">2,32%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="hero-panel">
+          <h3>Estado de cuenta</h3>
+          <div class="stat-stack">
+            <div class="stat">
+              <div class="s-l">Crédito promocional conseguido</div>
+              <div class="s-v mono">400,00 €</div>
+            </div>
+            <div class="stat">
+              <div class="s-l">Saldo a fecha 12 jun 2026</div>
+              <div class="s-v mono">0,00 €</div>
+            </div>
+            <div class="stat">
+              <div class="s-l">Próximo pago automático</div>
+              <div class="s-v mono">No programado</div>
+            </div>
+            <div class="stat">
+              <div class="s-l">Campañas activas</div>
+              <div class="s-v mono">3</div>
+            </div>
+            <div class="stat">
+              <div class="s-l">Inversión total mes 1</div>
+              <div class="s-v mono">700,00 €</div>
+            </div>
+            <div class="stat">
+              <div class="s-l">Aportación neta de TCSystems</div>
+              <div class="s-v mono">300,00 €</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-box" style="margin-top:auto;">
+      <div class="label">Cierre ejecutivo</div>
+      <p>El mes 1 cerró con datos sólidos y un crédito promocional ya conseguido de <strong>400,00 €</strong>, lo que deja una aportación neta de <strong>300,00 €</strong> para TCSystems sobre un total mensual de <strong>700,00 €</strong>.</p>
+    </div>
+
+    <div class="foot">
+      <div><strong>RCOLABS</strong> · TCSystems · Informe Google Ads · Rendimiento real Mes 1</div>
+      <div>Página 3 de 3</div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

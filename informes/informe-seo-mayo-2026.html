@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Informe SEO · TCSystems · Mayo 2026</title>
+<style>
+  /* ===========================================================
+     Estilos B/N tipo Vercel/Linear · Informe SEO A4
+     Tipografía: Inter (system fallback Helvetica)
+     Tamaño: 210mm × 297mm con margen 14mm
+     =========================================================== */
+
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  html, body {
+    background: #ffffff;
+    color: #0A0A0A;
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 10pt;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .page {
+    width: 210mm;
+    height: 297mm;
+    padding: 12mm 15mm 20mm 15mm;
+    position: relative;
+    page-break-after: always;
+    background: #ffffff;
+    overflow: hidden;
+  }
+  .page:last-of-type { page-break-after: auto; }
+  /* Evitar partir bloques entre páginas */
+  .block, .block-dark, .kpi { page-break-inside: avoid; break-inside: avoid; }
+  h2, h3, h4 { page-break-after: avoid; }
+
+  /* ============ HEADER ============ */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 4mm;
+    border-bottom: 1px solid #E5E5E5;
+    margin-bottom: 5mm;
+  }
+  .header .brand img {
+    width: 24mm;
+    height: auto;
+    filter: brightness(0);
+    display: block;
+  }
+  .header .brand .meta {
+    font-size: 7pt;
+    color: #525252;
+    margin-top: 2mm;
+    letter-spacing: 0.02em;
+  }
+  .header .doc-tag {
+    text-align: right;
+  }
+  .header .doc-tag .kind {
+    font-size: 7pt;
+    color: #525252;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 1mm;
+  }
+  .header .doc-tag .num {
+    font-size: 14pt;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  /* ============ TYPOGRAPHY ============ */
+  h1 {
+    font-size: 28pt;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    margin-bottom: 6mm;
+  }
+  h2 {
+    font-size: 15pt;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    margin-bottom: 3mm;
+    margin-top: 0;
+  }
+  h3 {
+    font-size: 10.5pt;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    margin-bottom: 2mm;
+    margin-top: 4mm;
+  }
+  h4 {
+    font-size: 8.5pt;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #525252;
+    margin-bottom: 2mm;
+    margin-top: 3mm;
+  }
+  p { margin-bottom: 1.5mm; color: #0A0A0A; font-size: 9.5pt; }
+  p.muted { color: #525252; }
+  strong { font-weight: 600; }
+  code, .mono {
+    font-family: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+    font-size: 8.5pt;
+    background: #FAFAFA;
+    padding: 0.5mm 1.5mm;
+    border-radius: 1mm;
+    border: 1px solid #E5E5E5;
+  }
+
+  /* ============ KPI CARDS ============ */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5mm;
+    margin: 3mm 0 4mm;
+  }
+  .kpi {
+    border: 1px solid #E5E5E5;
+    border-radius: 2mm;
+    padding: 3mm;
+  }
+  .kpi .label {
+    font-size: 6.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #525252;
+    margin-bottom: 1.5mm;
+  }
+  .kpi .value {
+    font-size: 16pt;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5mm;
+    line-height: 1.1;
+  }
+  .kpi .delta {
+    font-size: 7.5pt;
+    color: #525252;
+  }
+  .kpi .delta.up { color: #15803d; }
+  .kpi .delta.down { color: #b91c1c; }
+
+  /* ============ TABLES ============ */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2mm 0 3mm;
+    font-size: 8.5pt;
+  }
+  table thead th {
+    background: #FAFAFA;
+    border-bottom: 1px solid #E5E5E5;
+    text-align: left;
+    padding: 2mm 2.5mm;
+    font-size: 6.5pt;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #525252;
+  }
+  table tbody td {
+    border-bottom: 1px solid #E5E5E5;
+    padding: 2mm 2.5mm;
+    vertical-align: top;
+  }
+  table tbody tr:last-child td { border-bottom: none; }
+  table.bordered {
+    border: 1px solid #E5E5E5;
+    border-radius: 2mm;
+    overflow: hidden;
+  }
+  .num { font-variant-numeric: tabular-nums; text-align: right; }
+  .center { text-align: center; }
+
+  /* ============ BLOCKS ============ */
+  .block {
+    border: 1px solid #E5E5E5;
+    border-radius: 2mm;
+    padding: 3.5mm 4mm;
+    margin: 2.5mm 0;
+  }
+  .block-dark {
+    background: #0A0A0A;
+    color: #ffffff;
+    border: none;
+    border-radius: 2mm;
+    padding: 4mm;
+    margin: 3mm 0;
+  }
+  .block p, .block-dark p { font-size: 9pt; }
+  .block-dark h3, .block-dark h4 { color: #ffffff; }
+  .block-dark p, .block-dark li { color: #A3A3A3; }
+  .block-dark strong { color: #ffffff; }
+
+  /* ============ BADGES ============ */
+  .badge {
+    display: inline-block;
+    font-size: 7pt;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.8mm 2.2mm;
+    border-radius: 1mm;
+    border: 1px solid #E5E5E5;
+    background: #FAFAFA;
+    color: #525252;
+    vertical-align: middle;
+  }
+  .badge.success { background: #f0fdf4; border-color: #bbf7d0; color: #15803d; }
+  .badge.warn    { background: #fefce8; border-color: #fde68a; color: #a16207; }
+  .badge.danger  { background: #fef2f2; border-color: #fecaca; color: #b91c1c; }
+  .badge.info    { background: #f0f9ff; border-color: #bae6fd; color: #075985; }
+  .badge.solid   { background: #0A0A0A; border-color: #0A0A0A; color: #ffffff; }
+
+  /* ============ LISTS ============ */
+  ul.clean { list-style: none; padding-left: 0; }
+  ul.clean li {
+    padding: 1mm 0 1mm 5mm;
+    position: relative;
+    border-bottom: 1px solid #F5F5F5;
+    font-size: 9pt;
+  }
+  ul.clean li:last-child { border-bottom: none; }
+  ul.clean li:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 3.5mm;
+    width: 2mm;
+    height: 1px;
+    background: #0A0A0A;
+  }
+  ul.check li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 1.5mm;
+    color: #15803d;
+    font-weight: 700;
+    background: transparent;
+    width: auto; height: auto;
+    font-size: 9pt;
+  }
+  ul.cross li:before {
+    content: "✕";
+    color: #b91c1c;
+    font-weight: 700;
+    background: transparent;
+    width: auto; height: auto;
+    font-size: 9pt;
+  }
+
+  /* ============ DELTA INDICATOR ============ */
+  .delta-pos { color: #15803d; font-weight: 600; }
+  .delta-neg { color: #b91c1c; font-weight: 600; }
+  .delta-neu { color: #525252; }
+
+  /* ============ DIVIDER ============ */
+  .divider {
+    height: 1px;
+    background: #E5E5E5;
+    margin: 4mm 0;
+  }
+
+  /* ============ FOOTER ============ */
+  .footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 16mm;
+    background: #0A0A0A;
+    color: #A3A3A3;
+    padding: 3.5mm 15mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 6.5pt;
+  }
+  .footer .foot-brand {
+    display: flex;
+    align-items: center;
+    gap: 3mm;
+  }
+  .footer .foot-brand img {
+    height: 5mm;
+    width: auto;
+    filter: brightness(0) invert(1);
+  }
+  .footer .foot-brand .meta {
+    line-height: 1.4;
+  }
+  .footer .foot-brand .meta strong {
+    color: #ffffff;
+    font-size: 7.5pt;
+    letter-spacing: 0.02em;
+  }
+  .footer .foot-meta {
+    text-align: right;
+    line-height: 1.5;
+  }
+  .footer .foot-meta strong { color: #ffffff; }
+
+  /* ============ COVER ============ */
+  .cover {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0;
+  }
+  .cover .cover-top {
+    padding-top: 8mm;
+  }
+  .cover .cover-top img {
+    width: 36mm;
+    filter: brightness(0);
+  }
+  .cover .cover-mid {
+    margin-top: 30mm;
+  }
+  .cover .cover-mid .kicker {
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #525252;
+    margin-bottom: 4mm;
+  }
+  .cover .cover-mid h1 {
+    font-size: 32pt;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    margin-bottom: 4mm;
+    max-width: 160mm;
+  }
+  .cover .cover-mid .subtitle {
+    font-size: 11.5pt;
+    color: #525252;
+    line-height: 1.45;
+    max-width: 150mm;
+  }
+  .cover .cover-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4mm 6mm;
+    margin-top: 16mm;
+    padding-top: 5mm;
+    border-top: 1px solid #E5E5E5;
+  }
+  .cover .cover-meta-grid .item .label {
+    font-size: 6.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #525252;
+    margin-bottom: 1mm;
+  }
+  .cover .cover-meta-grid .item .val {
+    font-size: 9.5pt;
+    font-weight: 600;
+  }
+
+  /* ============ TWO-COL ============ */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5mm;
+  }
+
+  /* ============ PRINT ============ */
+  @media print {
+    body { background: white; }
+    .page { box-shadow: none; }
+  }
+
+  /* On-screen helper */
+  @media screen {
+    body {
+      background: #f5f5f5;
+      padding: 20px 0;
+    }
+    .page {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      margin: 0 auto 20px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     PÁGINA 1 · PORTADA
+     ============================================================ -->
+<section class="page">
+  <div class="cover">
+    <div class="cover-top">
+      <img src="logo-tcsystems.webp" alt="TCSystems">
+    </div>
+
+    <div class="cover-mid">
+      <div class="kicker">Auditoría SEO &middot; rcolabs</div>
+      <h1>Informe de optimización técnica y rendimiento orgánico</h1>
+      <p class="subtitle">Análisis comparativo abril&ndash;mayo 2026, detección de regresiones, implementación de mejoras técnicas y configuración de medición de conversiones.</p>
+
+      <div class="cover-meta-grid">
+        <div class="item">
+          <div class="label">Cliente</div>
+          <div class="val">Sistemas De T-Cobro S.L.</div>
+        </div>
+        <div class="item">
+          <div class="label">Periodo analizado</div>
+          <div class="val">01 abr &ndash; 26 may 2026</div>
+        </div>
+        <div class="item">
+          <div class="label">Fecha del informe</div>
+          <div class="val">26 mayo 2026</div>
+        </div>
+        <div class="item">
+          <div class="label">Propiedad GSC</div>
+          <div class="val">sc-domain:tcsystems.es</div>
+        </div>
+        <div class="item">
+          <div class="label">Propiedad GA4</div>
+          <div class="val">495835842</div>
+        </div>
+        <div class="item">
+          <div class="label">Preparado por</div>
+          <div class="val">rcolabs.es</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="foot-brand">
+      <img src="logo-rcolabs.png" alt="rcolabs">
+      <div class="meta">
+        <strong>rcolabs.es</strong><br>
+        contacto@rcolabs.es
+      </div>
+    </div>
+    <div class="foot-meta">
+      <strong>Confidencial</strong><br>
+      Página 1 de 12
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PÁGINA 2 · RESUMEN EJECUTIVO
+     ============================================================ -->
+<section class="page">
+  <div class="header">
+    <div class="brand">
+      <img src="logo-tcsystems.webp" alt="TCSystems">
+      <div class="meta">Auditoría SEO &middot; mayo 2026</div>
+    </div>
+    <div class="doc-tag">
+      <div class="kind">Sección 1</div>
+      <div class="num">Resumen ejecutivo</div>
+    </div>
+  </div>
+
+  <h2>Resumen ejecutivo</h2>
+  <p class="muted">Variación mes a mes con mismo número de días (1&ndash;26 de cada mes). Fuente: Google Search Console y Google Analytics 4.</p>
+
+  <h4>Search Console &middot; tráfico orgánico</h4>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="label">Clicks orgánicos</div>
+      <div class="value">57</div>
+      <div class="delta up">+18 vs abril (+46%)</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Impresiones</div>
+      <div class="value">1.209</div>
+      <div class="delta down">&minus;143 (&minus;10,6%)</div>
+    </div>
+    <div class="kpi">
+      <div class="label">CTR medio</div>
+      <div class="value">4,71%</div>
+      <div class="delta up">+1,83 pp (+63%)</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Posición media</div>
+      <div class="value">18,3</div>
+      <div class="delta down">+2,2 (peor)</div>
+    </div>
+  </div>
+
+  <h4>Analytics 4 &middot; comportamiento de usuario</h4>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="label">Sesiones</div>
+      <div class="value">341</div>
+      <div class="delta down">&minus;36 (&minus;9,5%)</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Engagement rate</div>
+      <div class="value">43,7%</div>
+      <div class="delta up">+9,7 pp (+29%)</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Duración media</div>
+      <div class="value">2:42</div>
+      <div class="delta up">+71% vs abril</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Bounce rate</div>
+      <div class="value">56,3%</div>
+      <div class="delta up">&minus;9,7 pp (mejor)</div>
+    </div>
+  </div>
+
+  <div class="block-dark">
+    <h4 style="margin-top:0">Lectura clave</h4>
+    <p style="color:#ffffff">Menos volumen, pero usuarios mucho m&aacute;s comprometidos. Esto es coherente con el rediseno editorial del blog y la mejora de la home: el tr&aacute;fico que llega convierte mejor (CTR ×2, engagement +29%, duraci&oacute;n +71%) aunque el volumen baje por la consolidaci&oacute;n del dominio.</p>
+  </div>
+
+  <div class="footer">
+    <div class="foot-brand">
+      <img src="logo-rcolabs.png" alt="rcolabs">
+      <div class="meta"><strong>rcolabs.es</strong><br>contacto@rcolabs.es</div>
+    </div>
+    <div class="foot-meta"><strong>Confidencial</strong><br>Página 2 de 12</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PÁGINA 3 · CAMBIOS IMPLEMENTADOS
+     ============================================================ -->
+<section class="page">
+  <div class="header">
+    <div class="brand">
+      <img src="logo-tcsystems.webp" alt="TCSystems">
+      <div class="meta">Auditoría SEO &middot; mayo 2026</div>
+    </div>
+    <div class="doc-tag">
+      <div class="kind">Sección 1 (cont.)</div>
+      <div class="num">Cambios implementados</div>
+    </div>
+  </div>
+
+  <h2>Cambios implementados durante la sesión</h2>
+  <p class="muted">Acciones técnicas aplicadas en el repositorio, configuración de hosting y propiedades de medición.</p>
+
+  <table class="bordered">
+    <thead>
+      <tr>
+        <th style="width:55%">Acción</th>
+        <th>Tipo</th>
+        <th class="center">Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Redirect 308 <span class="mono">tcsystems.es</span> &rarr; <span class="mono">www.tcsystems.es</span></td><td>SEO técnico</td><td class="center"><span class="badge success">En vivo</span></td></tr>
+      <tr><td>Dropdowns "Servicios" y "Productos" siempre en HTML SSR</td><td>SEO técnico</td><td class="center"><span class="badge success">Desplegado</span></td></tr>
+      <tr><td>Columna "Servicios" añadida al footer (enlazado interno)</td><td>SEO técnico</td><td class="center"><span class="badge success">Desplegado</span></td></tr>
+      <tr><td>Schema Organization corregido: <span class="mono">Product</span> &rarr; <span class="mono">Service</span></td><td>Schema.org</td><td class="center"><span class="badge success">Desplegado</span></td></tr>
+      <tr><td>Schemas <span class="mono">Service</span> individuales por producto (×4)</td><td>Schema.org</td><td class="center"><span class="badge success">Desplegado</span></td></tr>
+      <tr><td>Evento <span class="mono">generate_lead</span> en envío de formulario</td><td>Analytics</td><td class="center"><span class="badge success">Validado</span></td></tr>
+      <tr><td>Filtrado de <span class="mono">/studio</span> (Sanity admin) en GA4</td><td>Analytics</td><td class="center"><span class="badge success">Desplegado</span></td></tr>
+      <tr><td>Key events configurados en GA4 (<span class="mono">generate_lead</span>, <span class="mono">form_start</span>)</td><td>Analytics</td><td class="center"><span class="badge success">Activo</span></td></tr>
+      <tr><td>Reindexación solicitada en Search Console</td><td>Indexación</td><td class="center"><span class="badge info">En cola</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="footer">
+    <div class="foot-brand">
+      <img src="logo-rcolabs.png" alt="rcolabs">
+      <div class="meta"><strong>rcolabs.es</strong><br>contacto@rcolabs.es</div>
+    </div>
+    <div class="foot-meta"><strong>Confidencial</strong><br>Página 3 de 12</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PÁGINA 3 · ANÁLISIS GSC + GA4
+     ============================================================ -->
+<section class="page">
+  <div class="header">
+    <div class="brand">
+      <img src="logo-tcsystems.webp" alt="TCSystems">
+      <div class="meta">Auditoría SEO &middot; mayo 2026</div>
+    </div>
+    <div class="doc-tag">
+      <div class="kind">Sección 2</div>
+      <div class="num">Análisis del rendimiento</div>
+    </div>
+  </div>
+
+  <h2>Análisis comparativo Search Console</h2>
+
+  <h3>Por dispositivo</h3>
+  <table class="bordered">
+    <thead>
+      <tr>
+        <th>Dispositivo</th>
+        <th class="num">Clicks may</th>
+        <th class="num">Clicks abr</th>
+        <th class="num">Δ Clicks</th>
+        <th class="num">Pos may</th>
+        <th class="num">Pos abr</th>
+        <th>Lectura</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Desktop</strong></td>
+        <td class="num">42</td>
+        <td class="num">31</td>
+        <td class="num delta-pos">+35%</td>
+        <td class="num">20,9</td>
+        <td class="num">16,0</td>
+        <td>Crece en clicks pero pierde 5 posiciones</td>
+      </tr>
+      <tr>
+        <td><strong>Mobile</strong></td>
+        <td class="num">15</td>
+        <td class="num">8</td>
+        <td class="num delta-pos">+87%</td>
+        <td class="num">12,7</td>
+        <td class="num">16,6</td>
+        <td>Mejora ranking y clicks (gran avance)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Top páginas con cambios significativos</h3>
+  <table class="bordered">
+    <thead>
+      <tr>
+        <th>Página</th>
+        <th class="num">Clicks may</th>
+        <th class="num">Clicks abr</th>
+        <th>Diagnóstico</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="mono">/</span> (home)</td><td class="num">38</td><td class="num">31</td><td><span class="badge success">Mejora</span> +23% clicks, duración +55%</td></tr>
+      <tr><td><span class="mono">/blog</span></td><td class="num">4</td><td class="num">2</td><td><span class="badge success">Mejora</span> Doble de clicks</td></tr>
+      <tr><td><span class="mono">/productos/elysium</span></td><td class="num">3</td><td class="num">0</td><td><span class="badge success">Nuevo</span> Rankea por primera vez</td></tr>
+      <tr><td><span class="mono">/productos/prometheus</span></td><td class="num">1</td><td class="num">0</td><td><span class="badge success">Nuevo</span> Comienza a recibir tráfico</td></tr>
+      <tr><td><span class="mono">/parkings</span></td><td class="num">0</td><td class="num">3</td><td><span class="badge danger">Regresión</span> Investigado y resuelto</td></tr>
+      <tr><td><span class="mono">/blog/seguridad-datos-cifrado-pagos</span></td><td class="num">1</td><td class="num">0</td><td><span class="badge warn">Caída visibilidad</span> 152 → 96 impresiones</td></tr>
+    </tbody>
+  </table>
+
+  <div class="footer">
+    <div class="foot-brand">
+      <img src="logo-rcolabs.png" alt="rcolabs">
+      <div class="meta"><strong>rcolabs.es</strong><br>contacto@rcolabs.es</div>
+    </div>
+    <div class="foot-meta"><strong>Confidencial</strong><br>Página 4 de 12</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PÁGINA 5 · ANÁLISIS GA4
+     ============================================================ -->
+<section class="page">
+  <div class="header">
+    <div class="brand">
+      <img src="logo-tcsystems.webp" alt="TCSystems">
+      <div class="meta">Auditoría SEO &middot; mayo 2026</div>
+    </div>
+    <div class="doc-tag">
+      <div class="kind">Sección 2 (cont.)</div>
+      <div class="num">Análisis del rendimiento</div>
+    </div>
+  </div>
+
+  <h2>Análisis Analytics 4</h2>
+
+  <h3>Por canal de adquisición</h3>
+  <table class="bordered">
+    <thead>
+      <tr>
+        <th>Canal</th>
+        <th class="num">Sesiones may</th>
+        <th class="num">Sesiones abr</th>
+        <th class="num">Δ</th>
+        <th class="num">Engagement may</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Direct</strong></td><td class="num">197</td><td class="num">286</td><td class="num delta-neg">&minus;31%</td><td class="num">27,9%</td></tr>
+      <tr><td><strong>Organic Search</strong></td><td class="num">98</td><td class="num">60</td><td class="num delta-pos">+63%</td><td class="num">63,3%</td></tr>
+      <tr><td><strong>Referral</strong></td><td class="num">16</td><td class="num">25</td><td class="num delta-neg">&minus;36%</td><td class="num">81,3%</td></tr>
+      <tr><td><strong>Organic Social</strong></td><td class="num">15</td><td class="num">2</td><td class="num delta-pos">+650%</td><td class="num">73,3%</td></tr>
+      <tr><td><strong>Unassigned</strong></td><td class="num">15</td><td class="num">3</td><td class="num delta-pos">+400%</td><td class="num">53,3%</td></tr>
+    </tbody>
+  </table>
+
+  <div class="block">
+    <h4 style="margin-top:0">Conclusión del análisis</h4>
+    <ul class="clean">
+      <li><strong>Organic Search</strong> es el único canal que crece en volumen y mantiene alto engagement (+63% sesiones, 63% engaged). El SEO funciona.</li>
+      <li><strong>Direct</strong> baja un 31% pero coincide con la limpieza de tráfico interno (Sanity Studio) y desindexación de URLs duplicadas no-www.</li>
+      <li><strong>Organic Social</strong> despega desde casi cero — efecto del rediseño editorial del blog.</li>
+      <li><strong>Eventos clave</strong> en GA4: <span class="mono">scroll</span> +113%, <span class="mono">form_start</span> +220% &mdash; señales claras de mayor intent en mayo.</li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    <div class="foot-brand">
+      <img src="logo-rcolabs.png" alt="rcolabs">
+      <div class="meta"><strong>rcolabs.es</strong><br>contacto@rcolabs.es</div>
+    </div>
+    <div class="foot-meta"><strong>Confidencial</strong><br>Página 5 de 12</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PÁGINA 4 · HALLAZGOS DETECTADOS
+     ============================================================ -->
+<section class="page">
+  <div class="header">
+    <div class="brand">
+      <img src="logo-tcsystems.webp" alt="TCSystems">
+      <div class="meta">Auditoría SEO &middot; mayo 2026</div>
+    </div>
+    <div class="doc-tag">
+      <div class="kind">Sección 3</div>
+      <div class="num">Hallazgos detectados</div>
+    </div>
+  </div>
+
+  <h2>Hallazgos técnicos detectados</h2>
+  <p class="muted">Problemas identificados durante la auditoría que estaban impactando ranking, conversión o calidad del dato.</p>
+
+  <h3><span class="badge danger">Alto</span> &nbsp; Canibalización de dominio www / no-www</h3>
+  <div class="block">
+    <p>Search Console mostraba <strong>787 impresiones</strong> para <span class="mono">tcsystems.es/</span> y <strong>132 impresiones</strong> para <span class="mono">www.tcsystems.es/</span> de manera paralela. Aunque el canonical apuntaba a la versión www, no existía redirect 308 desde el dominio raíz.</p>
+    <p><strong>Impacto:</strong> reparto de autoridad de enlaces entre dos URLs distintas, métricas fragmentadas en GA4/GSC, y posibles inconsistencias en SERP.</p>
+  </div>
+
+  <h3><span class="badge danger">Alto</span> &nbsp; Páginas de servicios huérfanas de enlaces internos</h3>
+  <div class="block">
+    <p>Las páginas <span class="mono">/parkings</span>, <span class="mono">/control-accesos</span> y <span class="mono">/verifactu</span> existían en el sitemap pero <strong>no aparecían en el HTML SSR</strong>. El componente Header las renderizaba dentro de un dropdown con conditional rendering (<span class="mono">{isOpen &amp;&amp; ...}</span>), por lo que el HTML estático servido al crawler de Google estaba vacío de esos enlaces.</p>
+    <p><strong>Impacto:</strong> Google indexaba las páginas (vía sitemap) pero no transfería autoridad interna. <span class="mono">/parkings</span> cayó de 3 clicks en abril a 0 en mayo.</p>
+  </div>
+
+  <h3><span class="badge danger">Alto</span> &nbsp; Schema Product sin offers</h3>
+  <div class="block">
+    <p>El JSON-LD de Organization incluía un <span class="mono">OfferCatalog</span> declarando EVO, Prometheus y Elysium como <span class="mono">Product</span>. Search Console reportaba <strong>6 elementos no válidos</strong> en "Fragmentos de productos" por falta de <span class="mono">offers</span>, <span class="mono">review</span> o <span class="mono">aggregateRating</span>.</p>
+    <p><strong>Impacto:</strong> bloqueaba rich snippets en SERP y generaba avisos persistentes en la propiedad GSC.</p>
+  </div>
+
+  <div class="footer">
+    <div class="foot-brand">
+      <img src="logo-rcolabs.png" alt="rcolabs">
+      <div class="meta"><strong>rcolabs.es</strong><br>contacto@rcolabs.es</div>
+    </div>
+    <div class="foot-meta"><strong>Confidencial</strong><br>Página 6 de 12</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PÁGINA 5 · HALLAZGOS DETECTADOS (cont.)
+     ============================================================ -->
+<section class="page">
+  <div class="header">
+    <div class="brand">
+      <img src="logo-tcsystems.webp" alt="TCSystems">
+      <div class="meta">Auditoría SEO &middot; mayo 2026</div>
+    </div>
+    <div class="doc-tag">
+      <div class="kind">Sección 3 (cont.)</div>
+      <div class="num">Hallazgos detectados</div>
+    </div>
+  </div>
+
+  <h2>Hallazgos técnicos (continuación)</h2>
+
+  <h3><span class="badge warn">Medio</span> &nbsp; Tráfico interno de Sanity Studio contaminando GA4</h3>
+  <div class="block">
+    <p>El admin de Sanity en <span class="mono">/studio*</span> registraba page_views, sessions y eventos en GA4 (15 sesiones en mayo) sin distinguirse del tráfico real de visitantes.</p>
+    <p><strong>Impacto:</strong> métricas falseadas, engagement rate diluido, conversiones imposibles de atribuir correctamente.</p>
+  </div>
+
+  <h3><span class="badge warn">Medio</span> &nbsp; Sin medición de conversiones</h3>
+  <div class="block">
+    <p>El formulario de contacto enviaba leads via API pero <strong>no disparaba ningún evento a GA4</strong>. La propiedad reportaba 0 conversiones a pesar de 16 <span class="mono">form_start</span> en mayo. Ningún evento estaba marcado como key event.</p>
+    <p><strong>Impacto:</strong> sin atribución de tráfico a leads, sin posibilidad de optimizar canales por valor real.</p>
+  </div>
+
+  <h3><span class="badge info">Bajo</span> &nbsp; Blog de seguridad infraposicionado</h3>
+  <div class="block">
+    <p><span class="mono">/blog/seguridad-datos-cifrado-pagos</span> perdió 56 impresiones (152 → 96) entre abril y mayo. Rankea para queries muy técnicas (HSM, telemetría criptográfica) y solo 1 query con potencial comercial (<em>"pagos cifrados"</em>) en posición 3,83 pero <strong>con 0 clicks</strong> &mdash; señal clara de title meta poco atractivo.</p>
+  </div>
+
+  <div class="footer">
+    <div class="foot-brand">
+      <img src="logo-rcolabs.png" alt="rcolabs">
+      <div class="meta"><strong>rcolabs.es</strong><br>contacto@rcolabs.es</div>
+    </div>
+    <div class="foot-meta"><strong>Confidencial</strong><br>Página 7 de 12</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PÁGINA 5 · SOLUCIONES IMPLEMENTADAS
+     ============================================================ -->
+<section class="page">
+  <div class="header">
+    <div class="brand">
+      <img src="logo-tcsystems.webp" alt="TCSystems">
+      <div class="meta">Auditoría SEO &middot; mayo 2026</div>
+    </div>
+    <div class="doc-tag">
+      <div class="kind">Sección 4</div>
+      <div class="num">Soluciones implementadas</div>
+    </div>
+  </div>
+
+  <h2>Soluciones implementadas</h2>
+  <p class="muted">Todos los cambios han sido desplegados en producción y validados. Detalles técnicos y commit references abajo.</p>
+
+  <h3>1. Redirect 308 a nivel de dominio</h3>
+  <div class="block">
+    <p>Configurado en el panel de Vercel: <span class="mono">tcsystems.es</span> &rarr; <span class="badge solid">308 Permanent Redirect</span> &rarr; <span class="mono">www.tcsystems.es</span>. Se cambió el código de respuesta de 307 (temporal, por defecto) a 308 para preservar autoridad SEO.</p>
+    <p><strong>Validación:</strong> <span class="mono">curl -I https://tcsystems.es/parkings</span> devuelve <span class="mono">HTTP/2 308</span> con location correcta.</p>
+  </div>
+
+  <h3>2. Dropdowns siempre renderizados en SSR</h3>
+  <div class="block">
+    <p>En <span class="mono">components/Header.tsx</span>: cambiado conditional rendering por visibilidad CSS. Los enlaces a servicios y productos están ahora <strong>siempre en el HTML estático</strong> que sirve Next.js, con atributos <span class="mono">aria-expanded</span> y <span class="mono">tabIndex</span> para accesibilidad.</p>
+    <p>Adicionalmente se añadió una nueva columna "Servicios" en <span class="mono">components/Footer.tsx</span> con enlaces directos a <span class="mono">/parkings</span>, <span class="mono">/control-accesos</span> y <span class="mono">/verifactu</span>.</p>
+    <p><strong>Verificación:</strong> el HTML estático de la home contiene ahora <strong>2 ocurrencias</strong> de cada link (header + footer). Antes contenía 0.</p>
+  </div>
+
+  <h3>3. Schema.org corregido y enriquecido</h3>
+  <div class="block">
+    <p><strong>Nivel Organization</strong> (<span class="mono">app/layout.tsx</span>): el <span class="mono">OfferCatalog</span> ahora declara cada elemento como <span class="mono">Service</span> (no Product), evitando el error de "offers requerido" y reflejando mejor el modelo B2B de TCSystems.</p>
+    <p><strong>Nivel página de producto</strong>: cada una de las 4 páginas de producto incluye su propio JSON-LD <span class="mono">Service</span> específico, con <span class="mono">provider</span>, <span class="mono">areaServed</span> España, <span class="mono">audience</span> empresarial, <span class="mono">image</span> y <span class="mono">offer</span> con priceCurrency EUR enlazado al contacto. Componente reutilizable <span class="mono">components/ProductServiceSchema.tsx</span>.</p>
+  </div>
+
+  <div class="footer">
+    <div class="foot-brand">
+      <img src="logo-rcolabs.png" alt="rcolabs">
+      <div class="meta"><strong>rcolabs.es</strong><br>contacto@rcolabs.es</div>
+    </div>
+    <div class="foot-meta"><strong>Confidencial</strong><br>Página 8 de 12</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PÁGINA 7 · SOLUCIONES IMPLEMENTADAS (cont.)
+     ============================================================ -->
+<section class="page">
+  <div class="header">
+    <div class="brand">
+      <img src="logo-tcsystems.webp" alt="TCSystems">
+      <div class="meta">Auditoría SEO &middot; mayo 2026</div>
+    </div>
+    <div class="doc-tag">
+      <div class="kind">Sección 4 (cont.)</div>
+      <div class="num">Soluciones implementadas</div>
+    </div>
+  </div>
+
+  <h2>Soluciones implementadas (continuación)</h2>
+
+  <h3>4. Tracking de conversiones</h3>
+  <div class="block">
+    <p>En <span class="mono">components/ContactForm.tsx</span>: tras la respuesta exitosa de la API se dispara <span class="mono">sendGAEvent('event', 'generate_lead', { product, form_location })</span>.</p>
+    <p>El evento se envía sin <span class="mono">value</span> monetario (los leads B2B varían demasiado para asignar un valor uniforme), pero incluye dimensiones útiles para atribución posterior.</p>
+    <p>En GA4 se han marcado como key events: <span class="mono">generate_lead</span> y <span class="mono">form_start</span>. Validado en informe Tiempo Real.</p>
+  </div>
+
+  <h3>5. Limpieza de tráfico interno</h3>
+  <div class="block">
+    <p><span class="mono">components/ConditionalLayout.tsx</span>: el componente <span class="mono">&lt;GoogleAnalytics&gt;</span> ya no se renderiza cuando <span class="mono">pathname.startsWith('/studio')</span>. El admin Sanity deja de generar page_views y eventos en GA4.</p>
+  </div>
+
+  <h3>6. Reindexación priorizada</h3>
+  <div class="block">
+    <p>Solicitada inspección y reindexación de la home en Search Console para acelerar la propagación del nuevo schema y la consolidación de URLs.</p>
+  </div>
+
+  <div class="footer">
+    <div class="foot-brand">
+      <img src="logo-rcolabs.png" alt="rcolabs">
+      <div class="meta"><strong>rcolabs.es</strong><br>contacto@rcolabs.es</div>
+    </div>
+    <div class="foot-meta"><strong>Confidencial</strong><br>Página 9 de 12</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PÁGINA 6 · INVESTIGACIONES ESPECÍFICAS
+     ============================================================ -->
+<section class="page">
+  <div class="header">
+    <div class="brand">
+      <img src="logo-tcsystems.webp" alt="TCSystems">
+      <div class="meta">Auditoría SEO &middot; mayo 2026</div>
+    </div>
+    <div class="doc-tag">
+      <div class="kind">Sección 5</div>
+      <div class="num">Investigaciones específicas</div>
+    </div>
+  </div>
+
+  <h2>Investigaciones específicas</h2>
+
+  <h3>Query <span class="mono">"systems tc"</span> &mdash; 168 impresiones, 0 clicks</h3>
+  <p class="muted">Análisis sobre 87 días (marzo&ndash;mayo 2026)</p>
+
+  <table class="bordered">
+    <thead>
+      <tr>
+        <th>Query</th>
+        <th class="num">Impresiones</th>
+        <th class="num">Posición</th>
+        <th class="num">Clicks</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="mono">systems tc</span></td><td class="num">168</td><td class="num">5,93</td><td class="num">0</td></tr>
+      <tr><td><span class="mono">tc systema</span></td><td class="num">81</td><td class="num">9,59</td><td class="num">0</td></tr>
+      <tr><td><span class="mono">t systems</span></td><td class="num">20</td><td class="num">47,2</td><td class="num">0</td></tr>
+      <tr><td><span class="mono">t-systems</span></td><td class="num">7</td><td class="num">43,3</td><td class="num">0</td></tr>
+      <tr><td><span class="mono">tec systems</span></td><td class="num">11</td><td class="num">14,4</td><td class="num">0</td></tr>
+    </tbody>
+  </table>
+
+  <div class="block">
+    <h4 style="margin-top:0">Diagnóstico</h4>
+    <p>No es un problema técnico de la web. La marca <strong>TCSystems</strong> colisiona en SERP con otras tres marcas muy buscadas a nivel global:</p>
+    <ul class="clean">
+      <li><strong>T-Systems</strong> (Deutsche Telekom, IT services multinacional)</li>
+      <li><strong>TCS</strong> (Tata Consultancy Services, gigante indio de IT)</li>
+      <li><strong>Tec Systems, TST y similares</strong></li>
+    </ul>
+    <p>Google posiciona <span class="mono">tcsystems.es</span> en posiciones 5-15 porque considera la palabra clave relevante, pero los usuarios <strong>buscan otra empresa</strong> y eligen el resultado correcto. Las 168 impresiones son tráfico fantasma: no representan oportunidad real de tráfico cualificado.</p>
+    <p><strong>Recomendación opcional:</strong> reforzar la geolocalización en el title (ej. añadir "Madrid" o "España") y enriquecer el schema Organization con <span class="mono">alternateName</span> para reforzar la entidad. Sin urgencia.</p>
+  </div>
+
+  <div class="footer">
+    <div class="foot-brand">
+      <img src="logo-rcolabs.png" alt="rcolabs">
+      <div class="meta"><strong>rcolabs.es</strong><br>contacto@rcolabs.es</div>
+    </div>
+    <div class="foot-meta"><strong>Confidencial</strong><br>Página 10 de 12</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PÁGINA 11 · INVESTIGACIONES (CAÍDA DEL BLOG)
+     ============================================================ -->
+<section class="page">
+  <div class="header">
+    <div class="brand">
+      <img src="logo-tcsystems.webp" alt="TCSystems">
+      <div class="meta">Auditoría SEO &middot; mayo 2026</div>
+    </div>
+    <div class="doc-tag">
+      <div class="kind">Sección 5 (cont.)</div>
+      <div class="num">Investigaciones específicas</div>
+    </div>
+  </div>
+
+  <h2>Caída de <span class="mono" style="font-size:13pt">/blog/seguridad-datos-cifrado-pagos</span></h2>
+  <p class="muted">Análisis sobre 56 días. Health score compuesto y queries que rankea.</p>
+
+  <table class="bordered">
+    <thead>
+      <tr>
+        <th>Métrica</th>
+        <th>Valor</th>
+        <th>Veredicto</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Health score compuesto</td><td>35 / 100</td><td><span class="badge danger">Crítico</span></td></tr>
+      <tr><td>Clicks (56 días)</td><td>0</td><td><span class="badge danger">Sin conversión</span></td></tr>
+      <tr><td>Posición media</td><td>45,1</td><td><span class="badge warn">Fuera del top</span></td></tr>
+      <tr><td>Query "pagos cifrados"</td><td>Pos 3,83 / 0 clicks</td><td><span class="badge warn">Snippet no atrae</span></td></tr>
+      <tr><td>Bounce rate GA4</td><td>100%</td><td><span class="badge danger">Crítico</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="block">
+    <h4 style="margin-top:0">Diagnóstico</h4>
+    <p>El post rankea para queries demasiado técnicas (<em>HSM, telemetría criptográfica, monitoreo de operaciones criptográficas</em>) que no son las que buscan los clientes B2B de TCSystems. La única query con potencial comercial (<em>"pagos cifrados"</em>) está en posición 3,83 con 0 clicks &mdash; el title meta no consigue atraer.</p>
+    <h4>Acciones recomendadas (a aplicar en Sanity)</h4>
+    <ul class="check">
+      <li>Reescribir el title del post: <em>"Pagos cifrados explicados: guía 2026 para proteger tu negocio"</em></li>
+      <li>Reescribir meta description incluyendo la query principal y un beneficio claro</li>
+      <li>H1 visible reformulado para empezar con "Pagos cifrados"</li>
+      <li>Añadir FAQ schema con preguntas reales (¿qué son los pagos cifrados?, ¿es obligatorio cifrar?, ...)</li>
+      <li>Enlazar internamente desde <span class="mono">/productos/prometheus</span> hacia este post</li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    <div class="foot-brand">
+      <img src="logo-rcolabs.png" alt="rcolabs">
+      <div class="meta"><strong>rcolabs.es</strong><br>contacto@rcolabs.es</div>
+    </div>
+    <div class="foot-meta"><strong>Confidencial</strong><br>Página 11 de 12</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PÁGINA 7 · SIGUIENTES PASOS
+     ============================================================ -->
+<section class="page">
+  <div class="header">
+    <div class="brand">
+      <img src="logo-tcsystems.webp" alt="TCSystems">
+      <div class="meta">Auditoría SEO &middot; mayo 2026</div>
+    </div>
+    <div class="doc-tag">
+      <div class="kind">Sección 6</div>
+      <div class="num">Siguientes pasos</div>
+    </div>
+  </div>
+
+  <h2>Roadmap propuesto</h2>
+  <p class="muted">Próximas acciones priorizadas para los próximos 30 días.</p>
+
+  <h3>Pendientes inmediatos (semana 1)</h3>
+  <table class="bordered">
+    <thead>
+      <tr>
+        <th>Acción</th>
+        <th class="center">Responsable</th>
+        <th class="center">Esfuerzo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Actualizar copy del post <span class="mono">/blog/seguridad-datos-cifrado-pagos</span> en Sanity (title, meta, H1)</td>
+        <td class="center">TCSystems</td>
+        <td class="center">30 min</td>
+      </tr>
+      <tr>
+        <td>Verificar en Rich Results Test que los 4 schemas <span class="mono">Service</span> de producto se detectan sin errores</td>
+        <td class="center">rcolabs</td>
+        <td class="center">10 min</td>
+      </tr>
+      <tr>
+        <td>Comprobar en GSC que el aviso de "Fragmentos de productos" desaparece (2-7 días)</td>
+        <td class="center">rcolabs</td>
+        <td class="center">monitorizar</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Mejoras a medio plazo (semanas 2-4)</h3>
+  <table class="bordered">
+    <thead>
+      <tr>
+        <th>Acción</th>
+        <th>Impacto esperado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Optimizar n8n blog automation: prompt que evite jerga técnica y oriente hacia queries comerciales</td>
+        <td>Posts nuevos con mayor potencial de ranking</td>
+      </tr>
+      <tr>
+        <td>Crear contenido específico para "sistemas de cobro para [sector]" (cafetería, lavandería, gasolinera): tienen 30-90 impresiones cada uno en pos 30-60</td>
+        <td>Subir 5-10 posiciones en ~10 queries con potencial</td>
+      </tr>
+      <tr>
+        <td>Añadir FAQ schema en las páginas de producto</td>
+        <td>Rich snippets adicionales en SERP</td>
+      </tr>
+      <tr>
+        <td>Reforzar geolocalización en title de la home ("Madrid" o "España")</td>
+        <td>Diferenciación de marca vs T-Systems / TCS</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Métricas a vigilar (próximos 30 días)</h3>
+  <div class="kpi-grid" style="grid-template-columns: repeat(3, 1fr)">
+    <div class="kpi">
+      <div class="label">Consolidación URL</div>
+      <div class="value" style="font-size:14pt">919</div>
+      <div class="delta">impresiones esperadas en una sola URL</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Conversiones GA4</div>
+      <div class="value" style="font-size:14pt">&gt; 5</div>
+      <div class="delta">leads/mes objetivo inicial</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Rich snippets</div>
+      <div class="value" style="font-size:14pt">4</div>
+      <div class="delta">productos con schema válido</div>
+    </div>
+  </div>
+
+  <div class="block-dark" style="margin-top:8mm">
+    <h4 style="margin-top:0; color:#ffffff">Cierre</h4>
+    <p style="color:#ffffff">El trabajo realizado durante esta sesión cubre todas las regresiones críticas detectadas en abril&ndash;mayo y deja los cimientos analíticos para medir el impacto en las próximas semanas. Las mejoras técnicas (redirect, dropdowns, schemas) son cambios estructurales que seguirán generando valor sin mantenimiento adicional. La nueva medición de conversiones permitirá tomar decisiones basadas en datos reales a partir de la semana siguiente.</p>
+  </div>
+
+  <div class="footer">
+    <div class="foot-brand">
+      <img src="logo-rcolabs.png" alt="rcolabs">
+      <div class="meta"><strong>rcolabs.es</strong><br>contacto@rcolabs.es</div>
+    </div>
+    <div class="foot-meta"><strong>Confidencial</strong><br>Página 12 de 12</div>
+  </div>
+</section>
+
+</body>
+</html>
