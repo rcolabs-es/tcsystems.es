@@ -1,19 +1,49 @@
 'use client'
 
 import { sendGAEvent } from '@next/third-parties/google'
+import { leadSendTo, callSendTo, whatsappSendTo } from './googleAds'
+
+type Gtag = (...args: unknown[]) => void
+
+function getGtag(): Gtag | null {
+  if (typeof window === 'undefined') return null
+  const g = (window as unknown as { gtag?: Gtag }).gtag
+  return typeof g === 'function' ? g : null
+}
 
 /**
- * Dispara la conversión de un lead capturado en una landing de campaña.
- *
- * - GA4: evento `generate_lead` (siempre).
- * - Google Ads: evento `conversion` si están definidas las variables de entorno
- *   NEXT_PUBLIC_GOOGLE_ADS_ID (p. ej. "AW-123456789") y
- *   NEXT_PUBLIC_GOOGLE_ADS_LEAD_LABEL (la etiqueta de conversión de "envío de
- *   formulario de lead"). Si no están, no hace nada — sin errores.
- *
- * El tag de Google Ads se carga en <GoogleAdsTag /> (ver ConditionalLayout).
+ * Alimenta las Conversiones Mejoradas (Enhanced Conversions): pasa los datos del
+ * usuario en claro a gtag, que los normaliza y hashea (SHA-256) en el cliente
+ * antes de enviarlos. Mejora la atribución de los leads cerrados offline.
  */
-export function fireLeadConversion(meta: { product?: string; origin?: string }) {
+function setUserData(gtag: Gtag, user?: { email?: string; phone?: string }) {
+  if (!user) return
+  const data: Record<string, string> = {}
+  if (user.email) data.email = user.email.trim().toLowerCase()
+  if (user.phone) {
+    // Normaliza a E.164 básico (asume España si no trae prefijo)
+    const digits = user.phone.replace(/[^\d+]/g, '')
+    data.phone_number = digits.startsWith('+')
+      ? digits
+      : `+34${digits.replace(/^0+/, '')}`
+  }
+  if (Object.keys(data).length > 0) {
+    gtag('set', 'user_data', data)
+  }
+}
+
+/**
+ * Dispara la conversión de un lead capturado por formulario.
+ * - GA4: evento `generate_lead` (siempre).
+ * - Google Ads: evento `conversion` (solo si hay etiqueta en googleAds.ts).
+ * - Enhanced Conversions: envía email/teléfono hasheados si se proporcionan.
+ */
+export function fireLeadConversion(meta: {
+  product?: string
+  origin?: string
+  email?: string
+  phone?: string
+}) {
   try {
     sendGAEvent('event', 'generate_lead', {
       product: meta.product ?? 'general',
@@ -25,20 +55,35 @@ export function fireLeadConversion(meta: { product?: string; origin?: string }) 
     /* GA4 no disponible — no bloquea el flujo del formulario */
   }
 
-  const adsId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID
-  const leadLabel = process.env.NEXT_PUBLIC_GOOGLE_ADS_LEAD_LABEL
+  const gtag = getGtag()
+  if (gtag && leadSendTo) {
+    setUserData(gtag, { email: meta.email, phone: meta.phone })
+    gtag('event', 'conversion', { send_to: leadSendTo })
+  }
+}
 
-  if (
-    adsId &&
-    leadLabel &&
-    typeof window !== 'undefined' &&
-    typeof (window as unknown as { gtag?: (...a: unknown[]) => void }).gtag ===
-      'function'
-  ) {
-    ;(window as unknown as { gtag: (...a: unknown[]) => void }).gtag(
-      'event',
-      'conversion',
-      { send_to: `${adsId}/${leadLabel}` }
-    )
+/**
+ * Dispara la conversión de "Lead - Llamada" al pulsar un botón/enlace de llamar.
+ * No hace nada si no hay etiqueta de llamada configurada en googleAds.ts.
+ */
+export function firePhoneConversion() {
+  const gtag = getGtag()
+  if (gtag && callSendTo) {
+    gtag('event', 'conversion', {
+      send_to: callSendTo,
+      value: 1.0,
+      currency: 'EUR',
+    })
+  }
+}
+
+/**
+ * Dispara la conversión de "Lead - WhatsApp" al pulsar el botón de WhatsApp.
+ * No hace nada si no hay etiqueta de WhatsApp configurada en googleAds.ts.
+ */
+export function fireWhatsAppConversion() {
+  const gtag = getGtag()
+  if (gtag && whatsappSendTo) {
+    gtag('event', 'conversion', { send_to: whatsappSendTo })
   }
 }

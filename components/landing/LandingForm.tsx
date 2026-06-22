@@ -58,7 +58,12 @@ export default function LandingForm({
       const json = await res.json().catch(() => ({}))
       if (!res.ok) throw new Error(json.error || 'No se pudo enviar')
 
-      fireLeadConversion({ product: productName, origin })
+      fireLeadConversion({
+        product: productName,
+        origin,
+        email: data.email,
+        phone: data.phone,
+      })
       setDone(true)
     } catch (err) {
       setErrMsg(

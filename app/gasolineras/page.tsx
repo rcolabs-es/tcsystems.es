@@ -36,9 +36,9 @@ const config: LandingConfig = {
     { end: 5, label: 'delegaciones' },
   ],
   heroImage: {
-    src: '/T-Cobro Prometheus.webp',
-    alt: 'Terminal de cobro automático Prometheus para gasolineras',
-    modelLabel: 'Terminal · Prometheus',
+    src: '/elysium-plus.png',
+    alt: 'Terminal de cobro automático Elysium Plus para gasolineras',
+    modelLabel: 'Terminal · Elysium Plus',
   },
   productName: 'Gasolineras y Túnel de Lavado',
   origin: 'Landing Gasolineras (Google Ads)',
@@ -64,31 +64,32 @@ const config: LandingConfig = {
     },
     {
       num: '03',
-      title: 'Transacción lenta',
-      body: 'Expendedor de billetes de alta velocidad: la operación más rápida del mercado para no frenar el tráfico de tu estación.',
+      title: 'Cobro lento en hora punta',
+      body: 'Pantalla de 27" y cobro ágil por tarjeta, contactless o efectivo con devolución de cambio, para no frenar el tráfico de tu estación.',
     },
   ],
 
   product: {
-    eyebrowRight: 'Prometheus',
+    eyebrowRight: 'Elysium Plus',
     heading: (
       <>
-        Prometheus: velocidad extrema,{' '}
-        <span className="italic text-[#0e9acd]">efectivo y tarjeta.</span>
+        Elysium Plus: efectivo y tarjeta,{' '}
+        <span className="italic text-[#0e9acd]">con devolución de cambio.</span>
       </>
     ),
     media: {
-      type: 'image',
-      src: '/T-Cobro Prometheus.webp',
-      alt: 'Terminal de cobro automático Prometheus',
+      type: 'video',
+      src: '/videos/web/elysium-plus.mp4',
+      poster: '/videos/web/elysium-plus.jpg',
+      alt: 'Terminal de cobro automático Elysium Plus en funcionamiento',
     },
     specs: [
-      { title: 'Expendedor alta velocidad', sub: 'La transacción más rápida del mercado' },
-      { title: 'Efectivo + tarjeta + QR', sub: 'Admite y devuelve billetes y monedas' },
-      { title: 'Guía por voz', sub: 'Sistema de audio que acompaña al usuario' },
-      { title: 'Uso 24/7', sub: 'Mini PC industrial, diseño antivandálico' },
+      { title: 'Tarjeta · contactless · efectivo', sub: 'Cobra como pague tu cliente' },
+      { title: 'Devolución de cambio', sub: 'Admite y devuelve billetes y monedas' },
+      { title: 'Pantalla 27" · uso 24/7', sub: 'Operación ágil incluso en hora punta' },
+      { title: 'Fabricación propia', sub: 'Soporte y recambios desde España' },
     ],
-    fichaHref: '/productos/prometheus',
+    fichaHref: '/productos/elysium-plus',
   },
 
   caseStudy: {

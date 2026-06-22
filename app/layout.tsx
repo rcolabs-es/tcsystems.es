@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import ConditionalLayout from "@/components/ConditionalLayout";
+import { GOOGLE_ADS_ID } from "@/components/landing/googleAds";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -201,7 +202,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} bg-white dark:bg-zinc-950 text-gray-900 dark:text-white transition-colors duration-300`}>
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=AW-18233086137"
+          src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}`}
           strategy="afterInteractive"
         />
         <Script id="google-ads-gtag" strategy="afterInteractive">
@@ -209,7 +210,7 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'AW-18233086137');
+            gtag('config', '${GOOGLE_ADS_ID}');
           `}
         </Script>
         <ThemeProvider>

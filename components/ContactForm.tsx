@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Send, User, Mail, Phone, Building, Users, FileText } from 'lucide-react';
 import Link from 'next/link';
-import { sendGAEvent } from '@next/third-parties/google';
+import { fireLeadConversion } from './landing/conversion';
 
 interface ContactFormProps {
   productName?: string;
@@ -75,10 +75,11 @@ export default function ContactForm({ productName }: ContactFormProps) {
         throw new Error(result.error || 'Error al enviar el formulario');
       }
 
-      // Disparar evento generate_lead a GA4 (sin valor — los leads varían demasiado)
-      sendGAEvent('event', 'generate_lead', {
+      // GA4 generate_lead + conversión de Google Ads (+ enhanced conversions con email/teléfono)
+      fireLeadConversion({
         product: productName ?? 'general',
-        form_location: typeof window !== 'undefined' ? window.location.pathname : undefined,
+        email: formData.corporateEmail,
+        phone: formData.phone,
       });
 
       // Éxito - mostrar mensaje de confirmación
