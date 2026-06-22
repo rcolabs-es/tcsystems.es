@@ -25,8 +25,9 @@ export async function POST(request: NextRequest) {
       productName,
     } = body;
 
-    // Validar campos requeridos
-    if (!firstName || !lastName || !corporateEmail) {
+    // Validar campos requeridos (lastName es opcional: las landings usan un
+    // único campo "Nombre completo" que llega en firstName, sin apellidos)
+    if (!firstName || !corporateEmail) {
       return NextResponse.json(
         { error: 'Faltan campos obligatorios' },
         { status: 400 }
