@@ -66,6 +66,8 @@ export default function ContactForm({ productName }: ContactFormProps) {
           corporateEmail: formData.corporateEmail,
           project: formData.project,
           productName: productName,
+          source: 'web',
+          page: window.location.pathname,
         }),
       });
 

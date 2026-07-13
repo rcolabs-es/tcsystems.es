@@ -1,20 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { render } from '@react-email/render';
-import { 
-  AdminContactNotification, 
-  UserConfirmation, 
-  EMAIL_CONFIG, 
+import {
+  AdminContactNotification,
+  UserConfirmation,
+  EMAIL_CONFIG,
   generateSubjects,
-  type ContactFormData 
+  type ContactFormData
 } from '../../../emails';
+import { getDb, hasDb, schema } from '@/lib/db';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    
+
     const {
       firstName,
       lastName,
@@ -23,6 +24,8 @@ export async function POST(request: NextRequest) {
       corporateEmail,
       project,
       productName,
+      source,
+      page,
     } = body;
 
     // Validar campos requeridos (lastName es opcional: las landings usan un
@@ -41,6 +44,26 @@ export async function POST(request: NextRequest) {
         { error: 'Email inválido' },
         { status: 400 }
       );
+    }
+
+    // Guardar el lead en BD para el panel /admin. Si la BD falla o no está
+    // configurada, el flujo de emails sigue funcionando igual que antes.
+    if (hasDb()) {
+      try {
+        await getDb().insert(schema.leads).values({
+          type: 'formulario',
+          name: [firstName, lastName].filter(Boolean).join(' '),
+          email: corporateEmail,
+          phone: phone || null,
+          company: company || null,
+          message: project || null,
+          product: productName || null,
+          source: source || null,
+          page: page || null,
+        });
+      } catch (dbError) {
+        console.error('Error guardando lead en BD:', dbError);
+      }
     }
 
     // Generar emails HTML

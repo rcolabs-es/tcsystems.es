@@ -53,6 +53,8 @@ export default function LandingForm({
           corporateEmail: data.email,
           project: `Origen: ${origin}`,
           productName,
+          source: origin,
+          page: window.location.pathname,
         }),
       })
       const json = await res.json().catch(() => ({}))

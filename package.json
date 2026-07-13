@@ -8,9 +8,12 @@
     "start": "next start",
     "lint": "next lint",
     "convert-webp": "node scripts/convert-to-webp.js",
-    "convert-webp:delete": "node scripts/convert-to-webp.js --delete-originals"
+    "convert-webp:delete": "node scripts/convert-to-webp.js --delete-originals",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.1.0",
     "@next/third-parties": "^15.5.6",
     "@portabletext/react": "^5.0.0",
     "@react-email/components": "^0.1.1",
@@ -21,8 +24,10 @@
     "@sanity/vision": "^4.14.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "drizzle-orm": "^0.45.2",
     "lucide-react": "^0.523.0",
     "next": "^15.3.5",
+    "next-auth": "^5.0.0-beta.31",
     "next-sanity": "^11.6.5",
     "next-themes": "^0.4.6",
     "react": "^19.2.0",
@@ -37,6 +42,7 @@
     "@types/node": "^20.19.24",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
+    "drizzle-kit": "^0.31.10",
     "eslint": "^8.57.0",
     "eslint-config-next": "^15.3.5",
     "tailwindcss": "^4.1.17",

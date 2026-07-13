@@ -136,3 +136,13 @@
     overflow: hidden;
   }
 }
+
+/* Autofill de Chrome/Safari: evita el fondo azulado sobre los inputs
+   (afecta al panel /admin y a los formularios de landings) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: currentColor;
+  caret-color: currentColor;
+  transition: background-color 9999999s ease-in-out 0s;
+}

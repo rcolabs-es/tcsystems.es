@@ -22,23 +22,25 @@ export default function ConditionalLayout({
 }) {
   const pathname = usePathname()
 
-  // No mostrar Header/Footer en el Studio de Sanity ni en landings con chrome propio
+  // No mostrar Header/Footer en el Studio de Sanity, el panel de leads
+  // ni en landings con chrome propio
   const isStudio = pathname?.startsWith('/studio')
+  const isAdmin = pathname?.startsWith('/admin')
   const isStandaloneLanding = STANDALONE_LANDINGS.some((p) =>
     pathname?.startsWith(p)
   )
 
-  // GA4 fuera del Studio (es tráfico interno y contamina la propiedad).
-  // El gtag de Google Ads se carga globalmente en app/layout.tsx.
+  // GA4 fuera del Studio y del panel /admin (es tráfico interno y contamina
+  // la propiedad). El gtag de Google Ads se carga globalmente en app/layout.tsx.
   // ConversionClicks captura clics en tel:/WhatsApp en toda la web.
-  const analytics = !isStudio ? (
+  const analytics = !isStudio && !isAdmin ? (
     <>
       <GoogleAnalytics gaId="G-FTNY37SJ4W" />
       <ConversionClicks />
     </>
   ) : null
 
-  if (isStudio) {
+  if (isStudio || isAdmin) {
     return <>{children}</>
   }
 

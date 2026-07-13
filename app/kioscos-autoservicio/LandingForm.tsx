@@ -47,6 +47,8 @@ export default function LandingForm() {
           corporateEmail: data.email,
           project: `Sector: ${sectorLabel} · Origen: Landing Kioscos Autoservicio`,
           productName: 'Kioscos Autoservicio',
+          source: 'Landing Kioscos Autoservicio',
+          page: window.location.pathname,
         }),
       })
       const json = await res.json().catch(() => ({}))
