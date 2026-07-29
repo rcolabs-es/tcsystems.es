@@ -13,6 +13,7 @@ import HeroStats, { type LandingStat } from './HeroStats'
 import LandingForm from './LandingForm'
 import { clientLogos } from './clientLogos'
 import ThemeToggle from '@/components/ThemeToggle'
+import { faqPageSchema, type FaqEntry } from '@/lib/schema'
 
 const fraunces = {
   fontFamily: 'var(--font-fraunces), Georgia, serif',
@@ -91,6 +92,14 @@ export interface LandingConfig {
   useCasesEyebrow?: string
   useCases?: UseCase[]
 
+  /**
+   * Preguntas frecuentes (opcional). Se renderizan en HTML servidor y generan
+   * automáticamente el JSON-LD FAQPage a partir de la misma fuente.
+   */
+  faqs?: FaqEntry[]
+  faqEyebrow?: string
+  faqHeading?: ReactNode
+
   /** Sección formulario */
   formHeading: ReactNode
   formIntro: string
@@ -117,6 +126,14 @@ export default function VerticalLanding({ config }: { config: LandingConfig }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(c.structuredData) }}
       />
+      {c.faqs && c.faqs.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(faqPageSchema(c.faqs)),
+          }}
+        />
+      )}
 
       {/* ───────── HEADER MINIMAL ───────── */}
       <header className="sticky top-0 z-50 backdrop-blur-md bg-white/70 dark:bg-zinc-950/70 border-b border-zinc-900/5 dark:border-white/5">
@@ -608,6 +625,55 @@ export default function VerticalLanding({ config }: { config: LandingConfig }) {
                     ))}
                   </ul>
                 </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ───────── PREGUNTAS FRECUENTES ───────── */}
+      {c.faqs && c.faqs.length > 0 && (
+        <section className="bg-white dark:bg-zinc-950 py-20 lg:py-32">
+          <div className="max-w-4xl mx-auto px-6 lg:px-10">
+            <div className="flex items-baseline gap-3 mb-12 lg:mb-16">
+              <span
+                className="text-[11px] uppercase tracking-[0.24em] text-[#0e9acd]"
+                style={mono}
+              >
+                {c.faqEyebrow ?? 'Preguntas frecuentes'}
+              </span>
+              <span className="h-px flex-1 bg-zinc-200 dark:bg-zinc-800" />
+            </div>
+
+            {c.faqHeading && (
+              <h2
+                className="text-4xl sm:text-5xl leading-[1.02] tracking-tight font-medium mb-12 text-zinc-900 dark:text-white"
+                style={fraunces}
+              >
+                {c.faqHeading}
+              </h2>
+            )}
+
+            {/* <details> nativo: desplegable sin JavaScript y con la respuesta
+                siempre presente en el HTML, legible por rastreadores de IA. */}
+            <div className="divide-y divide-zinc-200 dark:divide-zinc-800 border-y border-zinc-200 dark:border-zinc-800">
+              {c.faqs.map((faq) => (
+                <details key={faq.question} className="group py-6">
+                  <summary className="flex items-start justify-between gap-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                    <h3 className="text-lg sm:text-xl font-medium tracking-tight text-zinc-900 dark:text-white">
+                      {faq.question}
+                    </h3>
+                    <span
+                      aria-hidden
+                      className="mt-1 shrink-0 w-5 h-5 rounded-full border border-zinc-300 dark:border-zinc-700 flex items-center justify-center text-[#0e9acd] transition-transform duration-300 group-open:rotate-45"
+                    >
+                      <span className="text-sm leading-none">+</span>
+                    </span>
+                  </summary>
+                  <p className="mt-4 text-base text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-3xl">
+                    {faq.answer}
+                  </p>
+                </details>
               ))}
             </div>
           </div>

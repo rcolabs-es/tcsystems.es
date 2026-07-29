@@ -112,6 +112,46 @@ const config: LandingConfig = {
   },
   caseStudyEyebrow: 'Caso de éxito',
 
+  faqEyebrow: 'Preguntas frecuentes',
+  faqHeading: (
+    <>
+      Lo que nos preguntan{' '}
+      <span className="italic text-[#0e9acd]">las lavanderías.</span>
+    </>
+  ),
+  faqs: [
+    {
+      question: '¿Qué es una central de pago para una lavandería de autoservicio?',
+      answer:
+        'Una central de pago es un único terminal que centraliza el cobro de todas las lavadoras y secadoras del local: el cliente paga en la central y esta activa el programa de la máquina elegida. Sustituye a los monederos individuales de cada máquina, de modo que no hay que vaciar monedero por monedero ni cuadrar cajas por separado.',
+    },
+    {
+      question: '¿Qué formas de pago acepta la central Elysium Plus?',
+      answer:
+        'Acepta tarjeta de débito y crédito, contactless, app y efectivo (monedas y billetes). Aceptar tarjeta permite cobrar al cliente que no lleva efectivo, también de madrugada, cuando la lavandería opera sin personal.',
+    },
+    {
+      question: '¿Puedo saber cuánto factura cada máquina sin ir al local?',
+      answer:
+        'Sí. La central ofrece reporting 24/7 con la facturación por máquina en tiempo real, y permite activar y controlar cada lavadora y secadora en remoto. Así se detecta qué máquina factura menos o está fallando sin desplazarse.',
+    },
+    {
+      question: '¿Funciona la lavandería sin personal las 24 horas?',
+      answer:
+        'Sí. La central gestiona el cobro y la activación de programas de forma desatendida 24/7. Lavanderías de autoservicio como T-Wash operan así con TCSystems: cobro sin personal en sala y conciliación automática del efectivo.',
+    },
+    {
+      question: '¿Qué pasa si la central se queda sin conexión?',
+      answer:
+        'Sigue funcionando en modo offline, almacenando las transacciones localmente hasta que se restablece la conexión, momento en el que se sincronizan automáticamente. El local no deja de cobrar por una caída de red.',
+    },
+    {
+      question: '¿Cuánto tarda la instalación y qué soporte hay después?',
+      answer:
+        'La instalación típica se completa en 1-2 días laborables, incluyendo configuración y formación básica. TCSystems fabrica en España, con soporte técnico 24/7 y recambios desde sus 5 delegaciones, y acumula más de 14 años y más de 500 instalaciones.',
+    },
+  ],
+
   formHeading: (
     <>
       Cuéntanos tu lavandería.{' '}

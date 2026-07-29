@@ -119,20 +119,44 @@ export default function RootLayout({
               "url": "https://www.tcsystems.es",
               "logo": "https://www.tcsystems.es/logo.webp",
               "foundingDate": "2010",
+              "telephone": "+34916216237",
+              "email": "consultoria@tcsystems.es",
               "address": {
                 "@type": "PostalAddress",
-                "addressCountry": "ES",
-                "addressLocality": "Madrid",
-                "addressRegion": "Madrid"
+                "streetAddress": "C. Centauro, 15",
+                "postalCode": "28971",
+                "addressLocality": "Griñón",
+                "addressRegion": "Madrid",
+                "addressCountry": "ES"
+              },
+              "areaServed": {
+                "@type": "Country",
+                "name": "España"
               },
               "contactPoint": {
                 "@type": "ContactPoint",
-                "telephone": "+34-900-123-456",
+                "telephone": "+34916216237",
+                "email": "consultoria@tcsystems.es",
                 "contactType": "customer service",
-                "availableLanguage": "Spanish"
+                "areaServed": "ES",
+                "availableLanguage": "Spanish",
+                "hoursAvailable": {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": [
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday"
+                  ],
+                  "opens": "09:00",
+                  "closes": "18:00"
+                }
               },
               "sameAs": [
-                "https://www.linkedin.com/company/tcsystems-grupotcobro/"              ],
+                "https://www.linkedin.com/company/tcsystems-grupotcobro/",
+                "https://www.facebook.com/profile.php?id=61572716694969"
+              ],
               "hasOfferCatalog": {
                 "@type": "OfferCatalog",
                 "name": "Sistemas de Cobro Automático",

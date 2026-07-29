@@ -1,4 +1,6 @@
 import { Metadata } from 'next'
+import { faqPageSchema } from '@/lib/schema'
+import { controlAccesosFaqs } from './faq'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.tcsystems.es'),
@@ -129,6 +131,10 @@ export default function ControlAccesosLayout({
             }
           })
         }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema(controlAccesosFaqs)) }}
       />
       {children}
     </>

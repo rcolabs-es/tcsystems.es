@@ -11,6 +11,8 @@ import {
 import HeroStats from './HeroStats'
 import LandingForm from './LandingForm'
 import ThemeToggle from '@/components/ThemeToggle'
+import { faqPageSchema } from '@/lib/schema'
+import { kioscosFaqs } from './faq'
 
 const fraunces = {
   fontFamily: 'var(--font-fraunces), Georgia, serif',
@@ -51,6 +53,12 @@ export default function KioscosAutoservicioLanding() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqPageSchema(kioscosFaqs)),
+        }}
       />
 
       {/* ───────── HEADER MINIMAL ───────── */}
@@ -581,6 +589,52 @@ export default function KioscosAutoservicioLanding() {
                   ))}
                 </ul>
               </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ───────── PREGUNTAS FRECUENTES ───────── */}
+      <section className="bg-zinc-50 dark:bg-zinc-900/40 border-y border-zinc-900/5 dark:border-white/5 py-20 lg:py-32">
+        <div className="max-w-4xl mx-auto px-6 lg:px-10">
+          <div className="flex items-baseline gap-3 mb-12 lg:mb-16">
+            <span
+              className="text-[11px] uppercase tracking-[0.24em] text-[#0e9acd]"
+              style={mono}
+            >
+              06 / Preguntas frecuentes
+            </span>
+            <span className="h-px flex-1 bg-zinc-200 dark:bg-zinc-800" />
+          </div>
+
+          <h2
+            className="text-4xl sm:text-5xl leading-[1.02] tracking-tight font-medium mb-12 text-zinc-900 dark:text-white"
+            style={fraunces}
+          >
+            Lo que se pregunta{' '}
+            <span className="italic text-[#0e9acd]">antes de instalar.</span>
+          </h2>
+
+          {/* <details> nativo: desplegable sin JavaScript y con la respuesta
+              siempre presente en el HTML, legible por rastreadores de IA. */}
+          <div className="divide-y divide-zinc-200 dark:divide-zinc-800 border-y border-zinc-200 dark:border-zinc-800">
+            {kioscosFaqs.map((faq) => (
+              <details key={faq.question} className="group py-6">
+                <summary className="flex items-start justify-between gap-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                  <h3 className="text-lg sm:text-xl font-medium tracking-tight text-zinc-900 dark:text-white">
+                    {faq.question}
+                  </h3>
+                  <span
+                    aria-hidden
+                    className="mt-1 shrink-0 w-5 h-5 rounded-full border border-zinc-300 dark:border-zinc-700 flex items-center justify-center text-[#0e9acd] transition-transform duration-300 group-open:rotate-45"
+                  >
+                    <span className="text-sm leading-none">+</span>
+                  </span>
+                </summary>
+                <p className="mt-4 text-base text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-3xl">
+                  {faq.answer}
+                </p>
+              </details>
             ))}
           </div>
         </div>

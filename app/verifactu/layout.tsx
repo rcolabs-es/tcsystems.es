@@ -1,4 +1,6 @@
 import { Metadata } from 'next'
+import { faqPageSchema } from '@/lib/schema'
+import { verifactuFaqs } from './faq'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.tcsystems.es'),
@@ -117,12 +119,45 @@ export default function VerifactuLayout({
               "name": "Facturación Electrónica",
               "description": "Sistema de facturación electrónica Verifactu integrado en terminales de pago"
             },
+            "citation": [
+              {
+                "@type": "Legislation",
+                "name": "Real Decreto 1007/2023, de 5 de diciembre, por el que se aprueba el Reglamento que establece los requisitos que deben adoptar los sistemas y programas informáticos de facturación",
+                "legislationIdentifier": "RD 1007/2023",
+                "legislationDate": "2023-12-05",
+                "legislationJurisdiction": "ES",
+                "url": "https://www.boe.es/eli/es/rd/2023/12/05/1007"
+              },
+              {
+                "@type": "Legislation",
+                "name": "Real Decreto-ley 15/2025, de 2 de diciembre, que modifica los plazos de adaptación previstos en el Real Decreto 1007/2023",
+                "legislationIdentifier": "RDL 15/2025",
+                "legislationDate": "2025-12-02",
+                "legislationJurisdiction": "ES",
+                "url": "https://www.boe.es/eli/es/rdl/2025/12/02/15"
+              },
+              {
+                "@type": "WebPage",
+                "name": "AEAT — Nota informativa: ampliación del plazo de adaptación de los sistemas informáticos de facturación",
+                "publisher": {
+                  "@type": "GovernmentOrganization",
+                  "name": "Agencia Estatal de Administración Tributaria"
+                },
+                "url": "https://sede.agenciatributaria.gob.es/Sede/iva/sistemas-informaticos-facturacion-verifactu/nota-informativa-ampliacion-plazo-adaptacion-facturacion.html"
+              }
+            ],
             "mainEntity": {
               "@type": "Service",
               "name": "Integración Verifactu",
               "description": "Servicio de integración de Verifactu para facturación electrónica en terminales de pago TCSystems"
             }
           })
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqPageSchema(verifactuFaqs)),
         }}
       />
       {children}

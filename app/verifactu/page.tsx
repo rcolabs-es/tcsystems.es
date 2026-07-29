@@ -1,6 +1,7 @@
 import Link from 'next/link'
-import { CheckCircle, FileText, Shield, ArrowRight, Phone, Mail, MessageCircle } from 'lucide-react'
+import { CheckCircle, FileText, Shield, ArrowRight, Phone, Mail, MessageCircle, ExternalLink, CalendarClock } from 'lucide-react'
 import ContactForm from '@/components/ContactForm'
+import { verifactuFaqs } from './faq'
 
 const contactOptions = [
   {
@@ -169,6 +170,166 @@ export default function VerifactuPage() {
               <div className="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-[#0e9acd]/20 to-blue-600/20 rounded-full blur-3xl"></div>
               <div className="absolute -bottom-6 -left-6 w-20 h-20 bg-gradient-to-br from-[#0e9acd]/15 to-blue-600/15 rounded-full blur-2xl"></div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Marco normativo — fuentes primarias citadas */}
+      <section className="py-24 bg-white dark:bg-zinc-950">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <div className="inline-flex items-center bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-full px-4 py-2 text-sm text-gray-600 dark:text-zinc-400 shadow-sm mb-6">
+              Marco normativo
+            </div>
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+              Qué exige <span className="text-[#0e9acd]">Veri*factu</span> y desde cuándo
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-zinc-300 max-w-3xl mx-auto leading-relaxed">
+              Veri*factu no es un producto: es el marco de la Agencia Tributaria que obliga a que los
+              sistemas informáticos de facturación garanticen la{' '}
+              <strong className="text-gray-900 dark:text-white">
+                integridad, trazabilidad e inalterabilidad
+              </strong>{' '}
+              de los registros de facturación. Estas son las fechas y las fuentes oficiales.
+            </p>
+          </div>
+
+          {/* Plazos */}
+          <div className="grid md:grid-cols-2 gap-6 mb-10">
+            <div className="bg-gray-50 dark:bg-[#121214] rounded-2xl p-8 border border-gray-200 dark:border-zinc-800">
+              <div className="flex items-center mb-4">
+                <CalendarClock className="w-6 h-6 text-[#0e9acd] mr-3" />
+                <span className="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-zinc-400">
+                  Impuesto sobre Sociedades
+                </span>
+              </div>
+              <p className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                1 de enero de 2027
+              </p>
+              <p className="text-gray-600 dark:text-zinc-400 leading-relaxed">
+                Fecha límite para que los contribuyentes del Impuesto sobre Sociedades tengan
+                adaptados sus sistemas informáticos de facturación.
+              </p>
+            </div>
+
+            <div className="bg-gray-50 dark:bg-[#121214] rounded-2xl p-8 border border-gray-200 dark:border-zinc-800">
+              <div className="flex items-center mb-4">
+                <CalendarClock className="w-6 h-6 text-[#0e9acd] mr-3" />
+                <span className="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-zinc-400">
+                  Resto de obligados tributarios
+                </span>
+              </div>
+              <p className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                1 de julio de 2027
+              </p>
+              <p className="text-gray-600 dark:text-zinc-400 leading-relaxed">
+                Autónomos en IRPF y demás obligados tributarios. El periodo previo a cada fecha es,
+                según la AEAT, un periodo de pruebas.
+              </p>
+            </div>
+          </div>
+
+          {/* Cita textual atribuida a la fuente oficial */}
+          <blockquote className="border-l-4 border-[#0e9acd] bg-[#0e9acd]/5 dark:bg-[#0e9acd]/10 rounded-r-2xl p-8 mb-10">
+            <p className="text-lg text-gray-800 dark:text-zinc-200 leading-relaxed italic mb-4">
+              «El periodo previo a las respectivas fechas es un periodo de pruebas, durante el cual
+              se podrá dejar de remitir registros de prueba con un SIF modalidad VERI*FACTU.»
+            </p>
+            <footer className="text-sm text-gray-600 dark:text-zinc-400">
+              — Agencia Tributaria (AEAT), nota informativa sobre la ampliación del plazo de
+              adaptación de los sistemas informáticos de facturación.
+            </footer>
+          </blockquote>
+
+          {/* Fuentes */}
+          <div className="bg-white dark:bg-zinc-950 rounded-2xl border border-gray-200 dark:border-zinc-800 p-8">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
+              Fuentes oficiales
+            </h3>
+            <ul className="space-y-4">
+              {[
+                {
+                  href: 'https://www.boe.es/eli/es/rd/2023/12/05/1007',
+                  title:
+                    'Real Decreto 1007/2023, de 5 de diciembre — Reglamento de requisitos de los sistemas informáticos de facturación (RRSIF)',
+                  meta: 'BOE núm. 291, de 6 de diciembre de 2023',
+                },
+                {
+                  href: 'https://www.boe.es/eli/es/rdl/2025/12/02/15',
+                  title:
+                    'Real Decreto-ley 15/2025, de 2 de diciembre — modifica los plazos de adaptación previstos en el RD 1007/2023',
+                  meta: 'Boletín Oficial del Estado',
+                },
+                {
+                  href: 'https://sede.agenciatributaria.gob.es/Sede/iva/sistemas-informaticos-facturacion-verifactu/nota-informativa-ampliacion-plazo-adaptacion-facturacion.html',
+                  title:
+                    'AEAT — Nota informativa: ampliación del plazo de adaptación de los sistemas informáticos de facturación',
+                  meta: 'Sede electrónica de la Agencia Tributaria',
+                },
+              ].map((source) => (
+                <li key={source.href}>
+                  <a
+                    href={source.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-start gap-3 text-gray-700 dark:text-zinc-300 hover:text-[#0e9acd] dark:hover:text-[#0e9acd] transition-colors"
+                  >
+                    <ExternalLink className="w-4 h-4 mt-1 shrink-0 text-[#0e9acd]" />
+                    <span>
+                      <span className="font-medium group-hover:underline">{source.title}</span>
+                      <span className="block text-sm text-gray-500 dark:text-zinc-500 mt-0.5">
+                        {source.meta}
+                      </span>
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <p className="text-sm text-gray-500 dark:text-zinc-500 mt-6 leading-relaxed">
+              Esta página resume la normativa a efectos informativos y no constituye asesoramiento
+              fiscal. Para tu caso concreto, consulta con tu asesor o directamente con la Agencia
+              Tributaria.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Preguntas frecuentes */}
+      <section className="py-24 bg-gray-50 dark:bg-[#121214]">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <div className="inline-flex items-center bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-full px-4 py-2 text-sm text-gray-600 dark:text-zinc-400 shadow-sm mb-6">
+              Preguntas frecuentes
+            </div>
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white">
+              Dudas sobre <span className="text-[#0e9acd]">Veri*factu</span>
+            </h2>
+          </div>
+
+          {/* <details> nativo: sin JavaScript y con la respuesta siempre en el HTML. */}
+          <div className="space-y-4">
+            {verifactuFaqs.map((faq) => (
+              <details
+                key={faq.question}
+                className="group bg-white dark:bg-zinc-950 rounded-2xl border border-gray-200 dark:border-zinc-800 hover:border-[#0e9acd] dark:hover:border-[#0e9acd] transition-colors duration-300"
+              >
+                <summary className="flex items-start justify-between gap-6 cursor-pointer list-none p-6 [&::-webkit-details-marker]:hidden">
+                  <h3 className="font-semibold text-gray-900 dark:text-white text-lg">
+                    {faq.question}
+                  </h3>
+                  <span
+                    aria-hidden
+                    className="mt-1 shrink-0 w-6 h-6 rounded-full border border-gray-300 dark:border-zinc-700 flex items-center justify-center text-[#0e9acd] transition-transform duration-300 group-open:rotate-45"
+                  >
+                    <span className="leading-none">+</span>
+                  </span>
+                </summary>
+                <div className="px-6 pb-6">
+                  <div className="h-px bg-gradient-to-r from-[#0e9acd]/20 to-transparent mb-4"></div>
+                  <p className="text-gray-600 dark:text-zinc-400 leading-relaxed">{faq.answer}</p>
+                </div>
+              </details>
+            ))}
           </div>
         </div>
       </section>

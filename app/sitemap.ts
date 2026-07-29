@@ -28,10 +28,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     // Páginas principales
     {
-      url: `${baseUrl}/productos`,
+      url: `${baseUrl}/quienes-somos`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
-      priority: 0.9,
+      priority: 0.8,
     },
     {
       url: `${baseUrl}/contacto`,
@@ -60,6 +60,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${baseUrl}/productos/prometheus`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    // Landings de sector
+    {
+      url: `${baseUrl}/kioscos-autoservicio`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/kioscos-autoservicio-espana`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/gasolineras`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/lavanderias`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: 0.8,

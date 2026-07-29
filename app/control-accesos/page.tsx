@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { CheckCircle, Shield, Fingerprint, KeyRound, ArrowRight, Phone, Mail, MessageCircle, Wifi, Eye, Users } from 'lucide-react'
 import ContactForm from '@/components/ContactForm'
+import { controlAccesosFaqs } from './faq'
 
 const contactOptions = [
   {
@@ -391,6 +392,46 @@ export default function ControlAccesosPage() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Preguntas frecuentes */}
+      <section className="py-24 bg-gray-50 dark:bg-[#121214]">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <div className="inline-flex items-center bg-white dark:bg-zinc-800 border border-gray-200 dark:border-zinc-700 rounded-full px-4 py-2 text-sm text-gray-600 dark:text-zinc-400 shadow-sm mb-6">
+              Preguntas frecuentes
+            </div>
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white">
+              Dudas sobre <span className="text-[#0e9acd]">control de accesos</span>
+            </h2>
+          </div>
+
+          {/* <details> nativo: sin JavaScript y con la respuesta siempre en el HTML. */}
+          <div className="space-y-4">
+            {controlAccesosFaqs.map((faq) => (
+              <details
+                key={faq.question}
+                className="group bg-white dark:bg-zinc-950 rounded-2xl border border-gray-200 dark:border-zinc-800 hover:border-[#0e9acd] dark:hover:border-[#0e9acd] transition-colors duration-300"
+              >
+                <summary className="flex items-start justify-between gap-6 cursor-pointer list-none p-6 [&::-webkit-details-marker]:hidden">
+                  <h3 className="font-semibold text-gray-900 dark:text-white text-lg">
+                    {faq.question}
+                  </h3>
+                  <span
+                    aria-hidden
+                    className="mt-1 shrink-0 w-6 h-6 rounded-full border border-gray-300 dark:border-zinc-700 flex items-center justify-center text-[#0e9acd] transition-transform duration-300 group-open:rotate-45"
+                  >
+                    <span className="leading-none">+</span>
+                  </span>
+                </summary>
+                <div className="px-6 pb-6">
+                  <div className="h-px bg-gradient-to-r from-[#0e9acd]/20 to-transparent mb-4"></div>
+                  <p className="text-gray-600 dark:text-zinc-400 leading-relaxed">{faq.answer}</p>
+                </div>
+              </details>
+            ))}
           </div>
         </div>
       </section>

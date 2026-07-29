@@ -57,7 +57,7 @@ export default function CTASection() {
               <ArrowRight className="w-5 h-5 lg:w-6 lg:h-6 ml-2 lg:ml-3 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
-              href="/productos"
+              href="/#productos"
               className="inline-flex items-center justify-center border-2 border-white text-white px-8 lg:px-10 py-4 lg:py-5 rounded-2xl font-bold text-base lg:text-lg hover:bg-white hover:text-[#0e9acd] transition-all duration-200 hover:scale-105"
             >
               Ver productos

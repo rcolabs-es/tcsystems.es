@@ -34,7 +34,7 @@ export default function Footer() {
     {
       title: "Empresa",
       links: [
-        { name: "Sobre Nosotros", href: "/#empresa", icon: undefined, isExternal: false },
+        { name: "Sobre Nosotros", href: "/quienes-somos", icon: undefined, isExternal: false },
         { name: "Casos de Éxito", href: "/#clientes", icon: undefined, isExternal: false },
         { name: "Contacto", href: "/contacto", icon: undefined, isExternal: false },
       ],

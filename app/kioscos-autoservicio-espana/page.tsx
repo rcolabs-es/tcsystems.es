@@ -111,6 +111,46 @@ const config: LandingConfig = {
     },
   ],
 
+  faqEyebrow: 'Preguntas frecuentes',
+  faqHeading: (
+    <>
+      Lo que se pregunta{' '}
+      <span className="italic text-[#0e9acd]">antes de comprar.</span>
+    </>
+  ),
+  faqs: [
+    {
+      question: '¿Quién fabrica los kioscos de autoservicio de TCSystems?',
+      answer:
+        'Los fabrica TCSystems. Es una empresa española, con sede en Griñón (Madrid) y 5 delegaciones, que diseña, fabrica, instala y da soporte a sus propios kioscos. No es un revendedor de equipos importados: el hardware, el software y el SAT son propios.',
+    },
+    {
+      question: '¿Qué ventaja tiene comprar a un fabricante español y no a un revendedor?',
+      answer:
+        'El soporte y los recambios salen del mismo fabricante, sin intermediarios ni esperas de importación, y el kiosco puede adaptarse al sector y a la operación concreta del cliente en lugar de ser una talla única. TCSystems acumula más de 14 años y más de 500 instalaciones en España.',
+    },
+    {
+      question: '¿Qué modelos de kiosco fabrica TCSystems y en qué se diferencian?',
+      answer:
+        'La gama tiene tres líneas: Elysium Plus, kiosco de 27 pulgadas con tarjeta, efectivo y QR; EVO, kiosco completo de autoservicio con admisión de monedas, billetes y tarjetas; y Prometheus, terminal de alta velocidad con expendedor de billetes, pensado para alto tráfico.',
+    },
+    {
+      question: '¿En qué sectores se instalan estos kioscos?',
+      answer:
+        'Se instalan en gasolineras y túneles de lavado, lavanderías de autoservicio, parkings, retail, centros deportivos y administración pública, tanto para cobro desatendido 24/7 como para control de accesos y cobro de cuotas y tasas.',
+    },
+    {
+      question: '¿El kiosco se integra con el ERP o el TPV que ya usamos?',
+      answer:
+        'Sí. El software es propio de TCSystems, lo que permite integrarlo con el ERP o el TPV existente y adaptar la operativa al flujo de trabajo de cada negocio.',
+    },
+    {
+      question: '¿Cuánto tarda la instalación y qué garantía tienen los equipos?',
+      answer:
+        'La instalación típica se completa en 1-2 días laborables, con configuración y formación básica incluidas. Los equipos incluyen 1 año de garantía completa sobre hardware, software y mano de obra, ampliable a 3 años con los planes de mantenimiento premium.',
+    },
+  ],
+
   formHeading: (
     <>
       Cuéntanos tu proyecto.{' '}

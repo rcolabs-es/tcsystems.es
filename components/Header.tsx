@@ -14,7 +14,7 @@ export default function Header() {
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
 
   const navigation = [
-    { name: "Empresa", href: "/#empresa" },
+    { name: "Empresa", href: "/quienes-somos" },
     { name: "Productos", href: "/#productos", dropdown: "products" as const },
     { name: "Servicios", href: "#", dropdown: "services" as const },
     { name: "Clientes", href: "/#clientes" },

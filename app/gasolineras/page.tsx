@@ -112,6 +112,47 @@ const config: LandingConfig = {
   },
   caseStudyEyebrow: 'Caso de éxito',
 
+  faqEyebrow: 'Preguntas frecuentes',
+  faqHeading: (
+    <>
+      Lo que nos preguntan{' '}
+      <span className="italic text-[#0e9acd]">las estaciones.</span>
+    </>
+  ),
+  faqs: [
+    {
+      question:
+        '¿Puede una gasolinera cobrar sin personal las 24 horas con un terminal de TCSystems?',
+      answer:
+        'Sí. El terminal Elysium Plus de TCSystems permite operar la estación en modo desatendido 24/7: el cliente reposta o lava y paga directamente en el terminal, sin caja atendida. Es la configuración que usan redes de estaciones como Ballenoil para cubrir turnos de noche y picos de tráfico sin colas.',
+    },
+    {
+      question: '¿El terminal admite efectivo y devuelve cambio?',
+      answer:
+        'Sí. Elysium Plus admite monedas y billetes y devuelve cambio, además de aceptar tarjeta de débito, crédito y contactless. Cada operación queda registrada, lo que permite la trazabilidad y la conciliación del efectivo de la estación.',
+    },
+    {
+      question: '¿Sirve también para un túnel de lavado?',
+      answer:
+        'Sí. El mismo terminal gestiona el cobro del túnel de lavado y de los programas de lavado, con la misma admisión de efectivo y tarjeta. TCSystems instala terminales tanto en la zona de repostaje como en la de lavado de la estación.',
+    },
+    {
+      question: '¿Qué pasa si se cae la conexión a internet en la estación?',
+      answer:
+        'El terminal sigue operando en modo offline y almacena las transacciones localmente. Cuando se restablece la conexión, los datos se sincronizan automáticamente, de modo que una caída de red no detiene el cobro.',
+    },
+    {
+      question: '¿Cuánto tarda la instalación y qué soporte incluye?',
+      answer:
+        'La instalación típica se completa en 1-2 días laborables, incluyendo configuración y formación básica del personal. TCSystems fabrica los terminales en España y ofrece soporte técnico 24/7 y recambios desde sus 5 delegaciones, con más de 14 años y más de 500 instalaciones a sus espaldas.',
+    },
+    {
+      question: '¿Se puede integrar Veri*factu en el terminal de la gasolinera?',
+      answer:
+        'Sí. TCSystems integra Veri*factu en sus terminales para emitir facturación electrónica conforme al Reglamento aprobado por el Real Decreto 1007/2023. Puedes consultar el detalle y los plazos oficiales en la página de Veri*factu de TCSystems.',
+    },
+  ],
+
   formHeading: (
     <>
       Cuéntanos tu estación.{' '}
