@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informe de Implementación · Posicionamiento en IA (GEO) · TCSystems</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  :root {
+    --ink: #0A0A0A; --muted: #6B7280; --faint: #9CA3AF;
+    --line: #E7E7E7; --line-soft: #F0F0F0; --bg: #ffffff; --bg-soft: #FAFAFA;
+    --accent: #0e9acd; --accent-ink: #0a7ba6;
+    --green: #16A34A; --amber: #D97706; --red: #DC2626;
+  }
+  html, body {
+    background: #EDEDED; color: var(--ink);
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 10pt; line-height: 1.55;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  }
+  .page {
+    width: 210mm; min-height: 297mm; margin: 0 auto; background: var(--bg);
+    padding: 14mm 16mm 13mm 16mm; position: relative;
+    page-break-after: always; overflow: hidden;
+  }
+  .page:last-of-type { page-break-after: auto; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 7.5pt; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-ink); }
+  .eyebrow.muted { color: var(--faint); }
+  h1 { font-size: 29pt; font-weight: 800; letter-spacing: -0.03em; line-height: 1.06; }
+  h2 { font-size: 17pt; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
+  h3 { font-size: 11.5pt; font-weight: 700; letter-spacing: -0.01em; }
+  h4 { font-size: 9.5pt; font-weight: 700; }
+  p { color: #2A2A2A; }
+  strong { font-weight: 700; color: var(--ink); }
+  a { color: var(--accent-ink); text-decoration: none; }
+  .lead { font-size: 11.5pt; color: #3A3A3A; line-height: 1.6; }
+
+  /* HEADER / FOOTER */
+  .runhead { display: flex; justify-content: space-between; align-items: center; padding-bottom: 5mm; border-bottom: 1px solid var(--line); margin-bottom: 8mm; }
+  .runhead .co { display: flex; align-items: center; gap: 9px; }
+  .runhead img.tcs { height: 21px; width: auto; }
+  .runhead img.rco { height: 15px; width: auto; opacity: 0.9; }
+  .runhead .sep { width: 1px; height: 20px; background: var(--line); }
+  .runhead .tag { font-family: 'JetBrains Mono', monospace; font-size: 7pt; letter-spacing: 0.1em; color: var(--faint); text-transform: uppercase; }
+  .footer { position: absolute; bottom: 9mm; left: 16mm; right: 16mm; display: flex; justify-content: space-between; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 6.8pt; letter-spacing: 0.08em; color: var(--faint); text-transform: uppercase; padding-top: 3mm; border-top: 1px solid var(--line-soft); }
+
+  /* COVER */
+  .cover { display: flex; flex-direction: column; height: 260mm; }
+  .cover-top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .cover-logos { display: flex; align-items: center; gap: 14px; }
+  .cover-logos img.tcs { height: 34px; }
+  .cover-logos img.rco { height: 22px; opacity: 0.92; }
+  .cover-logos .sep { width: 1px; height: 30px; background: var(--line); }
+  .cover-mid { margin-top: auto; margin-bottom: auto; }
+  .cover-mid h1 { max-width: 170mm; }
+  .cover-kicker { display: inline-flex; align-items: center; gap: 7px; padding: 5px 11px; border: 1px solid var(--line); border-radius: 999px; margin-bottom: 14mm; }
+  .cover-kicker .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+  .cover-kicker span { font-family: 'JetBrains Mono', monospace; font-size: 7.5pt; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .cover-sub { margin-top: 8mm; font-size: 12.5pt; color: var(--muted); max-width: 155mm; line-height: 1.55; }
+  .cover-meta { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 16mm; border-top: 1px solid var(--line); }
+  .cover-meta .cell { padding: 6mm 0 0 0; }
+  .cover-meta .k { font-family: 'JetBrains Mono', monospace; font-size: 7pt; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); }
+  .cover-meta .v { font-size: 10.5pt; font-weight: 600; margin-top: 3px; }
+
+  /* BLOCKS */
+  .section-head { margin-bottom: 7mm; }
+  .section-head .eyebrow { display: block; margin-bottom: 4mm; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+  .card { border: 1px solid var(--line); border-radius: 11px; padding: 6mm; background: var(--bg); }
+  .card.soft { background: var(--bg-soft); }
+  .dark { background: var(--ink); color: #EDEDED; border-radius: 13px; padding: 8mm; }
+  .dark h2, .dark h3, .dark strong { color: #fff; }
+  .dark p { color: #B8B8B8; }
+  .dark .eyebrow { color: #5EC8ED; }
+
+  .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4mm; margin: 6mm 0; }
+  .stat { border: 1px solid var(--line); border-radius: 11px; padding: 5mm; }
+  .stat .n { font-size: 23pt; font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
+  .stat .n .u { font-size: 12pt; color: var(--accent-ink); }
+  .stat .l { font-size: 7.6pt; color: var(--muted); margin-top: 3mm; line-height: 1.4; }
+
+  .diag { width: 100%; border-collapse: collapse; margin-top: 2mm; }
+  .diag th { text-align: left; font-family: 'JetBrains Mono', monospace; font-size: 6.8pt; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); padding: 0 3mm 2.5mm; border-bottom: 1px solid var(--line); }
+  .diag td { padding: 2.6mm 3mm; border-bottom: 1px solid var(--line-soft); vertical-align: top; font-size: 8.6pt; }
+  .diag tr:last-child td { border-bottom: none; }
+  .diag .pg { font-family: 'JetBrains Mono', monospace; font-size: 8pt; color: var(--accent-ink); white-space: nowrap; }
+  .pill { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 6.6pt; font-weight: 600; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 5px; text-transform: uppercase; white-space: nowrap; }
+  .pill.ok { background: #E7F6ED; color: var(--green); }
+  .pill.new { background: #E6F4FB; color: var(--accent-ink); }
+  .pill.mid { background: #FEF2E2; color: var(--amber); }
+
+  ul.clean { list-style: none; margin-top: 3mm; }
+  ul.clean li { position: relative; padding-left: 15px; margin-bottom: 2.4mm; font-size: 9pt; color: #333; line-height: 1.5; }
+  ul.clean li::before { content: ''; position: absolute; left: 0; top: 6px; width: 5px; height: 5px; background: var(--accent); border-radius: 50%; }
+  ul.check { list-style: none; margin-top: 3mm; }
+  ul.check li { position: relative; padding-left: 18px; margin-bottom: 2.4mm; font-size: 9pt; color: #333; line-height: 1.5; }
+  ul.check li::before { content: '✓'; position: absolute; left: 0; top: 0; color: var(--green); font-weight: 800; }
+
+  /* phases */
+  .phase { display: flex; gap: 6mm; padding: 4mm 0; border-top: 1px solid var(--line); }
+  .phase:first-of-type { border-top: none; padding-top: 2mm; }
+  .phase .idx { flex: 0 0 auto; }
+  .phase .ring { width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--ink); display: flex; align-items: center; justify-content: center; font-size: 15pt; font-weight: 800; }
+  .phase .body { flex: 1; }
+  .phase .tag-free { display: inline-block; vertical-align: middle; font-family: 'JetBrains Mono', monospace; font-size: 6.8pt; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--green); background: #E7F6ED; border: 1px solid #BBE7CB; border-radius: 5px; padding: 1px 7px; margin-left: 8px; }
+
+  .callout { border-left: 3px solid var(--accent); background: var(--bg-soft); padding: 5mm 6mm; border-radius: 0 10px 10px 0; margin-top: 5mm; }
+  .callout .eyebrow { display:block; margin-bottom: 2mm; }
+
+  .code { background: #0A0A0A; border-radius: 10px; padding: 5mm; margin-top: 4mm; overflow-x: auto; }
+  .code pre { font-family: 'JetBrains Mono', monospace; font-size: 7pt; line-height: 1.6; color: #C8C8C8; white-space: pre; }
+  .code .k { color: #5EC8ED; } .code .s { color: #9BD08B; } .code .p { color: #E8B96B; }
+
+  .flow { display: grid; grid-template-columns: 1fr 22px 1fr; align-items: center; gap: 3mm; margin-top: 4mm; }
+  .flow .box { border: 1px solid var(--line); border-radius: 10px; padding: 4mm; text-align: center; }
+  .flow .box.bad { background: #FDECEC; border-color: #F6C9C9; }
+  .flow .box.good { background: #E7F6ED; border-color: #BBE7CB; }
+  .flow .box .t { font-size: 8pt; font-weight: 700; }
+  .flow .box .s { font-size: 7.4pt; color: var(--muted); margin-top: 1.5mm; line-height: 1.35; }
+  .flow .arr { text-align: center; color: var(--faint); font-size: 13pt; }
+
+  .no-list { margin-top: 3mm; }
+  .no-item { display: flex; gap: 5mm; padding: 3mm 0; border-bottom: 1px solid var(--line-soft); }
+  .no-item:last-child { border-bottom: none; }
+  .no-item .x { flex: 0 0 22px; height: 22px; border-radius: 6px; background: #FEF2E2; color: var(--amber); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11pt; }
+  .no-item .t { flex: 1; }
+  .no-item .t b { display: block; font-size: 9.5pt; }
+  .no-item .t span { font-size: 8.5pt; color: var(--muted); }
+
+  .signoff { border: 1px solid var(--line); border-radius: 13px; padding: 7mm; margin-top: 4mm; }
+  .signoff .row { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 6mm; padding-top: 6mm; border-top: 1px solid var(--line); }
+  .src-note { font-size: 7.5pt; color: var(--faint); line-height: 1.5; }
+  .kv { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3mm 6mm; margin-top: 3mm; }
+  .kv .row2 { display: flex; justify-content: space-between; padding: 2.4mm 0; border-bottom: 1px solid var(--line-soft); font-size: 8.6pt; }
+  .kv .row2 .k { color: var(--muted); }
+  .kv .row2 .v { font-weight: 600; font-family: 'JetBrains Mono', monospace; font-size: 8pt; }
+</style>
+</head>
+<body>
+
+<!-- ============ PÁGINA 1 · PORTADA ============ -->
+<section class="page">
+  <div class="cover">
+    <div class="cover-top">
+      <div class="cover-logos">
+        <img class="tcs" src="__TCS_LOGO__" alt="TCSystems">
+        <div class="sep"></div>
+        <img class="rco" src="__RCO_LOGO__" alt="RCO Labs">
+      </div>
+      <div class="eyebrow muted">Informe&nbsp;·&nbsp;GEO&nbsp;2026</div>
+    </div>
+
+    <div class="cover-mid">
+      <div class="cover-kicker"><span class="dot"></span><span>Implementación completada</span></div>
+      <h1>Posicionamiento en<br>motores de IA <span style="color:var(--accent)">·</span> GEO</h1>
+      <p class="cover-sub">Informe de las acciones ejecutadas sobre <strong>tcsystems.es</strong> para que ChatGPT, Perplexity, Google&nbsp;AI&nbsp;Overviews y Claude puedan leer, entender y citar la web como fuente. Optimización técnica de contenido y datos estructurados, sin alterar el diseño ni el funcionamiento del sitio.</p>
+
+      <div class="cover-meta">
+        <div class="cell"><div class="k">Cliente</div><div class="v">TCSystems</div></div>
+        <div class="cell"><div class="k">Ejecutado por</div><div class="v">RCO&nbsp;Labs</div></div>
+        <div class="cell"><div class="k">Alcance</div><div class="v">Fases&nbsp;1–3</div></div>
+        <div class="cell"><div class="k">Estado</div><div class="v" style="color:var(--green)">Verificado</div></div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid var(--line);padding-top:6mm;">
+      <div class="mono" style="font-size:7.5pt;color:var(--faint);letter-spacing:0.08em;">GENERATIVE ENGINE OPTIMIZATION</div>
+      <div class="mono" style="font-size:7.5pt;color:var(--faint);letter-spacing:0.08em;">RCOLABS.ES</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PÁGINA 2 · RESUMEN EJECUTIVO ============ -->
+<section class="page">
+  <div class="runhead">
+    <div class="co"><img class="tcs" src="__TCS_LOGO__" alt="TCSystems"><div class="sep"></div><img class="rco" src="__RCO_LOGO__" alt="RCO Labs"></div>
+    <div class="tag">Resumen ejecutivo</div>
+  </div>
+
+  <div class="section-head">
+    <span class="eyebrow">01 · Qué se ha hecho y por qué importa</span>
+    <h2>La web ahora está preparada para ser citada por la IA</h2>
+  </div>
+
+  <p class="lead">Cada vez más clientes potenciales no buscan en Google: le preguntan a ChatGPT, a Perplexity o al resumen de IA de Google. Esas herramientas solo recomiendan lo que <strong>pueden leer y verificar</strong>. Hemos intervenido la web de TCSystems para que su información —qué fabrica, dónde, con qué garantías— viaje en un formato que esos sistemas entienden y tienden a citar.</p>
+
+  <div class="stat-row">
+    <div class="stat"><div class="n">9</div><div class="l">Páginas con bloque de preguntas frecuentes optimizado para IA</div></div>
+    <div class="stat"><div class="n">55</div><div class="l">Preguntas y respuestas legibles por los rastreadores</div></div>
+    <div class="stat"><div class="n">14<span class="u">+</span></div><div class="l">Bloques de datos estructurados nuevos (JSON-LD)</div></div>
+    <div class="stat"><div class="n">28</div><div class="l">Archivos intervenidos · +623 líneas de código</div></div>
+  </div>
+
+  <div class="callout">
+    <span class="eyebrow">El principio técnico que lo cambia todo</span>
+    <p style="font-size:9.5pt;">Los rastreadores de IA (GPTBot de OpenAI, ClaudeBot, PerplexityBot) <strong>no ejecutan JavaScript</strong>: solo leen el HTML que el servidor entrega de entrada. Si una respuesta aparece únicamente al pulsar un botón, para ellos <strong>no existe</strong>. Todo el trabajo se ha diseñado bajo esa regla — el contenido y los datos estructurados viajan ya en la primera carga.</p>
+  </div>
+
+  <div class="flow">
+    <div class="box bad"><div class="t">Antes</div><div class="s">La respuesta se generaba solo al hacer clic. El rastreador de IA veía la pregunta, pero no la respuesta.</div></div>
+    <div class="arr">→</div>
+    <div class="box good"><div class="t">Ahora</div><div class="s">La respuesta está siempre en el HTML inicial. Se pliega con CSS, no se elimina. La IA la lee completa.</div></div>
+  </div>
+
+  <div class="card soft" style="margin-top:6mm;">
+    <h4 style="margin-bottom:3mm;">Los tres métodos que la investigación demuestra eficaces —y que hemos aplicado</h4>
+    <ul class="clean" style="margin-top:2mm;">
+      <li><strong>Citar fuentes oficiales.</strong> En la página de Veri*factu se enlazan el BOE y la AEAT como referencias verificables.</li>
+      <li><strong>Aportar datos y cifras concretas.</strong> Fabricante español, sede en Griñón, +500 instalaciones, +14 años, 5 delegaciones — repetidos de forma consistente.</li>
+      <li><strong>Estructurar en pregunta–respuesta.</strong> 55 preguntas reales que reflejan cómo la gente consulta a la IA, cada una con su respuesta directa.</li>
+    </ul>
+    <p class="src-note" style="margin-top:4mm;">Métodos contrastados con investigación del sector (estudio de la Universidad de Princeton sobre GEO, Ahrefs, Semrush). Descartados por ineficaces o contraproducentes: <em>llms.txt</em> y la acumulación de palabras clave.</p>
+  </div>
+
+  <div class="footer"><span>TCSystems × RCO Labs</span><span>Implementación GEO · 02</span></div>
+</section>
+
+<!-- ============ PÁGINA 3 · FASE 1 ============ -->
+<section class="page">
+  <div class="runhead">
+    <div class="co"><img class="tcs" src="__TCS_LOGO__" alt="TCSystems"><div class="sep"></div><img class="rco" src="__RCO_LOGO__" alt="RCO Labs"></div>
+    <div class="tag">Acciones · Fase 1</div>
+  </div>
+
+  <div class="phase">
+    <div class="idx"><div class="ring">1</div></div>
+    <div class="body">
+      <span class="eyebrow">02 · Fundamentos y datos de identidad<span class="tag-free">Sin coste</span></span>
+      <h2 style="margin-top:2mm;">Corregir lo básico que confunde a buscadores e IA</h2>
+      <p style="margin-top:3mm;font-size:9.5pt;">Antes de sumar contenido, se sanearon los cimientos: datos de contacto reales, mapa del sitio correcto y navegación sin enlaces rotos. Son errores que restan credibilidad ante cualquier sistema automático.</p>
+    </div>
+  </div>
+
+  <table class="diag" style="margin-top:2mm;">
+    <thead><tr><th>Acción</th><th>Antes</th><th>Ahora</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Teléfono en los datos de la empresa</strong><br><span style="color:var(--muted)">Ficha de organización (schema.org)</span></td>
+        <td class="mono" style="color:var(--red)">+34 900 123 456<br><span style="font-size:7pt;">(número de ejemplo)</span></td>
+        <td class="mono" style="color:var(--green)">+34 916 216 237<br><span style="font-size:7pt;">+ dirección, email y horario</span></td>
+      </tr>
+      <tr>
+        <td><strong>Dirección y perfil social</strong></td>
+        <td style="color:var(--muted)">Ausentes en los datos estructurados</td>
+        <td>C. Centauro 15, Griñón (Madrid) · LinkedIn + Facebook</td>
+      </tr>
+      <tr>
+        <td><strong>Mapa del sitio (sitemap.xml)</strong></td>
+        <td style="color:var(--muted)">Incluía <span class="mono">/productos</span> (página inexistente, error 404). Faltaban 4 landings de sector.</td>
+        <td>Sin la URL rota. Añadidas las 4 landings de sector y la nueva página de empresa.</td>
+      </tr>
+      <tr>
+        <td><strong>Navegación (menú y pie)</strong></td>
+        <td style="color:var(--muted)">«Empresa» apuntaba a un ancla de la home. «Ver productos» llevaba a un 404.</td>
+        <td>«Empresa» → página <span class="mono">/quienes-somos</span>. Enlaces de producto corregidos.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout" style="margin-top:7mm;">
+    <span class="eyebrow">Por qué era urgente</span>
+    <p style="font-size:9.5pt;">Un teléfono de ejemplo en los datos estructurados es la información que un asistente de IA leería en voz alta a un cliente. Una URL rota en el mapa del sitio gasta el presupuesto de rastreo de Google en una página que no existe. Ambos se han eliminado.</p>
+  </div>
+
+  <div class="card" style="margin-top:7mm;">
+    <h4 style="margin-bottom:3mm;">Ficha de empresa enriquecida — extracto de los datos que ahora lee la IA</h4>
+    <div class="code">
+      <pre><span class="k">"@type"</span>: <span class="s">"Organization"</span>,
+<span class="k">"name"</span>: <span class="s">"TCSystems"</span>,
+<span class="k">"telephone"</span>: <span class="s">"+34916216237"</span>,
+<span class="k">"address"</span>: { <span class="k">"streetAddress"</span>: <span class="s">"C. Centauro, 15"</span>, <span class="k">"postalCode"</span>: <span class="s">"28971"</span>,
+             <span class="k">"addressLocality"</span>: <span class="s">"Griñón"</span>, <span class="k">"addressRegion"</span>: <span class="s">"Madrid"</span> },
+<span class="k">"areaServed"</span>: <span class="s">"España"</span>,
+<span class="k">"sameAs"</span>: [ <span class="s">"…/company/tcsystems"</span>, <span class="s">"…/facebook…"</span> ]</pre>
+    </div>
+  </div>
+
+  <div class="footer"><span>TCSystems × RCO Labs</span><span>Implementación GEO · 03</span></div>
+</section>
+
+<!-- ============ PÁGINA 4 · FASE 2 ============ -->
+<section class="page">
+  <div class="runhead">
+    <div class="co"><img class="tcs" src="__TCS_LOGO__" alt="TCSystems"><div class="sep"></div><img class="rco" src="__RCO_LOGO__" alt="RCO Labs"></div>
+    <div class="tag">Acciones · Fase 2</div>
+  </div>
+
+  <div class="phase">
+    <div class="idx"><div class="ring">2</div></div>
+    <div class="body">
+      <span class="eyebrow">03 · Contenido citable</span>
+      <h2 style="margin-top:2mm;">Preguntas, respuestas y fuentes que la IA puede citar</h2>
+      <p style="margin-top:3mm;font-size:9.5pt;">El grueso del trabajo. Se ha dotado a 9 páginas de un bloque de preguntas frecuentes legible por máquinas, respaldado por su ficha de datos estructurados (<span class="mono">FAQPage</span>) y alimentado desde una única fuente por página, de modo que el texto visible y los datos <strong>nunca puedan descuadrarse</strong>.</p>
+    </div>
+  </div>
+
+  <table class="diag" style="margin-top:3mm;">
+    <thead><tr><th>Página</th><th style="text-align:center;">Preguntas</th><th>Datos estructurados añadidos</th></tr></thead>
+    <tbody>
+      <tr><td class="pg">/contacto</td><td style="text-align:center;">6</td><td><span class="pill new">FAQPage</span> <span class="pill new">ContactPage</span></td></tr>
+      <tr><td class="pg">/verifactu</td><td style="text-align:center;">6</td><td><span class="pill new">FAQPage</span> <span class="pill new">Legislation ×3</span></td></tr>
+      <tr><td class="pg">/kioscos-autoservicio</td><td style="text-align:center;">7</td><td><span class="pill new">FAQPage</span></td></tr>
+      <tr><td class="pg">/kioscos-autoservicio-espana</td><td style="text-align:center;">6</td><td><span class="pill new">FAQPage</span></td></tr>
+      <tr><td class="pg">/gasolineras</td><td style="text-align:center;">6</td><td><span class="pill new">FAQPage</span></td></tr>
+      <tr><td class="pg">/lavanderias</td><td style="text-align:center;">6</td><td><span class="pill new">FAQPage</span></td></tr>
+      <tr><td class="pg">/parkings</td><td style="text-align:center;">6</td><td><span class="pill new">FAQPage</span></td></tr>
+      <tr><td class="pg">/control-accesos</td><td style="text-align:center;">6</td><td><span class="pill new">FAQPage</span></td></tr>
+      <tr><td class="pg">/quienes-somos</td><td style="text-align:center;">6</td><td><span class="pill new">AboutPage</span> <span class="pill new">FAQPage</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="grid2" style="margin-top:5mm;">
+    <div class="card soft">
+      <span class="eyebrow" style="display:block;margin-bottom:3mm;">Veri*factu · autoridad por fuentes</span>
+      <p style="font-size:9pt;">Se añadió un bloque de marco normativo que cita las fuentes oficiales verificables:</p>
+      <ul class="clean" style="margin-top:3mm;">
+        <li>BOE — <strong>RD 1007/2023</strong> (reglamento)</li>
+        <li>BOE — <strong>RDL 15/2025</strong> (nuevos plazos)</li>
+        <li>Nota informativa de la <strong>AEAT</strong></li>
+      </ul>
+      <p class="src-note" style="margin-top:4mm;">Fechas verificadas contra la AEAT: obligatoriedad el <strong>1/1/2027</strong> (Sociedades) y <strong>1/7/2027</strong> (resto). Cita textual atribuida incluida.</p>
+    </div>
+    <div class="card soft">
+      <span class="eyebrow" style="display:block;margin-bottom:3mm;">Cómo se garantiza que no se descuadre</span>
+      <p style="font-size:9pt;">Cada página tiene un único archivo <span class="mono">faq.ts</span> con sus preguntas. De ahí beben a la vez:</p>
+      <ul class="clean" style="margin-top:3mm;">
+        <li>El <strong>texto visible</strong> para el usuario.</li>
+        <li>Los <strong>datos estructurados</strong> que lee la IA.</li>
+      </ul>
+      <p class="src-note" style="margin-top:4mm;">Imposible que uno diga una cosa y el otro diga otra: es la misma fuente. Mantenimiento futuro trivial.</p>
+    </div>
+  </div>
+
+  <div class="footer"><span>TCSystems × RCO Labs</span><span>Implementación GEO · 04</span></div>
+</section>
+
+<!-- ============ PÁGINA 5 · FASE 3 ============ -->
+<section class="page">
+  <div class="runhead">
+    <div class="co"><img class="tcs" src="__TCS_LOGO__" alt="TCSystems"><div class="sep"></div><img class="rco" src="__RCO_LOGO__" alt="RCO Labs"></div>
+    <div class="tag">Acciones · Fase 3</div>
+  </div>
+
+  <div class="phase">
+    <div class="idx"><div class="ring">3</div></div>
+    <div class="body">
+      <span class="eyebrow">04 · Entidad de empresa</span>
+      <h2 style="margin-top:2mm;">Una página que define a TCSystems como entidad</h2>
+      <p style="margin-top:3mm;font-size:9.5pt;">Los modelos de IA construyen una «ficha mental» de cada empresa. Para poder citarla necesitan una fuente clara que responda <em>qué es</em>, <em>dónde está</em> y <em>a qué se dedica</em>. Se creó la página <span class="mono">/quienes-somos</span> con esa definición en el primer párrafo —el fragmento que la IA tiende a extraer— y respaldada con datos estructurados de tipo <span class="mono">AboutPage</span>.</p>
+    </div>
+  </div>
+
+  <div class="dark" style="margin-top:5mm;">
+    <span class="eyebrow">Definición de entidad · primer párrafo</span>
+    <p style="color:#DDD;font-size:10.5pt;margin-top:3mm;line-height:1.55;">«TCSystems es una empresa española fabricante de kioscos de autoservicio y sistemas de cobro automático, con sede en Griñón (Madrid)…»</p>
+    <p style="color:#8A8A8A;font-size:8pt;margin-top:3mm;">Frase definitoria, verificable y consistente con el resto del sitio — el tipo de enunciado que un asistente de IA reutiliza al describir a la empresa.</p>
+  </div>
+
+  <div class="grid2" style="margin-top:6mm;">
+    <div class="card">
+      <span class="eyebrow" style="display:block;margin-bottom:3mm;">La nueva página incluye</span>
+      <ul class="check" style="margin-top:2mm;">
+        <li>Definición de entidad y actividad</li>
+        <li>Cifras: 2010 · +14 años · +500 instalaciones · 5 delegaciones</li>
+        <li>Fabricante español · SAT propio · hecho en España</li>
+        <li>Gama de producto y sectores atendidos</li>
+        <li>Logos de clientes y datos de contacto (NAP)</li>
+        <li>Su propio bloque de 6 preguntas frecuentes</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="eyebrow" style="display:block;margin-bottom:3mm;">Enlazada desde toda la web</span>
+      <p style="font-size:9pt;">La página se integró en la navegación principal y en el pie, sustituyendo el antiguo ancla <span class="mono">/#empresa</span>. Ahora es una URL propia, indexable y con su canonical correcto — accesible desde cualquier punto del sitio.</p>
+      <div class="kv" style="grid-template-columns:1fr;margin-top:4mm;">
+        <div class="row2"><span class="k">Menú principal</span><span class="v">Empresa → /quienes-somos</span></div>
+        <div class="row2"><span class="k">Pie de página</span><span class="v">Sobre nosotros → /quienes-somos</span></div>
+        <div class="row2"><span class="k">Mapa del sitio</span><span class="v">Prioridad 0.8</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:6mm;">
+    <span class="eyebrow">Grafo de entidad · schema.org</span>
+    <p style="font-size:9.5pt;">La ficha <span class="mono">AboutPage</span> incorpora la organización con su año de fundación (2010), dirección, ámbito de actuación, áreas de conocimiento (<span class="mono">knowsAbout</span>) y perfiles sociales (<span class="mono">sameAs</span>). Es la información con la que un motor de IA <strong>desambigua</strong> a TCSystems frente a cualquier otra empresa de nombre parecido.</p>
+  </div>
+
+  <div class="footer"><span>TCSystems × RCO Labs</span><span>Implementación GEO · 05</span></div>
+</section>
+
+<!-- ============ PÁGINA 6 · VERIFICACIÓN + CIERRE ============ -->
+<section class="page">
+  <div class="runhead">
+    <div class="co"><img class="tcs" src="__TCS_LOGO__" alt="TCSystems"><div class="sep"></div><img class="rco" src="__RCO_LOGO__" alt="RCO Labs"></div>
+    <div class="tag">Verificación y cierre</div>
+  </div>
+
+  <div class="section-head">
+    <span class="eyebrow">05 · Todo comprobado antes de entregar</span>
+    <h2>Verificación técnica</h2>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <ul class="check">
+        <li><strong>Compilación de producción</strong> correcta (sin errores)</li>
+        <li><strong>Tipado (TypeScript)</strong> sin errores</li>
+        <li><strong>96 URLs</strong> del mapa del sitio responden 200</li>
+        <li><strong>Datos estructurados</strong> validados en las 9 páginas</li>
+      </ul>
+    </div>
+    <div class="card">
+      <ul class="check">
+        <li>Respuestas confirmadas <strong>en el HTML inicial</strong> (visibles para la IA)</li>
+        <li>Plegado probado con <strong>clics reales</strong>: comportamiento idéntico al previo</li>
+        <li>Dominio canónico <strong>coherente</strong> (www.tcsystems.es) en todo el sitio</li>
+        <li><strong>Diseño y funcionamiento intactos</strong> — nada roto</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-head" style="margin-top:6mm;">
+    <span class="eyebrow">06 · Fuera del código — recomendación</span>
+    <h2>Un paso más que refuerza el resultado</h2>
+  </div>
+  <div class="no-list">
+    <div class="no-item">
+      <div class="x">→</div>
+      <div class="t"><b>Alta en directorios y perfiles</b><span>Reforzar las menciones externas (Google Business Profile, directorios sectoriales) consolida la entidad de TCSystems ante los motores de IA. Es una gestión externa al sitio web.</span></div>
+    </div>
+  </div>
+
+  <div class="signoff">
+    <div>
+      <span class="eyebrow">Resumen del alcance entregado</span>
+      <h3 style="margin-top:3mm;">Fases 1–3 · implementadas y verificadas</h3>
+      <p style="font-size:9pt;color:var(--muted);margin-top:2mm;max-width:150mm;">28 archivos intervenidos · 9 páginas con preguntas frecuentes · 55 preguntas · +14 bloques de datos estructurados, entregados y verificados sobre tcsystems.es.</p>
+    </div>
+    <div class="row">
+      <div>
+        <div class="mono" style="font-size:7pt;color:var(--faint);letter-spacing:0.1em;">EJECUTADO POR</div>
+        <div style="font-weight:700;margin-top:2mm;">RCO Labs</div>
+        <div style="font-size:8pt;color:var(--muted);">contacto@rcolabs.es</div>
+      </div>
+      <div style="text-align:right;">
+        <div class="mono" style="font-size:7pt;color:var(--faint);letter-spacing:0.1em;">PARA</div>
+        <div style="font-weight:700;margin-top:2mm;">TCSystems</div>
+        <div style="font-size:8pt;color:var(--muted);">tcsystems.es</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer"><span>TCSystems × RCO Labs</span><span>Implementación GEO · 06</span></div>
+</section>
+
+</body>
+</html>
