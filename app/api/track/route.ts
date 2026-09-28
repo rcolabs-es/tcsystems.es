@@ -1,5 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { after, NextRequest, NextResponse } from 'next/server'
+import { and, eq, gt, isNull } from 'drizzle-orm'
 import { getDb, hasDb, schema } from '@/lib/db'
+import { notifyLeadClick } from '@/lib/notify-lead-click'
+
+/** Clics repetidos del mismo canal y página en esta ventana no reenvían aviso */
+const DEDUPE_MS = 3 * 60 * 1000
 
 const VALID_TYPES = ['whatsapp', 'llamada'] as const
 type TrackType = (typeof VALID_TYPES)[number]
@@ -32,7 +37,36 @@ export async function POST(request: NextRequest) {
     const source =
       typeof body.source === 'string' ? body.source.slice(0, 200) : null
 
-    await getDb().insert(schema.leads).values({ type, page, source })
+    const db = getDb()
+    const { leads } = schema
+
+    // El mismo visitante suele pulsar varias veces seguidas: solo avisamos
+    // del primer clic (el lead se sigue registrando igualmente)
+    const [recent] = await db
+      .select({ id: leads.id })
+      .from(leads)
+      .where(
+        and(
+          eq(leads.type, type),
+          page ? eq(leads.page, page) : isNull(leads.page),
+          gt(leads.createdAt, new Date(Date.now() - DEDUPE_MS))
+        )
+      )
+      .limit(1)
+
+    const [lead] = await db
+      .insert(leads)
+      .values({ type, page, source })
+      .returning({ createdAt: leads.createdAt })
+
+    // Email tras responder: no retrasa el beacon ni rompe nada si falla
+    if (!recent) {
+      after(() =>
+        notifyLeadClick({ type, page, source, createdAt: lead.createdAt }).catch(
+          (e) => console.error('Error en aviso de clic:', e)
+        )
+      )
+    }
 
     return new NextResponse(null, { status: 204 })
   } catch (error) {

@@ -3,6 +3,43 @@
 import { useEffect } from 'react'
 import { firePhoneConversion, fireWhatsAppConversion } from './conversion'
 
+const SOURCE_KEY = 'tc_source'
+
+/**
+ * Origen de la visita (first touch de la sesión): Google Ads, UTM o dominio
+ * de referencia. Se guarda al entrar porque gclid/utm y el referrer se
+ * pierden al navegar por la web.
+ */
+function detectSource(): string {
+  const params = new URLSearchParams(window.location.search)
+  if (params.get('gclid') || params.get('gbraid') || params.get('wbraid')) {
+    return 'Google Ads'
+  }
+  const utm = params.get('utm_source')
+  if (utm) {
+    const medium = params.get('utm_medium')
+    return medium ? `${utm} / ${medium}` : utm
+  }
+  let host = ''
+  try {
+    host = document.referrer ? new URL(document.referrer).hostname : ''
+  } catch {}
+  if (!host || host.endsWith('tcsystems.es')) return 'Directo'
+  if (/(^|\.)google\./.test(host)) return 'Google (orgánico)'
+  if (/(^|\.)bing\.com$/.test(host)) return 'Bing'
+  if (/chatgpt\.com|openai\.com/.test(host)) return 'ChatGPT'
+  if (/perplexity\.ai/.test(host)) return 'Perplexity'
+  return host.replace(/^www\./, '')
+}
+
+function getSource(): string | undefined {
+  try {
+    return sessionStorage.getItem(SOURCE_KEY) ?? undefined
+  } catch {
+    return undefined
+  }
+}
+
 /**
  * Registra el clic en el backend propio (/api/track → tabla leads) para que
  * aparezca en el panel /admin. sendBeacon sobrevive a la navegación que
@@ -10,7 +47,11 @@ import { firePhoneConversion, fireWhatsAppConversion } from './conversion'
  */
 function trackClick(type: 'llamada' | 'whatsapp') {
   try {
-    const payload = JSON.stringify({ type, page: window.location.pathname })
+    const payload = JSON.stringify({
+      type,
+      page: window.location.pathname,
+      source: getSource(),
+    })
     if (navigator.sendBeacon) {
       navigator.sendBeacon(
         '/api/track',
@@ -44,6 +85,12 @@ function trackClick(type: 'llamada' | 'whatsapp') {
  */
 export default function ConversionClicks() {
   useEffect(() => {
+    try {
+      if (!sessionStorage.getItem(SOURCE_KEY)) {
+        sessionStorage.setItem(SOURCE_KEY, detectSource())
+      }
+    } catch {}
+
     function onClick(e: MouseEvent) {
       const el = e.target as HTMLElement | null
       const a = el?.closest?.('a')
