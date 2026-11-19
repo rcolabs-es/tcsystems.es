@@ -29,6 +29,7 @@ export default function Footer() {
         { name: "Parkings", href: "/parkings", icon: undefined, isExternal: false },
         { name: "Control de Accesos", href: "/control-accesos", icon: undefined, isExternal: false },
         { name: "Verifactu", href: "/verifactu", icon: undefined, isExternal: false },
+        { name: "Integradores de software", href: "/integradores-kioscos-autoservicio", icon: undefined, isExternal: false },
       ],
     },
     {

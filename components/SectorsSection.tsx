@@ -1,4 +1,5 @@
-import { Building2, Car, Coffee, Shirt, MapPin, ShoppingCart } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, Building2, Car, Coffee, Shirt, MapPin, ShoppingCart } from "lucide-react";
 
 export default function SectorsSection() {
   const sectors = [
@@ -90,6 +91,17 @@ export default function SectorsSection() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Enlace a la landing de integradores de software */}
+        <div className="mt-12 text-center">
+          <Link
+            href="/integradores-kioscos-autoservicio"
+            className="inline-flex items-center text-lg font-semibold text-[#0e9acd] hover:text-[#0c7ba3] transition-colors group"
+          >
+            ¿Desarrollas software? Intégralo en nuestros kioscos autoservicio
+            <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+          </Link>
         </div>
       </div>
     </section>

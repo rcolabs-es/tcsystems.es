@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X, Phone, Mail, ChevronDown, Car, Shield, FileText } from "lucide-react";
+import { Menu, X, Phone, Mail, ChevronDown, Car, Shield, FileText, Code } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
@@ -67,6 +67,12 @@ export default function Header() {
       href: "/verifactu",
       description: "Facturación electrónica integrada",
       icon: FileText
+    },
+    {
+      name: "Integradores de software",
+      href: "/integradores-kioscos-autoservicio",
+      description: "Tu software en nuestros kioscos",
+      icon: Code
     }
   ];
 

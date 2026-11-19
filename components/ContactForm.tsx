@@ -1,30 +1,55 @@
 'use client';
 
 import { useState } from 'react';
-import { Send, User, Mail, Phone, Building, Users, FileText } from 'lucide-react';
+import { Send, User, Mail, Phone, Building, Users, FileText, Code, MapPin, Hash } from 'lucide-react';
 import Link from 'next/link';
 import { fireLeadConversion } from './landing/conversion';
 
 interface ContactFormProps {
   productName?: string;
+  /**
+   * Muestra campos extra para empresas de software / integradores
+   * (tipo de software, sector, nº de instalaciones). Se envían dentro del
+   * mensaje, así que no requieren cambios en /api/contact ni en la BD.
+   */
+  integratorFields?: boolean;
 }
 
-export default function ContactForm({ productName }: ContactFormProps) {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    phone: '',
-    company: '',
-    corporateEmail: '',
-    project: '',
-    privacyPolicy: false,
-    dataProcessing: false
-  });
+const SECTOR_OPTIONS = [
+  'Gasolineras / estaciones desatendidas',
+  'Ayuntamientos / administración pública',
+  'Lavaderos / lavanderías',
+  'Hostelería',
+  'Retail',
+  'Parkings',
+  'Control de accesos',
+  'Varios sectores',
+  'Otro',
+];
+
+const INSTALLATIONS_OPTIONS = ['1-10', '11-50', '51-200', 'Más de 200', 'Aún no lo sé'];
+
+const initialFormData = {
+  firstName: '',
+  lastName: '',
+  phone: '',
+  company: '',
+  corporateEmail: '',
+  project: '',
+  softwareType: '',
+  sector: '',
+  installations: '',
+  privacyPolicy: false,
+  dataProcessing: false
+};
+
+export default function ContactForm({ productName, integratorFields = false }: ContactFormProps) {
+  const [formData, setFormData] = useState(initialFormData);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, type, value } = e.target;
     
     if (type === 'checkbox') {
@@ -51,6 +76,19 @@ export default function ContactForm({ productName }: ContactFormProps) {
     }
     
     setIsSubmitting(true);
+
+    // Campos de integrador: se anteponen al mensaje para que lleguen al email
+    // del admin y al panel de leads sin tocar la API.
+    const integratorLines = integratorFields
+      ? [
+          formData.softwareType && `Tipo de software: ${formData.softwareType}`,
+          formData.sector && `Sector: ${formData.sector}`,
+          formData.installations && `Instalaciones aprox.: ${formData.installations}`,
+        ].filter(Boolean)
+      : [];
+    const project = integratorLines.length
+      ? [...integratorLines, '', formData.project].join('\n').trim()
+      : formData.project;
     
     try {
       const response = await fetch('/api/contact', {
@@ -64,7 +102,7 @@ export default function ContactForm({ productName }: ContactFormProps) {
           phone: formData.phone,
           company: formData.company,
           corporateEmail: formData.corporateEmail,
-          project: formData.project,
+          project,
           productName: productName,
           source: 'web',
           page: window.location.pathname,
@@ -90,16 +128,7 @@ export default function ContactForm({ productName }: ContactFormProps) {
       // Reset form after 5 seconds
       setTimeout(() => {
         setSubmitted(false);
-        setFormData({
-          firstName: '',
-          lastName: '',
-          phone: '',
-          company: '',
-          corporateEmail: '',
-          project: '',
-          privacyPolicy: false,
-          dataProcessing: false
-        });
+        setFormData(initialFormData);
       }, 5000);
 
     } catch (error) {
@@ -234,6 +263,72 @@ export default function ContactForm({ productName }: ContactFormProps) {
             />
           </div>
         </div>
+
+        {integratorFields && (
+          <>
+            <div>
+              <label htmlFor="softwareType" className="block text-sm font-medium text-gray-700 dark:text-zinc-300 mb-2">
+                Tipo de software
+              </label>
+              <div className="relative">
+                <Code className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                  type="text"
+                  id="softwareType"
+                  name="softwareType"
+                  value={formData.softwareType}
+                  onChange={handleChange}
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-zinc-600 rounded-xl focus:ring-2 focus:ring-[#0e9acd] focus:border-transparent bg-white dark:bg-zinc-900 text-gray-900 dark:text-white"
+                  placeholder="ERP, TPV, cita previa, control de accesos..."
+                />
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <label htmlFor="sector" className="block text-sm font-medium text-gray-700 dark:text-zinc-300 mb-2">
+                  Sector
+                </label>
+                <div className="relative">
+                  <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
+                  <select
+                    id="sector"
+                    name="sector"
+                    value={formData.sector}
+                    onChange={handleChange}
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-zinc-600 rounded-xl focus:ring-2 focus:ring-[#0e9acd] focus:border-transparent bg-white dark:bg-zinc-900 text-gray-900 dark:text-white appearance-none"
+                  >
+                    <option value="">Selecciona un sector</option>
+                    {SECTOR_OPTIONS.map((o) => (
+                      <option key={o} value={o}>{o}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="installations" className="block text-sm font-medium text-gray-700 dark:text-zinc-300 mb-2">
+                  Nº aprox. de instalaciones
+                </label>
+                <div className="relative">
+                  <Hash className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
+                  <select
+                    id="installations"
+                    name="installations"
+                    value={formData.installations}
+                    onChange={handleChange}
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-zinc-600 rounded-xl focus:ring-2 focus:ring-[#0e9acd] focus:border-transparent bg-white dark:bg-zinc-900 text-gray-900 dark:text-white appearance-none"
+                  >
+                    <option value="">Selecciona un rango</option>
+                    {INSTALLATIONS_OPTIONS.map((o) => (
+                      <option key={o} value={o}>{o}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
 
         <div>
           <label htmlFor="project" className="block text-sm font-medium text-gray-700 dark:text-zinc-300 mb-2">
