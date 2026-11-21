@@ -17,8 +17,6 @@ import {
   Factory,
   Fuel,
   Headphones,
-  ImageIcon,
-  Clock,
   Mail,
   MessageCircle,
   Monitor,
@@ -29,6 +27,7 @@ import {
   QrCode,
   Ruler,
   ShoppingCart,
+  Palette,
   Unlock,
   Wrench,
 } from 'lucide-react'
@@ -41,26 +40,26 @@ import { integradoresFaqs } from './faq'
 /* ------------------------------------------------------------------ */
 
 const pillars = [
-  { icon: Unlock, label: 'Hardware sin software' },
+  { icon: Code, label: 'API para efectivo y tarjeta' },
   { icon: Ruler, label: 'De catálogo o a medida' },
   { icon: Factory, label: 'Fabricación en España' },
-  { icon: Wrench, label: 'Soporte y recambios' },
+  { icon: Wrench, label: 'Instalación y soporte' },
 ]
 
 const audiences = [
   {
     icon: Fuel,
-    title: 'Software para estaciones de servicio',
+    title: 'Si desarrollas software para estaciones de servicio',
     body: 'Tienes el ERP o el TPV de la estación y tus clientes te piden un poste de pago desatendido. Lo diseñamos contigo y lo fabricamos a tu medida.',
   },
   {
     icon: Database,
-    title: 'ERP, TPV y software de gestión',
+    title: 'Si desarrollas un ERP, un TPV o software de gestión',
     body: 'Llevas tu programa de gestión o tu TPV a un kiosco de autopago sin tener que fabricar ni importar hardware.',
   },
   {
     icon: CalendarCheck,
-    title: 'Cita previa, accesos y software vertical',
+    title: 'Si desarrollas software de cita previa, accesos o vertical',
     body: 'Cita previa, turnos, control de accesos o cobro de servicios: si tu software necesita un punto físico de autoservicio, lo fabricamos.',
   },
 ]
@@ -72,9 +71,9 @@ const yourPart = [
 ]
 
 const ourPart = [
-  'Diseño y fabricación del kiosco',
-  'Periféricos de pago, lectura e impresión',
-  'Soporte técnico y recambios del hardware',
+  'Diseño y fabricación del kiosco, con el color y el logo que elijas',
+  'API y drivers para cobrar en efectivo y tarjeta',
+  'Instalación en tu cliente, soporte técnico y recambios',
 ]
 
 const catalog = [
@@ -151,24 +150,25 @@ const steps = [
   },
   {
     title: 'Eliges modelo o lo diseñamos contigo',
-    body: 'Partimos de un modelo de catálogo o diseñamos un kiosco a medida: formato, periféricos, medios de pago e imagen exterior.',
+    body: 'Partimos de un modelo de catálogo o diseñamos un kiosco a medida: formato, periféricos y medios de pago. Sale con el color RAL y el logo de tu cliente o con los tuyos.',
   },
   {
-    title: 'Lo fabricamos',
-    body: 'Fabricamos el hardware en nuestras instalaciones en España, con el diseño que hemos cerrado contigo.',
-    pending: 'Si hay unidad piloto, pedido mínimo y plazos orientativos de fabricación.',
+    title: 'Fabricamos una unidad piloto',
+    body: 'Si el kiosco es a medida, te pasamos presupuesto de una unidad piloto y la fabricamos en nuestras instalaciones en España. Tras el prototipo, la primera unidad real está lista en un plazo de 8 a 12 semanas.',
   },
   {
     title: 'Integras tu software',
-    body: 'Instalas tu aplicación y la conectas con los periféricos del kiosco.',
-    pending: 'Sistema operativo, SDK, drivers o API disponibles y documentación para el desarrollador.',
+    body: 'El kiosco lleva un PC industrial con Windows. Te damos las APIs y los drivers para que tu aplicación cobre en efectivo y con tarjeta y use el resto de periféricos.',
   },
   {
-    title: 'Lo instalas en tus clientes',
-    body: 'Despliegas el kiosco en los establecimientos de tus clientes con el respaldo de nuestro soporte técnico y recambios.',
-    pending: 'Modelo de soporte para integradores: si se atiende al integrador, al cliente final o a ambos.',
+    title: 'Lanzamos la serie',
+    body: 'Cuando apruebas la unidad piloto, fabricamos la serie para tus clientes.',
   },
-] as { title: string; body: string; pending?: string }[]
+  {
+    title: 'Lo instalamos en tus clientes',
+    body: 'Nuestros instaladores montan los kioscos en el cliente final. Tú tienes un soporte técnico directo y, si hace falta, presencial.',
+  },
+]
 
 const peripherals = [
   { icon: Coins, label: 'Admisión y devolución de monedas y billetes' },
@@ -178,7 +178,7 @@ const peripherals = [
   { icon: Nfc, label: 'Lector de proximidad o de usuarios' },
   { icon: Monitor, label: 'Pantalla táctil de 19", 21,5" o 27"' },
   { icon: Banknote, label: 'Expendedor de billetes de alta velocidad' },
-  { icon: Cpu, label: 'PC industrial para funcionamiento 24/7' },
+  { icon: Cpu, label: 'PC industrial con Windows, para funcionar 24/7' },
 ]
 
 const reasons = [
@@ -199,8 +199,8 @@ const reasons = [
   },
   {
     icon: Headphones,
-    title: 'Soporte técnico y recambios',
-    body: 'Soporte y recambios del hardware desde España, para que tú te centres en tu software.',
+    title: 'Instalación y soporte técnico',
+    body: 'Te atendemos a ti como integrador, instalamos los kioscos en tu cliente y damos soporte presencial cuando hace falta, con delegaciones en Madrid, Cataluña, Andalucía, País Vasco y Comunidad Valenciana.',
   },
 ]
 
@@ -250,41 +250,35 @@ function Blobs() {
   )
 }
 
-/**
- * Dato que falta confirmar con TCSystems. Se ve en la página para que el
- * cliente lo revise; hay que quitarlo (o sustituirlo por el dato) antes de publicar.
- */
-function Pending({ children, className = '' }: { children: React.ReactNode; className?: string }) {
+/** Foto real con pie, para la galería y los bloques de proyecto. */
+function Photo({
+  src,
+  alt,
+  caption,
+  className = '',
+  sizes = '(min-width: 1024px) 40vw, 100vw',
+}: {
+  src: string
+  alt: string
+  caption?: string
+  className?: string
+  sizes?: string
+}) {
   return (
-    <p
-      className={`flex items-start gap-2 rounded-xl border border-dashed border-amber-400/70 bg-amber-50 dark:bg-amber-500/10 px-4 py-3 text-sm text-amber-900 dark:text-amber-200 ${className}`}
-    >
-      <Clock className="w-4 h-4 mt-0.5 shrink-0 text-amber-500" aria-hidden />
-      <span>
-        <strong className="font-semibold">Pendiente cliente:</strong> {children}
-      </span>
-    </p>
-  )
-}
-
-/** Hueco para una foto que hay que pedir a TCSystems. */
-function PhotoPlaceholder({ label }: { label: string }) {
-  return (
-    <div
-      role="img"
-      aria-label={label}
-      className="flex flex-col items-center justify-center gap-4 h-full min-h-72 rounded-3xl border-2 border-dashed border-amber-400/70 bg-gradient-to-br from-[#0e9acd]/5 to-blue-600/5 dark:from-[#0e9acd]/10 dark:to-blue-600/10 p-8 text-center"
-    >
-      <div className="w-16 h-16 bg-white dark:bg-zinc-900 rounded-2xl flex items-center justify-center shadow-lg">
-        <ImageIcon className="w-8 h-8 text-[#0e9acd]" aria-hidden />
-      </div>
-      <div className="space-y-1">
-        <p className="text-xs font-semibold uppercase tracking-wide text-amber-600 dark:text-amber-400">
-          Foto pendiente cliente
-        </p>
-        <p className="text-sm font-medium text-gray-700 dark:text-zinc-300 max-w-xs">{label}</p>
-      </div>
-    </div>
+    <figure className={`group relative overflow-hidden rounded-3xl border border-gray-200 dark:border-zinc-800 shadow-xl ${className}`}>
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes={sizes}
+        className="object-cover transition-transform duration-700 group-hover:scale-105"
+      />
+      {caption && (
+        <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent px-5 pt-12 pb-4 text-sm font-medium text-white">
+          {caption}
+        </figcaption>
+      )}
+    </figure>
   )
 }
 
@@ -331,9 +325,9 @@ export default function IntegradoresPage() {
 
                 <ul className="space-y-3">
                   {[
-                    'Hardware sin software: tu aplicación sigue siendo tuya',
-                    'Modelos de catálogo o diseño a medida contigo',
-                    'Fabricación, soporte y recambios desde España',
+                    'API y drivers para cobrar en efectivo y tarjeta desde tu software',
+                    'Modelos de catálogo o diseño a medida, con el color y el logo de tu cliente',
+                    'Fabricación en España, instalación y soporte técnico',
                   ].map((item) => (
                     <li key={item} className="flex items-start text-gray-700 dark:text-zinc-300">
                       <CheckCircle className="w-5 h-5 text-green-500 mr-3 shrink-0 mt-0.5" />
@@ -488,6 +482,101 @@ export default function IntegradoresPage() {
         </div>
       </section>
 
+      {/* API */}
+      <section id="api" className="relative py-24 bg-zinc-950 text-white overflow-hidden scroll-mt-24">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#27272a_1px,transparent_1px),linear-gradient(to_bottom,#27272a_1px,transparent_1px)] bg-[size:6rem_4rem] opacity-30"></div>
+        <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#0e9acd]/25 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-32 -left-24 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl"></div>
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="space-y-6">
+              <div className="inline-flex items-center bg-white/5 border border-white/10 rounded-full px-4 py-2 text-sm text-zinc-300">
+                <Code className="w-4 h-4 text-[#0e9acd] mr-2" />
+                API para desarrolladores
+              </div>
+              <h2 className="text-4xl lg:text-5xl font-bold leading-tight">
+                Cobra en efectivo y con tarjeta{' '}
+                <span className="text-[#0e9acd]">desde tu propio software</span>
+              </h2>
+              <p className="text-lg text-zinc-300 leading-relaxed">
+                No tienes que pelearte con monederos, lectores de billetes ni datáfonos. Te damos las APIs
+                y los drivers para que tu aplicación integre el kiosco fácilmente y empiece a registrar
+                pagos en efectivo y con tarjeta.
+              </p>
+              <ul className="space-y-4">
+                {[
+                  {
+                    icon: Coins,
+                    title: 'Efectivo con devolución de cambio',
+                    text: 'Tu software pide el importe y el kiosco se encarga de cobrar y devolver el cambio.',
+                  },
+                  {
+                    icon: CreditCard,
+                    title: 'Tarjeta y contactless',
+                    text: 'Pago con tarjeta de débito o crédito desde la misma aplicación.',
+                  },
+                  {
+                    icon: Cpu,
+                    title: 'Windows, APIs y drivers',
+                    text: 'Los kioscos llevan un PC industrial con Windows y te damos los drivers de los periféricos.',
+                  },
+                  {
+                    icon: Headphones,
+                    title: 'Te acompañamos en la integración',
+                    text: 'Hablas directamente con nuestro equipo técnico mientras conectas tu aplicación.',
+                  },
+                ].map((item) => (
+                  <li key={item.title} className="flex gap-4">
+                    <div className="w-11 h-11 shrink-0 rounded-xl bg-[#0e9acd]/15 border border-[#0e9acd]/30 flex items-center justify-center">
+                      <item.icon className="w-5 h-5 text-[#0e9acd]" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-white">{item.title}</h3>
+                      <p className="text-zinc-400 leading-relaxed">{item.text}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="relative">
+              <div className="relative aspect-[16/10] rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+                <Image
+                  src="/integradores/api-integracion-software.webp"
+                  alt="Integración de software con la API de los kioscos autoservicio de TCSystems"
+                  fill
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/70 to-transparent"></div>
+              </div>
+              {/* Flujo: tu software → API → medios de pago */}
+              <div className="relative -mt-12 mx-4 sm:mx-8 grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-2 sm:gap-3 rounded-2xl bg-zinc-900/90 backdrop-blur border border-white/10 p-4 sm:p-5 shadow-2xl">
+                {[
+                  { icon: Code, label: 'Tu software' },
+                  { icon: Cpu, label: 'API TCSystems' },
+                  { icon: Banknote, label: 'Efectivo y tarjeta' },
+                ].map((node, i) => (
+                  <div key={node.label} className="contents">
+                    {i > 0 && <ArrowRight aria-hidden className="w-4 h-4 text-[#0e9acd]" />}
+                    <div className="flex flex-col items-center gap-2 text-center">
+                      <div
+                        className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                          i === 1 ? 'bg-gradient-to-br from-[#0e9acd] to-blue-600' : 'bg-white/10'
+                        }`}
+                      >
+                        <node.icon className="w-5 h-5 text-white" />
+                      </div>
+                      <span className="text-xs sm:text-sm font-medium text-zinc-200">{node.label}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Catálogo o a medida */}
       <section className="py-24 bg-gray-50 dark:bg-[#121214]">
         <div className="max-w-7xl mx-auto px-6">
@@ -546,6 +635,20 @@ export default function IntegradoresPage() {
                   Si ningún modelo encaja, lo diseñamos desde cero con tu equipo. Tu software manda; el
                   hardware se adapta.
                 </p>
+                <ol className="space-y-3">
+                  {[
+                    'Te pasamos presupuesto de una unidad piloto',
+                    'La fabricamos: tras el prototipo, la primera unidad real está lista en 8 a 12 semanas',
+                    'Cuando la apruebas, lanzamos la serie',
+                  ].map((item, i) => (
+                    <li key={item} className="flex items-start gap-3 text-gray-700 dark:text-zinc-300">
+                      <span className="w-6 h-6 shrink-0 rounded-full bg-[#0e9acd] text-white text-xs font-bold flex items-center justify-center mt-0.5">
+                        {i + 1}
+                      </span>
+                      {item}
+                    </li>
+                  ))}
+                </ol>
                 <ul className="grid sm:grid-cols-2 gap-3">
                   {[
                     'De pie, de pared o en mobiliario',
@@ -559,7 +662,6 @@ export default function IntegradoresPage() {
                     </li>
                   ))}
                 </ul>
-                <Pending>¿Ofrecéis marca blanca o vinilado también en los modelos de catálogo?</Pending>
                 <Link
                   href="#contacto"
                   className="inline-flex items-center bg-[#0e9acd] text-white px-6 py-3 rounded-xl font-semibold hover:bg-[#0c7ba3] transition-all duration-200 shadow-lg hover:shadow-xl group"
@@ -568,7 +670,62 @@ export default function IntegradoresPage() {
                   <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
-              <PhotoPlaceholder label="Un kiosco o poste fabricado a medida, instalado en un establecimiento real." />
+              <Photo
+                src="/integradores/kiosco-medida-transporte-calle.webp"
+                alt="Kiosco autoservicio fabricado a medida por TCSystems, instalado en una parada de autobús con el color y el logo del cliente"
+                caption="Kiosco a medida instalado en la calle, con el color y el logo del cliente"
+                className="aspect-[3/4] w-full max-w-md mx-auto"
+              />
+            </div>
+          </div>
+
+          {/* Personalización: RAL y vinilado */}
+          <div className="mt-16">
+            <div className="grid lg:grid-cols-3 gap-8 items-end mb-10">
+              <div className="lg:col-span-2 space-y-4">
+                <div className="inline-flex items-center bg-[#0e9acd]/10 dark:bg-[#0e9acd]/20 text-[#0e9acd] rounded-full px-4 py-2 text-sm font-semibold">
+                  <Palette className="w-4 h-4 mr-2" />
+                  Personalización
+                </div>
+                <h3 className="text-2xl lg:text-4xl font-bold text-gray-900 dark:text-white leading-tight">
+                  Con el color y el logo{' '}
+                  <span className="text-[#0e9acd]">de tu cliente o los tuyos</span>
+                </h3>
+              </div>
+              <p className="text-lg text-gray-600 dark:text-zinc-300 leading-relaxed">
+                Todos los equipos, de catálogo o a medida, salen pintados en el RAL que elijas y vinilados
+                con el logo del cliente final o con el tuyo.
+              </p>
+            </div>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+              <Photo
+                src="/integradores/kiosco-vinilado-logo-cliente.webp"
+                alt="Kiosco autoservicio de TCSystems vinilado con el logo del cliente"
+                caption="Vinilado con la marca del cliente"
+                className="aspect-[3/4]"
+                sizes="(min-width: 1024px) 25vw, 50vw"
+              />
+              <Photo
+                src="/integradores/kiosco-medida-transporte-fabrica.webp"
+                alt="Kiosco autoservicio a medida pintado en el RAL del cliente, listo para salir de fábrica"
+                caption="En el RAL del cliente, listo para salir de fábrica"
+                className="aspect-[3/4]"
+                sizes="(min-width: 1024px) 25vw, 50vw"
+              />
+              <Photo
+                src="/integradores/central-pago-pared-lavanderia.webp"
+                alt="Central de pago de pared de TCSystems instalada en una lavandería autoservicio"
+                caption="Central de pago de pared en una lavandería"
+                className="aspect-[3/4]"
+                sizes="(min-width: 1024px) 25vw, 50vw"
+              />
+              <Photo
+                src="/integradores/montaje-fabrica-tcsystems.webp"
+                alt="Técnico de TCSystems montando equipos de autoservicio en la fábrica"
+                caption="Montaje en nuestras instalaciones"
+                className="aspect-[3/4]"
+                sizes="(min-width: 1024px) 25vw, 50vw"
+              />
             </div>
           </div>
         </div>
@@ -613,6 +770,28 @@ export default function IntegradoresPage() {
               </div>
             ))}
           </div>
+
+          <div className="mt-12 flex flex-col md:flex-row md:items-center gap-6 rounded-3xl border border-[#0e9acd]/30 bg-[#0e9acd]/5 dark:bg-[#0e9acd]/10 p-8">
+            <div className="w-14 h-14 shrink-0 bg-white dark:bg-zinc-900 rounded-2xl flex items-center justify-center shadow-sm">
+              <Building2 className="w-7 h-7 text-[#0e9acd]" />
+            </div>
+            <div className="flex-1">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                ¿Tienes el negocio pero no el software?
+              </h3>
+              <p className="text-gray-600 dark:text-zinc-400 leading-relaxed">
+                Lo desarrollamos nosotros o te ponemos en contacto con un partner de software
+                especializado en tu modelo de negocio que ya trabaja con TCSystems.
+              </p>
+            </div>
+            <Link
+              href="#contacto"
+              className="inline-flex items-center justify-center shrink-0 bg-[#0e9acd] text-white px-6 py-3 rounded-xl font-semibold hover:bg-[#0c7ba3] transition-all duration-200 shadow-lg group"
+            >
+              Cuéntanos tu negocio
+              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -642,7 +821,6 @@ export default function IntegradoresPage() {
                 <div className="flex-1 bg-white dark:bg-zinc-950 rounded-2xl p-6 lg:p-8 border border-gray-200 dark:border-zinc-800 hover:border-[#0e9acd] dark:hover:border-[#0e9acd] hover:shadow-xl transition-all duration-300">
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">{step.title}</h3>
                   <p className="text-gray-600 dark:text-zinc-400 leading-relaxed">{step.body}</p>
-                  {step.pending && <Pending className="mt-4">{step.pending}</Pending>}
                 </div>
               </li>
             ))}
@@ -682,19 +860,20 @@ export default function IntegradoresPage() {
               <div className="rounded-2xl bg-[#0e9acd]/5 dark:bg-[#0e9acd]/10 border border-[#0e9acd]/30 p-6">
                 <h3 className="flex items-center font-semibold text-gray-900 dark:text-white mb-2">
                   <Code className="w-5 h-5 text-[#0e9acd] mr-2" />
-                  Sistema operativo e integración
+                  Windows, APIs y drivers
                 </h3>
-                <p className="text-gray-600 dark:text-zinc-400 mb-4">
-                  Antes de fabricar revisamos con tu equipo técnico qué periféricos va a usar tu aplicación
-                  y cómo se van a integrar.
+                <p className="text-gray-600 dark:text-zinc-400">
+                  Los kioscos funcionan con Windows y te damos las APIs y los drivers de los periféricos.
+                  Antes de fabricar revisamos con tu equipo técnico qué periféricos va a usar tu aplicación.
                 </p>
-                <Pending>
-                  Sistemas operativos soportados, SDK, drivers o API de los periféricos y documentación que
-                  se entrega al desarrollador.
-                </Pending>
               </div>
             </div>
-            <PhotoPlaceholder label="Interior de un kiosco abierto, con los periféricos a la vista (lector de tarjetas, monedero, impresora)." />
+            <Photo
+              src="/integradores/elysium-plus-fabrica.webp"
+              alt="Kiosco autoservicio Elysium Plus de TCSystems en fábrica, con lector de tarjetas, admisión de monedas y billetes e impresora"
+              caption="Elysium Plus en fábrica: tarjeta, efectivo, QR e impresora"
+              className="aspect-[3/4] w-full max-w-md mx-auto"
+            />
           </div>
         </div>
       </section>
@@ -767,13 +946,14 @@ export default function IntegradoresPage() {
                     </div>
                   ))}
                 </dl>
-                <Pending>
-                  ¿Podemos citar al cliente con nombre y logo? Si es así, añadimos también cuántas estaciones
-                  lo tienen instalado.
-                </Pending>
               </div>
               <div className="lg:col-span-2">
-                <PhotoPlaceholder label="El poste de pago a medida de este caso, instalado en una estación o recién fabricado." />
+                <Photo
+                  src="/integradores/postes-pago-medida.webp"
+                  alt="Postes de pago desatendido fabricados a medida por TCSystems"
+                  caption="Postes de pago fabricados a medida"
+                  className="aspect-[4/5] w-full"
+                />
               </div>
             </div>
           </div>
@@ -846,7 +1026,6 @@ export default function IntegradoresPage() {
                 <div className="px-6 pb-6">
                   <div className="h-px bg-gradient-to-r from-[#0e9acd]/20 to-transparent mb-4"></div>
                   <p className="text-gray-600 dark:text-zinc-400 leading-relaxed">{faq.answer}</p>
-                  {faq.pending && <Pending className="mt-4">{faq.pending}</Pending>}
                 </div>
               </details>
             ))}

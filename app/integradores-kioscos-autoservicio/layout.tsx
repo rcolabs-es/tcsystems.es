@@ -5,7 +5,7 @@ import { integradoresFaqs } from './faq'
 const PAGE_URL = 'https://www.tcsystems.es/integradores-kioscos-autoservicio'
 const TITLE = 'Kioscos autoservicio para integrar tu software | TCSystems'
 const DESCRIPTION =
-  'Fabricamos el kiosco, tú pones el software. Kioscos autoservicio de catálogo o a medida para integrar tu software en cualquier sector. Hablemos.'
+  'Fabricamos el kiosco, tú pones el software: kioscos autoservicio de catálogo o a medida, con API para cobrar en efectivo y tarjeta. Hablemos.'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.tcsystems.es'),
@@ -20,6 +20,8 @@ export const metadata: Metadata = {
     'integrar software en kiosco autoservicio',
     'kiosco autoservicio marca blanca',
     'hardware autoservicio para TPV',
+    'kiosco autoservicio con API',
+    'API pago efectivo y tarjeta kiosco',
   ],
   authors: [{ name: 'TCSystems' }],
   creator: 'TCSystems',
@@ -68,7 +70,7 @@ const serviceSchema = {
   name: 'Kioscos autoservicio para integrar software de terceros',
   serviceType: 'Fabricación de kioscos y terminales de autoservicio para integradores de software',
   description:
-    'Fabricación de kioscos y terminales de autoservicio, de catálogo o a medida, sin software, para que empresas de software e integradores instalen su propia aplicación en cualquier tipo de establecimiento.',
+    'Fabricación de kioscos y terminales de autoservicio, de catálogo o a medida, sin software, con API y drivers para cobrar en efectivo y tarjeta, para que empresas de software e integradores instalen su propia aplicación en cualquier tipo de establecimiento.',
   url: PAGE_URL,
   image: 'https://www.tcsystems.es/elysium-plus.png',
   category: 'Kioscos de autoservicio',

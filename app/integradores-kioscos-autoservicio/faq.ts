@@ -1,27 +1,39 @@
 /**
  * Fuente única de las preguntas frecuentes de /integradores-kioscos-autoservicio.
  * La consume la propia página (render visible) y el JSON-LD FAQPage del layout.
- *
- * `answer` es texto definitivo y es lo único que viaja al schema FAQPage.
- * `pending` es una nota visible solo en la página, con lo que falta confirmar
- * con TCSystems; no entra en el schema. Hay que quitarla antes de publicar.
  */
 import type { FaqEntry } from '@/lib/schema'
 
-export interface IntegradoresFaq extends FaqEntry {
-  pending?: string
-}
-
-export const integradoresFaqs: IntegradoresFaq[] = [
+export const integradoresFaqs: FaqEntry[] = [
   {
     question: '¿Puedo instalar mi propio software en un kiosco autoservicio de TCSystems?',
     answer:
       'Sí. TCSystems vende sus kioscos y terminales de autoservicio también sin software, para que una empresa de software o un integrador instale su propia aplicación: ERP, TPV, software para estaciones de servicio, cita previa, control de accesos o cualquier software de gestión. TCSystems pone el hardware y tú pones el software.',
   },
   {
+    question: '¿Tenéis API para cobrar en efectivo y con tarjeta desde mi software?',
+    answer:
+      'Sí. Aportamos las APIs y los drivers para que tu aplicación integre el kiosco fácilmente y empiece a registrar pagos en efectivo, con devolución de cambio, y con tarjeta. Nuestro equipo técnico te acompaña durante la integración.',
+  },
+  {
+    question: '¿Qué sistema operativo llevan los kioscos?',
+    answer:
+      'Los kioscos llevan un PC industrial con Windows. Junto con el equipo te damos las APIs y los drivers de los periféricos, y antes de fabricar revisamos con tu equipo técnico qué periféricos va a usar tu aplicación.',
+  },
+  {
     question: '¿Fabricáis kioscos a medida o solo modelos de catálogo?',
     answer:
       'Las dos cosas. Puedes partir de un modelo de catálogo (EVO, Prometheus, Elysium o Elysium Plus) o diseñar con TCSystems un kiosco o un poste de pago a medida: nos cuentas lo que necesita tu software, lo diseñamos contigo y lo fabricamos.',
+  },
+  {
+    question: '¿Cómo funciona un proyecto a medida y cuánto tarda?',
+    answer:
+      'Te pasamos presupuesto de una unidad piloto, la fabricamos y, cuando la apruebas, lanzamos la serie. Tras el prototipo, la primera unidad real está lista en un plazo de entre 8 y 12 semanas.',
+  },
+  {
+    question: '¿Puedo personalizar el kiosco con la imagen de mi marca o la de mi cliente?',
+    answer:
+      'Sí. Todos los equipos, de catálogo o a medida, salen pintados en el color RAL del cliente final o del integrador, y vinilados con el logo de uno u otro.',
   },
   {
     question: '¿Podéis fabricar un poste de pago para estaciones de servicio?',
@@ -31,43 +43,21 @@ export const integradoresFaqs: IntegradoresFaq[] = [
   {
     question: '¿Qué periféricos puede llevar el kiosco?',
     answer:
-      'Según el modelo y la configuración: admisión y devolución de monedas y billetes, pago con tarjeta y contactless, lector de códigos QR, impresora térmica de tickets, lector de proximidad o de usuarios, pantalla táctil de 19 a 27 pulgadas y PC industrial preparado para funcionar 24/7.',
+      'Según el modelo y la configuración: admisión y devolución de monedas y billetes, pago con tarjeta y contactless, lector de códigos QR, impresora térmica de tickets, lector de proximidad o de usuarios, pantalla táctil de 19 a 27 pulgadas y PC industrial con Windows preparado para funcionar 24/7.',
   },
   {
-    question: '¿Qué sistema operativo llevan y cómo integro los periféricos con mi software?',
+    question: '¿Quién da el soporte técnico e instala los kioscos?',
     answer:
-      'Depende del modelo y de la configuración que elijas. Antes de empezar revisamos con tu equipo técnico qué periféricos va a usar tu aplicación y cómo se van a integrar.',
-    pending:
-      'Sistemas operativos soportados, cómo se integran los periféricos (SDK, drivers, API o protocolos) y qué documentación se entrega al desarrollador.',
-  },
-  {
-    question: '¿Cuál es el pedido mínimo y cuánto tarda la fabricación?',
-    answer:
-      'Depende de si partes de un modelo de catálogo o de un diseño a medida. Cuéntanos tu proyecto y te damos condiciones y plazos concretos.',
-    pending: 'Pedido mínimo, si hay unidad piloto y plazos orientativos de fabricación y entrega.',
-  },
-  {
-    question: '¿Puedo personalizar el kiosco con la imagen de mi marca o la de mi cliente?',
-    answer:
-      'En un kiosco a medida la imagen exterior se diseña contigo desde el principio, junto con el formato y los periféricos.',
-    pending: 'Si se ofrece marca blanca y vinilado también en los modelos de catálogo.',
+      'Atendemos directamente al integrador. Nuestros instaladores montan los kioscos en el cliente final y damos soporte técnico presencial cuando hace falta, con delegaciones en Madrid, Cataluña, Andalucía, País Vasco y Comunidad Valenciana.',
   },
   {
     question: '¿En qué tipo de establecimientos se pueden instalar?',
     answer:
-      'En cualquier establecimiento con atención o cobro desatendido: gasolineras y estaciones de servicio desatendidas, ayuntamientos y administración pública, lavaderos y boxes de lavado, hostelería, retail, parkings, centros deportivos y control de accesos.',
+      'En cualquier establecimiento con atención o cobro desatendido: gasolineras y estaciones de servicio desatendidas, ayuntamientos y administración pública, transporte, lavaderos y lavanderías, hostelería, retail, parkings, centros deportivos y control de accesos.',
   },
   {
-    question: 'Tengo un establecimiento pero no tengo software, ¿podéis ayudarme?',
+    question: 'Tengo un negocio pero no tengo software, ¿podéis ayudarme?',
     answer:
-      'Sí. Si vas a abrir una estación de servicio u otro negocio de autoservicio y aún no tienes software, te ponemos en contacto con empresas de software que ya trabajan con nuestros kioscos.',
-    pending: 'Confirmar que queréis ofrecer esta derivación a partners de software en la web.',
-  },
-  {
-    question: '¿Quién da el soporte técnico y los recambios del hardware?',
-    answer:
-      'TCSystems fabrica sus equipos y da el soporte técnico y los recambios del hardware desde España.',
-    pending:
-      'Modelo de soporte para integradores (al integrador, al cliente final o a ambos) y condiciones de garantía.',
+      'Sí. Podemos desarrollar el software nosotros o ponerte en contacto con un partner de software especializado en tu modelo de negocio que ya trabaja con los kioscos de TCSystems.',
   },
 ]
