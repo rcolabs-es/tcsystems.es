@@ -48,6 +48,7 @@ export async function POST(request: NextRequest) {
 
     // Guardar el lead en BD para el panel /admin. Si la BD falla o no está
     // configurada, el flujo de emails sigue funcionando igual que antes.
+    let leadSaved = false;
     if (hasDb()) {
       try {
         await getDb().insert(schema.leads).values({
@@ -61,6 +62,7 @@ export async function POST(request: NextRequest) {
           source: source || null,
           page: page || null,
         });
+        leadSaved = true;
       } catch (dbError) {
         console.error('Error guardando lead en BD:', dbError);
       }
@@ -107,13 +109,18 @@ export async function POST(request: NextRequest) {
       html: userEmailHtml,
     });
 
-    // Verificar que ambos emails se enviaron correctamente
     if (adminEmail.error || userEmail.error) {
       console.error('Error enviando emails:', {
         adminError: adminEmail.error,
         userError: userEmail.error,
+        leadSaved,
       });
-      
+    }
+
+    // La solicitud solo se da por perdida si no ha llegado por ningún lado:
+    // ni aviso al admin ni lead guardado. Que falle solo la confirmación al
+    // usuario (p. ej. un email con errores) no debe mostrarle un error.
+    if (adminEmail.error && !leadSaved) {
       return NextResponse.json(
         { error: 'Error al enviar emails' },
         { status: 500 }

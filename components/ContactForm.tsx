@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Send, User, Mail, Phone, Building, Users, FileText, Code, MapPin, Hash } from 'lucide-react';
 import Link from 'next/link';
 import { fireLeadConversion } from './landing/conversion';
+import Toast, { type ToastData } from './Toast';
 
 interface ContactFormProps {
   productName?: string;
@@ -48,6 +49,8 @@ export default function ContactForm({ productName, integratorFields = false }: C
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [toast, setToast] = useState<ToastData | null>(null);
+  const closeToast = useCallback(() => setToast(null), []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, type, value } = e.target;
@@ -71,10 +74,15 @@ export default function ContactForm({ productName, integratorFields = false }: C
     
     // Validar que los checkboxes obligatorios estén marcados
     if (!formData.privacyPolicy || !formData.dataProcessing) {
-      alert('Debes aceptar la política de privacidad y el procesamiento de datos para continuar.');
+      setToast({
+        type: 'error',
+        title: 'Falta tu consentimiento',
+        message: 'Acepta la política de privacidad y el tratamiento de datos para continuar.',
+      });
       return;
     }
-    
+
+    setToast(null);
     setIsSubmitting(true);
 
     // Campos de integrador: se anteponen al mensaje para que lleguen al email
@@ -133,7 +141,11 @@ export default function ContactForm({ productName, integratorFields = false }: C
 
     } catch (error) {
       console.error('Error enviando formulario:', error);
-      alert('Error al enviar el formulario. Por favor, inténtalo de nuevo o contacta directamente a consultoria@tcsystems.es');
+      setToast({
+        type: 'error',
+        title: 'No hemos podido enviar tu solicitud',
+        message: 'Inténtalo de nuevo en unos segundos o escríbenos a consultoria@tcsystems.es.',
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -169,6 +181,8 @@ export default function ContactForm({ productName, integratorFields = false }: C
           Completa el formulario y te contactaremos en menos de 24 horas
         </p>
       </div>
+
+      <Toast toast={toast} onClose={closeToast} />
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">
