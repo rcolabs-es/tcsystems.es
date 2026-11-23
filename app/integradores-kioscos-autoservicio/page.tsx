@@ -17,6 +17,7 @@ import {
   Factory,
   Fuel,
   Headphones,
+  Layers,
   Mail,
   MessageCircle,
   Monitor,
@@ -48,18 +49,18 @@ const pillars = [
 
 const audiences = [
   {
-    icon: Fuel,
-    title: 'Si desarrollas software para estaciones de servicio',
-    body: 'Tienes el ERP o el TPV de la estación y tus clientes te piden un poste de pago desatendido. Lo diseñamos contigo y lo fabricamos a tu medida.',
-  },
-  {
     icon: Database,
     title: 'Si desarrollas un ERP, un TPV o software de gestión',
     body: 'Llevas tu programa de gestión o tu TPV a un kiosco de autopago sin tener que fabricar ni importar hardware.',
   },
   {
+    icon: Layers,
+    title: 'Si desarrollas software para un sector concreto',
+    body: 'Estaciones de servicio, lavaderos, parkings, hostelería o administración pública: tus clientes te piden un punto de autoservicio y lo fabricamos a tu medida.',
+  },
+  {
     icon: CalendarCheck,
-    title: 'Si desarrollas software de cita previa, accesos o vertical',
+    title: 'Si desarrollas software de cita previa, turnos o accesos',
     body: 'Cita previa, turnos, control de accesos o cobro de servicios: si tu software necesita un punto físico de autoservicio, lo fabricamos.',
   },
 ]
