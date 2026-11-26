@@ -1,0 +1,36 @@
+/* Tokens de los informes de cliente (/informes/*). Mundo TCSystems en tinta
+   oscura con el cian de marca como campo activo. */
+.informe-root {
+  --bg: #061017;
+  --surface: #0a1922;
+  --surface-2: #10232e;
+  --line: rgb(173 214 235 / 0.11);
+  --line-strong: rgb(173 214 235 / 0.24);
+  --ink: #eef7fb;
+  --ink-2: #b9cbd4;
+  --muted: #8299a5;
+  --cyan: #0e9acd;
+  --cyan-dim: #0e6f93;
+  --cyan-text: #45bfeb;
+  --prev: #34495a;
+  --up: #4fd1a5;
+  --down: #f2897a;
+
+  font-feature-settings: 'cv11', 'ss01';
+  color-scheme: dark;
+}
+
+.informe-root :focus-visible {
+  outline: 2px solid var(--cyan-text);
+  outline-offset: 3px;
+}
+
+.informe-root a {
+  text-underline-offset: 3px;
+}
+
+/* El html de la web usa transición de colores global; aquí fondo fijo */
+html:has(.informe-root) {
+  background: #061017;
+  scrollbar-color: #24404f #061017;
+}

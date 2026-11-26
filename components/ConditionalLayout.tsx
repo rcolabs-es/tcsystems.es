@@ -26,6 +26,9 @@ export default function ConditionalLayout({
   // ni en landings con chrome propio
   const isStudio = pathname?.startsWith('/studio')
   const isAdmin = pathname?.startsWith('/admin')
+  // Informes de cliente: página propia, sin chrome de la web ni analítica
+  // (sus visitas son internas y contaminarían GA4)
+  const isInforme = pathname?.startsWith('/informes')
   const isStandaloneLanding = STANDALONE_LANDINGS.some((p) =>
     pathname?.startsWith(p)
   )
@@ -40,7 +43,7 @@ export default function ConditionalLayout({
     </>
   ) : null
 
-  if (isStudio || isAdmin) {
+  if (isStudio || isAdmin || isInforme) {
     return <>{children}</>
   }
 

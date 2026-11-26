@@ -9,6 +9,15 @@ const nextConfig: NextConfig = {
     // También ignora errores de TypeScript durante el build si es necesario
     ignoreBuildErrors: false,
   },
+  // Informes de cliente: accesibles por enlace pero fuera de buscadores
+  async headers() {
+    return [
+      {
+        source: '/informes/:path*',
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+      },
+    ]
+  },
   images: {
     remotePatterns: [
       {
